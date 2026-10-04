@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Generator Link Undangan</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+            background: #f8edf1;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #c86f88;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .result {
+            margin-top: 30px;
+        }
+
+        .link-item {
+            padding: 12px;
+            margin-top: 10px;
+            background: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            word-break: break-all;
+        }
+
+        .guest-name {
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .link-url {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .copy-btn {
+            margin-top: 8px;
+            width: auto;
+            padding: 8px 14px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Generator Link Undangan</h1>
+
+    <label for="invitationId">
+        ID Undangan
+    </label>
+
+    <input
+        type="text"
+        id="invitationId"
+        placeholder="Contoh: ABC001"
+    >
+
+
+    <label for="guestList">
+        Daftar Nama Tamu
+    </label>
+
+    <textarea
+        id="guestList"
+        placeholder="Satu nama per baris
+
+Budi dan Keluarga
+Andi & Sinta
+Pak Dedi
+Keluarga Pak Joko"
+    ></textarea>
+
+
+    <button id="generateButton">
+        Buat Link Undangan
+    </button>
+
+
+    <div
+    class="result"
+    id="result"
+></div>
+
+<button
+    id="copyAllButton"
+    type="button"
+    style="display:none;"
+>
+    Salin Semua Link
+</button>
+
+</div>
+
+
+<script>
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbwvZfIxsyIKmH5UC_uwPTQZmLSwAQ0Xxf07UZJRobWR4I1tBM9arDc1Cqu7aSm0UQmQjA/exec";
+
+const generateButton =
+    document.getElementById("generateButton");
+
+const copyAllButton =
+    document.getElementById("copyAllButton");
+
+let generatedLinks = [];
+
+
+// =========================================
+// VALIDASI ID UNDANGAN
+// =========================================
+
+function validateInvitationId(
+    invitationId,
+    callback
+) {
+
+    const callbackName =
+        "validateInvitation_" + Date.now();
+
+    const apiScript =
+        document.createElement("script");
+
+    let finished = false;
+
+    const timeout =
+        window.setTimeout(function () {
+
+            if (finished) return;
+
+            finished = true;
+
+            delete window[callbackName];
+            apiScript.remove();
+
+            callback(null);
+
+        }, 5000);
+
+
+    window[callbackName] =
+        function (response) {
+
+            if (finished) return;
+
+            finished = true;
+            window.clearTimeout(timeout);
+
+            delete window[callbackName];
+            apiScript.remove();
+
+            callback(
+                response && response.success === true
+            );
+
+        };
+
+
+    apiScript.onerror = function () {
+
+        if (finished) return;
+
+        finished = true;
+        window.clearTimeout(timeout);
+
+        delete window[callbackName];
+        apiScript.remove();
+
+        callback(null);
+
+    };
+
+
+    apiScript.src =
+        API_URL +
+        "?id=" +
+        encodeURIComponent(invitationId) +
+        "&mode=check" +
+        "&callback=" +
+        callbackName;
+
+
+    document.head.appendChild(apiScript);
+}
+
+
+
+// =========================================
+// GENERATE LINK UNDANGAN
+// =========================================
+
+generateButton.addEventListener(
+    "click",
+    function () {
+
+        const invitationId =
+            document
+                .getElementById("invitationId")
+                .value
+                .trim();
+
+        const guestText =
+            document
+                .getElementById("guestList")
+                .value
+                .trim();
+
+        const result =
+            document.getElementById("result");
+
+
+        // CEK ID
+        if (!invitationId) {
+
+            alert("Masukkan ID Undangan.");
+
+            return;
+
+        }
+
+
+        // CEK NAMA TAMU
+        if (!guestText) {
+
+            alert("Masukkan daftar nama tamu.");
+
+            return;
+
+        }
+
+
+        // RESET HASIL
+        result.innerHTML = "";
+        generatedLinks = [];
+
+        generateButton.disabled = true;
+        generateButton.textContent =
+            "Membuat Link...";
+
+
+        // =========================================
+        // URL TEMPLATE
+        // =========================================
+
+        const baseURL =
+            window.location.origin +
+            window.location.pathname.replace(
+                "generator.html",
+                "template-black-gold.html"
+            );
+
+
+        // =========================================
+        // DAFTAR TAMU
+        // =========================================
+
+        const guests =
+            guestText
+                .split("\n")
+                .map(function (name) {
+                    return name.trim();
+                })
+                .filter(function (name) {
+                    return name !== "";
+                });
+
+
+        // =========================================
+        // JIKA TIDAK ADA TAMU
+        // =========================================
+
+        if (guests.length === 0) {
+
+            generateButton.disabled = false;
+            generateButton.textContent =
+                "Buat Link Undangan";
+
+            alert("Nama tamu belum diisi.");
+
+            return;
+
+        }
+
+
+        // =========================================
+        // JUDUL HASIL
+        // =========================================
+
+        result.innerHTML =
+            "<h2>Hasil Link</h2>";
+
+
+        copyAllButton.style.display =
+            "block";
+
+
+        // =========================================
+        // BUAT LINK SETIAP TAMU
+        // =========================================
+
+        guests.forEach(
+            function (guest) {
+
+                const link =
+                    baseURL +
+                    "?id=" +
+                    encodeURIComponent(
+                        invitationId
+                    ) +
+                    "&to=" +
+                    encodeURIComponent(
+                        guest
+                    );
+
+
+                generatedLinks.push(link);
+
+
+                const item =
+                    document.createElement("div");
+
+
+                item.className =
+                    "link-item";
+
+
+                item.innerHTML = `
+                    <div class="guest-name">
+                        ${guest}
+                    </div>
+
+                    <div class="link-url">
+                        ${link}
+                    </div>
+
+                    <button
+                        class="copy-btn"
+                        type="button"
+                    >
+                        Salin Link
+                    </button>
+
+                    <button
+                        class="copy-btn whatsapp-btn"
+                        type="button"
+                    >
+                        Kirim WhatsApp
+                    </button>
+                `;
+
+
+                // =========================================
+                // SALIN LINK
+                // =========================================
+
+                const copyButton =
+                    item.querySelector(
+                        ".copy-btn"
+                    );
+
+
+                copyButton.addEventListener(
+                    "click",
+                    function () {
+
+                        navigator.clipboard
+                            .writeText(link)
+                            .then(
+                                function () {
+
+                                    copyButton.textContent =
+                                        "Berhasil disalin";
+
+                                    setTimeout(
+                                        function () {
+
+                                            copyButton.textContent =
+                                                "Salin Link";
+
+                                        },
+                                        1500
+                                    );
+
+                                }
+                            );
+
+                    }
+                );
+
+
+                // =========================================
+                // WHATSAPP
+                // =========================================
+
+                const whatsappButton =
+                    item.querySelector(
+                        ".whatsapp-btn"
+                    );
+
+
+                whatsappButton.addEventListener(
+                    "click",
+                    function () {
+
+                        const message =
+                            "Halo " +
+                            guest +
+                            ",\n\n" +
+                            "Berikut link undangan pernikahan kami:\n\n" +
+                            link +
+                            "\n\n" +
+                            "Mohon dibuka dan jangan lupa hadir di hari istimewa kami. Terima kasih. ♡";
+
+
+                        const whatsappURL =
+                            "https://wa.me/?text=" +
+                            encodeURIComponent(
+                                message
+                            );
+
+
+                        window.open(
+                            whatsappURL,
+                            "_blank"
+                        );
+
+                    }
+                );
+
+
+                result.appendChild(item);
+
+            }
+        );
+
+
+        // =========================================
+        // SELESAI
+        // =========================================
+
+        generateButton.disabled = false;
+
+        generateButton.textContent =
+            "Buat Link Undangan";
+
+    }
+);
+
+
+// =========================================
+// SALIN SEMUA LINK
+// =========================================
+
+copyAllButton.addEventListener(
+    "click",
+    function () {
+
+        if (
+            generatedLinks.length === 0
+        ) {
+
+            return;
+
+        }
+
+
+        navigator
+            .clipboard
+            .writeText(
+                generatedLinks.join("\n")
+            )
+            .then(
+                function () {
+
+                    copyAllButton
+                        .textContent =
+                        "Semua Link Berhasil Disalin";
+
+
+                    setTimeout(
+                        function () {
+
+                            copyAllButton
+                                .textContent =
+                                "Salin Semua Link";
+
+                        },
+                        2000
+                    );
+
+                }
+            );
+
+    }
+);
+
+</script>
+
+</body>
+</html>

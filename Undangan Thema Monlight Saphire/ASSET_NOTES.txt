@@ -1,0 +1,7 @@
+Theme 05 assets
+- cover-bg.png: new moonlit lakeside scene
+- mobile-cover-bg.png: portrait crop for mobile cover
+- location-bg.png: alternate lakeside crop
+- section-bg.png: darkened/softened section background
+- assets/gallery/*: local demo gallery photos
+- assets/music.mp3: template music asset; replace only with music you have rights to distribute

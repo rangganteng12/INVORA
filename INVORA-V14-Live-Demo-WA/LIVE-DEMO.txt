@@ -1,0 +1,30 @@
+INVORA V14 — LIVE DEMO + WHATSAPP
+
+Demo Live sekarang diarahkan langsung ke folder undangan asli yang berada satu level dengan folder INVORA-V11.
+
+Struktur folder yang disarankan:
+Undangan Digital/
+├── INVORA-V11/
+├── Galih-Ratna-Jawa-Nusantara/
+├── Galih-Ratna-Padang-Minangkabau/
+├── Galih-Ratna-Sunda-Pusaka/
+├── THEMA ANIMASI 1/
+├── THEMA ANIMASI 2/
+├── THEMA KAPAL LAUT/
+├── Undangan Thema black gold/
+├── Undangan Thema Champagne Garden/
+├── Undangan Thema Monlight Saphire/
+├── Undangan Thema Sage Botanical/
+├── Undangan Thema Sakura/
+├── Undangan Thema Sakura Twilight/
+└── Undangan Thema Terracotta/
+
+PENTING:
+- Setiap folder demo harus memiliki index.html.
+- Jangan pindahkan folder demo ke dalam INVORA-V11 karena demoUrl menggunakan ../
+- Jika nama folder berbeda, ubah demoUrl pada themes.js.
+- Nomor WhatsApp INVORA: 085775423618 (format link: 6285775423618).
+
+Tema Minangkabau:
+- Demo Live: ../Galih-Ratna-Padang-Minangkabau/index.html
+- Preview: assets/minangkabau-cover.png

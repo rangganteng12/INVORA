@@ -1,0 +1,7 @@
+Theme 06 assets are local for a self-contained demo package.
+cover-bg.png — new champagne garden/lakeside hero background
+mobile-cover-bg.png — mobile crop of the new hero scene
+location-bg.png — new venue/location background crop
+section-bg.png — new soft background crop for content sections
+assets/gallery/* — local gallery images, warm-graded to match theme
+assets/music.mp3 — included background music asset

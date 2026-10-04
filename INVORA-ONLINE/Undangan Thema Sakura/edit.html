@@ -1,0 +1,2770 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Edit Undangan</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            padding: 30px 15px;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            background:
+                #f8edf1;
+
+            color:
+                #333;
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 720px;
+
+            margin: auto;
+
+            background: #fff;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 40px
+                rgba(0, 0, 0, .08);
+        }
+
+
+        h1 {
+
+            text-align: center;
+
+            margin:
+                0 0 10px;
+        }
+
+
+        .description {
+
+            text-align: center;
+
+            color: #777;
+
+            margin-bottom: 30px;
+        }
+
+
+        .form-group {
+
+            margin-bottom: 18px;
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-weight: bold;
+        }
+
+
+        input,
+        textarea {
+
+            width: 100%;
+
+            padding: 12px;
+
+            border:
+                1px solid #ddd;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+
+            font-family: inherit;
+        }
+
+
+        textarea {
+
+            min-height: 100px;
+
+            resize: vertical;
+        }
+
+
+        input[type="file"] {
+
+            padding: 10px;
+
+            background:
+                #fafafa;
+        }
+
+
+        small {
+
+            display: block;
+
+            margin-top: 6px;
+
+            color: #888;
+        }
+
+
+        button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                #c86f88;
+
+            color: #fff;
+
+            font-size: 16px;
+
+            cursor: pointer;
+        }
+
+
+        button:hover {
+
+            opacity: .95;
+        }
+
+
+        button:disabled {
+
+            opacity: .6;
+
+            cursor: wait;
+        }
+
+
+        .status {
+
+            margin-top: 15px;
+
+            text-align: center;
+
+            font-weight: bold;
+
+            min-height: 22px;
+        }
+
+
+        .edit-form {
+
+            display: none;
+        }
+
+
+        /* ==================================================
+           PREVIEW FOTO
+        ================================================== */
+
+        .photo-preview {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-top: 10px;
+        }
+
+
+        .photo-preview-item {
+
+            text-align: center;
+
+            min-width: 0;
+        }
+
+
+        .photo-preview-item img {
+
+            width: 100%;
+
+            max-width: 160px;
+
+            height: 160px;
+
+            object-fit: cover;
+
+            border-radius: 15px;
+
+            border:
+                1px solid #ddd;
+
+            background:
+                #f5f5f5;
+
+            display: block;
+
+            margin: auto;
+        }
+
+
+        .photo-preview-item img.hidden {
+
+            display: none;
+        }
+
+
+        .photo-empty {
+
+            width: 100%;
+
+            max-width: 160px;
+
+            height: 160px;
+
+            border:
+                1px dashed #ccc;
+
+            border-radius: 15px;
+
+            background:
+                #fafafa;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            margin: auto;
+
+            padding: 15px;
+
+            color: #999;
+
+            font-size: 13px;
+        }
+
+
+        .photo-empty.hidden {
+
+            display: none;
+        }
+
+
+        .photo-label {
+
+            margin-top: 8px;
+
+            color: #777;
+
+            font-size: 14px;
+        }
+
+
+        @media (max-width: 600px) {
+
+            .container {
+
+                padding: 20px;
+            }
+
+
+            .photo-preview {
+
+                gap: 8px;
+            }
+
+
+            .photo-preview-item img,
+            .photo-empty {
+
+                width: 100px;
+
+                height: 100px;
+            }
+
+
+            .photo-label {
+
+                font-size: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ==================================================
+         JUDUL
+    ================================================== -->
+
+    <h1>
+        Edit Undangan
+    </h1>
+
+
+    <p class="description">
+        Masukkan ID Undangan dan Kode Edit Anda.
+    </p>
+
+
+    <!-- ==================================================
+         LOGIN
+    ================================================== -->
+
+    <div id="loginBox">
+
+
+        <div class="form-group">
+
+            <label for="invitationId">
+                ID Undangan
+            </label>
+
+            <input
+                type="text"
+                id="invitationId"
+                placeholder="Contoh: TEST002"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="editCode">
+                Kode Edit Undangan
+            </label>
+
+            <input
+                type="password"
+                id="editCode"
+                placeholder="Masukkan kode edit"
+            >
+
+        </div>
+
+
+        <button
+            type="button"
+            id="loginButton"
+        >
+            Buka Data Undangan
+        </button>
+
+
+        <div
+            id="loginStatus"
+            class="status"
+        ></div>
+
+
+    </div>
+
+
+    <!-- ==================================================
+         FORM EDIT
+    ================================================== -->
+
+    <div
+        id="editForm"
+        class="edit-form"
+    >
+
+
+        <div class="form-group">
+
+            <label for="namaPria">
+                Nama Pria
+            </label>
+
+            <input
+                type="text"
+                id="namaPria"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="namaWanita">
+                Nama Wanita
+            </label>
+
+            <input
+                type="text"
+                id="namaWanita"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="orangTuaPria">
+                Orang Tua Pria
+            </label>
+
+            <input
+                type="text"
+                id="orangTuaPria"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="orangTuaWanita">
+                Orang Tua Wanita
+            </label>
+
+            <input
+                type="text"
+                id="orangTuaWanita"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="tanggalPernikahan">
+                Tanggal Pernikahan
+            </label>
+
+            <input
+                type="text"
+                id="tanggalPernikahan"
+                placeholder="DD/MM/YYYY"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="jamAkad">
+                Jam Akad
+            </label>
+
+            <input
+                type="text"
+                id="jamAkad"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="jamResepsi">
+                Jam Resepsi
+            </label>
+
+            <input
+                type="text"
+                id="jamResepsi"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="namaGedung">
+                Nama Gedung
+            </label>
+
+            <input
+                type="text"
+                id="namaGedung"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="alamat">
+                Alamat
+            </label>
+
+            <textarea
+                id="alamat"
+            ></textarea>
+
+        </div>
+
+
+        <!-- ==================================================
+             GOOGLE MAPS
+        ================================================== -->
+
+        <div class="form-group">
+
+            <label for="googleMaps">
+                Google Maps
+            </label>
+
+            <input
+                type="url"
+                id="googleMaps"
+                placeholder="https://maps.google.com/... atau https://maps.app.goo.gl/..."
+            >
+
+            <small>
+                Buka Google Maps → pilih lokasi →
+                Bagikan → Salin link.
+            </small>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="nomorRekening">
+                Nomor Rekening
+            </label>
+
+            <input
+                type="text"
+                id="nomorRekening"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="namaPemilikRekening">
+                Nama Pemilik Rekening
+            </label>
+
+            <input
+                type="text"
+                id="namaPemilikRekening"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="nomorDana">
+                Nomor DANA
+            </label>
+
+            <input
+                type="text"
+                id="nomorDana"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="namaPemilikDana">
+                Nama Pemilik DANA
+            </label>
+
+            <input
+                type="text"
+                id="namaPemilikDana"
+            >
+
+        </div>
+
+
+        <!-- ==================================================
+             FOTO PRIA
+        ================================================== -->
+
+        <div class="form-group">
+
+            <label for="fotoPria">
+                Foto Mempelai Pria
+            </label>
+
+            <input
+                type="file"
+                id="fotoPria"
+                accept="image/jpeg,image/png,image/webp"
+            >
+
+            <small>
+                JPG, PNG, atau WEBP.
+                Maksimal 5 MB.
+            </small>
+
+        </div>
+
+
+        <!-- ==================================================
+             FOTO WANITA
+        ================================================== -->
+
+        <div class="form-group">
+
+            <label for="fotoWanita">
+                Foto Mempelai Wanita
+            </label>
+
+            <input
+                type="file"
+                id="fotoWanita"
+                accept="image/jpeg,image/png,image/webp"
+            >
+
+            <small>
+                JPG, PNG, atau WEBP.
+                Maksimal 5 MB.
+            </small>
+
+        </div>
+
+
+        <!-- ==================================================
+             FOTO COVER
+        ================================================== -->
+
+        <div class="form-group">
+
+            <label for="fotoCover">
+                Foto Cover Undangan
+            </label>
+
+            <input
+                type="file"
+                id="fotoCover"
+                accept="image/jpeg,image/png,image/webp"
+            >
+
+            <small>
+                JPG, PNG, atau WEBP.
+                Maksimal 5 MB.
+            </small>
+
+        </div>
+
+
+        <!-- ==================================================
+             GALERI FOTO
+        ================================================== -->
+
+        <div class="form-group">
+
+            <h2 style="margin: 25px 0 15px; color: #b63f62; font-size: 20px;">
+                Galeri Foto
+            </h2>
+
+            <small style="margin-bottom: 15px;">
+                Upload maksimal 6 foto. Foto yang tidak diisi tidak akan ditampilkan di galeri undangan.
+            </small>
+
+            <div class="form-group">
+                <label for="fotoGallery1">Foto Galeri 1</label>
+                <input type="file" id="fotoGallery1" accept="image/jpeg,image/png,image/webp">
+            </div>
+
+            <div class="form-group">
+                <label for="fotoGallery2">Foto Galeri 2</label>
+                <input type="file" id="fotoGallery2" accept="image/jpeg,image/png,image/webp">
+            </div>
+
+            <div class="form-group">
+                <label for="fotoGallery3">Foto Galeri 3</label>
+                <input type="file" id="fotoGallery3" accept="image/jpeg,image/png,image/webp">
+            </div>
+
+            <div class="form-group">
+                <label for="fotoGallery4">Foto Galeri 4</label>
+                <input type="file" id="fotoGallery4" accept="image/jpeg,image/png,image/webp">
+            </div>
+
+            <div class="form-group">
+                <label for="fotoGallery5">Foto Galeri 5</label>
+                <input type="file" id="fotoGallery5" accept="image/jpeg,image/png,image/webp">
+            </div>
+
+            <div class="form-group">
+                <label for="fotoGallery6">Foto Galeri 6</label>
+                <input type="file" id="fotoGallery6" accept="image/jpeg,image/png,image/webp">
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             FOTO SAAT INI
+        ================================================== -->
+
+        <div class="form-group">
+
+            <label>
+                Foto Saat Ini
+            </label>
+
+
+            <div class="photo-preview">
+
+
+                <!-- PRIA -->
+
+                <div
+                    class="photo-preview-item"
+                >
+
+                    <div
+                        id="emptyFotoPria"
+                        class="photo-empty"
+                    >
+                        Belum ada foto
+                    </div>
+
+                    <img
+                        id="previewFotoPria"
+                        class="hidden"
+                        alt="Foto Pria"
+                    >
+
+                    <div
+                        class="photo-label"
+                    >
+                        Mempelai Pria
+                    </div>
+
+                </div>
+
+
+                <!-- WANITA -->
+
+                <div
+                    class="photo-preview-item"
+                >
+
+                    <div
+                        id="emptyFotoWanita"
+                        class="photo-empty"
+                    >
+                        Belum ada foto
+                    </div>
+
+                    <img
+                        id="previewFotoWanita"
+                        class="hidden"
+                        alt="Foto Wanita"
+                    >
+
+                    <div
+                        class="photo-label"
+                    >
+                        Mempelai Wanita
+                    </div>
+
+                </div>
+
+
+                <!-- COVER -->
+
+                <div
+                    class="photo-preview-item"
+                >
+
+                    <div
+                        id="emptyFotoCover"
+                        class="photo-empty"
+                    >
+                        Belum ada foto cover
+                    </div>
+
+                    <img
+                        id="previewFotoCover"
+                        class="hidden"
+                        alt="Foto Cover"
+                    >
+
+                    <div
+                        class="photo-label"
+                    >
+                        Foto Cover
+                    </div>
+
+                </div>
+
+
+                <div class="photo-preview-item">
+                    <div id="emptyFotoGallery1" class="photo-empty">Belum ada foto</div>
+                    <img id="previewFotoGallery1" class="hidden" alt="Foto Galeri 1">
+                    <div class="photo-label">Galeri 1</div>
+                </div>
+
+                <div class="photo-preview-item">
+                    <div id="emptyFotoGallery2" class="photo-empty">Belum ada foto</div>
+                    <img id="previewFotoGallery2" class="hidden" alt="Foto Galeri 2">
+                    <div class="photo-label">Galeri 2</div>
+                </div>
+
+                <div class="photo-preview-item">
+                    <div id="emptyFotoGallery3" class="photo-empty">Belum ada foto</div>
+                    <img id="previewFotoGallery3" class="hidden" alt="Foto Galeri 3">
+                    <div class="photo-label">Galeri 3</div>
+                </div>
+
+                <div class="photo-preview-item">
+                    <div id="emptyFotoGallery4" class="photo-empty">Belum ada foto</div>
+                    <img id="previewFotoGallery4" class="hidden" alt="Foto Galeri 4">
+                    <div class="photo-label">Galeri 4</div>
+                </div>
+
+                <div class="photo-preview-item">
+                    <div id="emptyFotoGallery5" class="photo-empty">Belum ada foto</div>
+                    <img id="previewFotoGallery5" class="hidden" alt="Foto Galeri 5">
+                    <div class="photo-label">Galeri 5</div>
+                </div>
+
+                <div class="photo-preview-item">
+                    <div id="emptyFotoGallery6" class="photo-empty">Belum ada foto</div>
+                    <img id="previewFotoGallery6" class="hidden" alt="Foto Galeri 6">
+                    <div class="photo-label">Galeri 6</div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             SIMPAN
+        ================================================== -->
+
+        <button
+            type="button"
+            id="saveButton"
+        >
+            Simpan Perubahan
+        </button>
+
+
+        <div
+            id="saveStatus"
+            class="status"
+        ></div>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
+<script>
+
+
+// ==================================================
+// API
+// ==================================================
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbxKcjFZEKfJ4hyjeaj818jDtY2rCt1gH5kCYPlCugvLzMgkGNtv4QSucuaTYxL7FQezWA/exec";
+
+
+// ==================================================
+// DATA FOTO SAAT INI
+// ==================================================
+
+let currentPhotoURL = {
+
+    pria: "",
+
+    wanita: "",
+
+    cover: "",
+
+    gallery1: "",
+    gallery2: "",
+    gallery3: "",
+    gallery4: "",
+    gallery5: "",
+    gallery6: ""
+
+};
+
+
+// ==================================================
+// GOOGLE MAPS SAAT LOGIN
+// ==================================================
+
+let originalGoogleMaps = "";
+
+
+// ==================================================
+// JSONP
+// ==================================================
+
+function loadJsonp(url) {
+
+    return new Promise(
+        function(resolve, reject) {
+
+            const callbackName =
+                "__jsonp_" +
+                Date.now() +
+                "_" +
+                Math.random()
+                    .toString(36)
+                    .substring(2);
+
+
+            const script =
+                document.createElement(
+                    "script"
+                );
+
+
+            let finished =
+                false;
+
+
+            const timeoutId =
+                setTimeout(
+                    function() {
+
+                        if (finished) {
+                            return;
+                        }
+
+                        finished = true;
+
+                        script.remove();
+
+                        delete window[
+                            callbackName
+                        ];
+
+                        reject(
+                            new Error(
+                                "Server terlalu lama merespons."
+                            )
+                        );
+
+                    },
+                    30000
+                );
+
+
+            window[callbackName] =
+                function(response) {
+
+                    if (finished) {
+                        return;
+                    }
+
+                    finished = true;
+
+                    clearTimeout(
+                        timeoutId
+                    );
+
+                    script.remove();
+
+                    delete window[
+                        callbackName
+                    ];
+
+                    resolve(
+                        response
+                    );
+
+                };
+
+
+            script.onerror =
+                function() {
+
+                    if (finished) {
+                        return;
+                    }
+
+                    finished = true;
+
+                    clearTimeout(
+                        timeoutId
+                    );
+
+                    script.remove();
+
+                    delete window[
+                        callbackName
+                    ];
+
+                    reject(
+                        new Error(
+                            "Gagal terhubung ke server Apps Script."
+                        )
+                    );
+
+                };
+
+
+            script.src =
+                url +
+                (
+                    url.includes("?")
+                        ? "&"
+                        : "?"
+                ) +
+                "callback=" +
+                encodeURIComponent(
+                    callbackName
+                ) +
+                "&_=" +
+                Date.now();
+
+
+            document.head.appendChild(
+                script
+            );
+
+        }
+    );
+
+}
+
+
+// ==================================================
+// GOOGLE DRIVE IMAGE
+// ==================================================
+
+function driveImageURL(url) {
+
+    if (!url) {
+        return "";
+    }
+
+
+    const match =
+        String(url).match(
+            /[?&]id=([^&]+)/
+        );
+
+
+    if (
+        match &&
+        match[1]
+    ) {
+
+        return (
+            "https://drive.google.com/thumbnail?id=" +
+            match[1] +
+            "&sz=w1000"
+        );
+
+    }
+
+
+    return url;
+
+}
+
+
+// ==================================================
+// TAMPILKAN PREVIEW
+// ==================================================
+
+function showPhotoPreview(
+    imageId,
+    emptyId,
+    url
+) {
+
+    const image =
+        document.getElementById(
+            imageId
+        );
+
+    const empty =
+        document.getElementById(
+            emptyId
+        );
+
+
+    if (!image || !empty) {
+        return;
+    }
+
+
+    if (!url) {
+
+        image.src = "";
+
+        image.classList.add(
+            "hidden"
+        );
+
+        empty.classList.remove(
+            "hidden"
+        );
+
+        return;
+
+    }
+
+
+    image.src =
+        driveImageURL(
+            url
+        );
+
+    image.classList.remove(
+        "hidden"
+    );
+
+    empty.classList.add(
+        "hidden"
+    );
+
+}
+
+
+// ==================================================
+// LOGIN
+// ==================================================
+
+document
+    .getElementById(
+        "loginButton"
+    )
+    .addEventListener(
+        "click",
+        async function() {
+
+            const id =
+                document
+                    .getElementById(
+                        "invitationId"
+                    )
+                    .value
+                    .trim();
+
+
+            const code =
+                document
+                    .getElementById(
+                        "editCode"
+                    )
+                    .value
+                    .trim();
+
+
+            const status =
+                document.getElementById(
+                    "loginStatus"
+                );
+
+
+            if (
+                !id ||
+                !code
+            ) {
+
+                status.textContent =
+                    "ID dan Kode Edit wajib diisi.";
+
+                status.style.color =
+                    "red";
+
+                return;
+
+            }
+
+
+            status.textContent =
+                "Memeriksa data...";
+
+            status.style.color =
+                "#777";
+
+
+            try {
+
+                // ==================================
+                // CEK ID + KODE
+                // ==================================
+
+                const check =
+                    await loadJsonp(
+                        API_URL +
+                        "?id=" +
+                        encodeURIComponent(
+                            id
+                        ) +
+                        "&code=" +
+                        encodeURIComponent(
+                            code
+                        )
+                    );
+
+
+                if (
+                    !check ||
+                    !check.success
+                ) {
+
+                    throw new Error(
+                        "ID atau Kode Edit salah."
+                    );
+
+                }
+
+
+                // ==================================
+                // AMBIL DATA
+                // ==================================
+
+                const response =
+                    await loadJsonp(
+                        API_URL +
+                        "?id=" +
+                        encodeURIComponent(
+                            id
+                        ) +
+                        "&t=" +
+                        Date.now()
+                    );
+
+
+                if (
+                    !response ||
+                    !response.success
+                ) {
+
+                    throw new Error(
+                        "Data undangan gagal dimuat."
+                    );
+
+                }
+
+
+                const data =
+                    response.data;
+
+
+                // ==================================
+                // DATA TEKS
+                // ==================================
+
+                document
+                    .getElementById(
+                        "namaPria"
+                    )
+                    .value =
+                    data[
+                        "Nama Pria"
+                    ] || "";
+
+
+                document
+                    .getElementById(
+                        "namaWanita"
+                    )
+                    .value =
+                    data[
+                        "Nama Wanita"
+                    ] || "";
+
+
+                document
+                    .getElementById(
+                        "orangTuaPria"
+                    )
+                    .value =
+                    data[
+                        "Orang Tua Pria"
+                    ] || "";
+
+
+                document
+                    .getElementById(
+                        "orangTuaWanita"
+                    )
+                    .value =
+                    data[
+                        "Orang Tua Wanita"
+                    ] || "";
+
+
+                document
+                    .getElementById(
+                        "tanggalPernikahan"
+                    )
+                    .value =
+                    data[
+                        "Tanggal Pernikahan"
+                    ] || "";
+
+
+                document
+                    .getElementById(
+                        "jamAkad"
+                    )
+                    .value =
+                    data[
+                        "Jam Akad"
+                    ] || "";
+
+
+                document
+                    .getElementById(
+                        "jamResepsi"
+                    )
+                    .value =
+                    data[
+                        "Jam Resepsi"
+                    ] || "";
+
+
+                document
+                    .getElementById(
+                        "namaGedung"
+                    )
+                    .value =
+                    data[
+                        "Nama Gedung"
+                    ] || "";
+
+
+                document
+                    .getElementById(
+                        "alamat"
+                    )
+                    .value =
+                    data[
+                        "Alamat"
+                    ] || "";
+
+
+                document
+                    .getElementById(
+                        "googleMaps"
+                    )
+                    .value =
+                    data[
+                        "Google Maps"
+                    ] || "";
+
+
+                originalGoogleMaps =
+                    data[
+                        "Google Maps"
+                    ] || "";
+
+
+                document
+                    .getElementById(
+                        "nomorRekening"
+                    )
+                    .value =
+                    data[
+                        "Nomor Rekening"
+                    ] || "";
+
+
+                document
+                    .getElementById(
+                        "namaPemilikRekening"
+                    )
+                    .value =
+                    data[
+                        "Nama Pemilik Rekening"
+                    ] || "";
+
+
+                document
+                    .getElementById(
+                        "nomorDana"
+                    )
+                    .value =
+                    data[
+                        "Nomor DANA"
+                    ] || "";
+
+
+                document
+                    .getElementById(
+                        "namaPemilikDana"
+                    )
+                    .value =
+                    data[
+                        "Nama Pemilik DANA"
+                    ] || "";
+
+
+                // ==================================
+                // FOTO PRIA
+                // ==================================
+
+                currentPhotoURL.pria =
+                    data[
+                        "Foto Pria"
+                    ] || "";
+
+
+                showPhotoPreview(
+                    "previewFotoPria",
+                    "emptyFotoPria",
+                    currentPhotoURL.pria
+                );
+
+
+                // ==================================
+                // FOTO WANITA
+                // ==================================
+
+                currentPhotoURL.wanita =
+                    data[
+                        "Foto Wanita"
+                    ] || "";
+
+
+                showPhotoPreview(
+                    "previewFotoWanita",
+                    "emptyFotoWanita",
+                    currentPhotoURL.wanita
+                );
+
+
+                // ==================================
+                // FOTO COVER
+                // ==================================
+
+                currentPhotoURL.cover =
+                    data[
+                        "Foto Cover"
+                    ] || "";
+
+
+                showPhotoPreview(
+                    "previewFotoCover",
+                    "emptyFotoCover",
+                    currentPhotoURL.cover
+                );
+
+
+                // ==================================
+                // FOTO GALERI 1-6
+                // ==================================
+
+                for (let i = 1; i <= 6; i++) {
+
+                    const key = "gallery" + i;
+                    const header = "Gallery " + i;
+
+                    currentPhotoURL[key] =
+                        data[header] || "";
+
+                    showPhotoPreview(
+                        "previewFotoGallery" + i,
+                        "emptyFotoGallery" + i,
+                        currentPhotoURL[key]
+                    );
+
+                }
+
+
+                // ==================================
+                // TAMPILKAN FORM
+                // ==================================
+
+                document
+                    .getElementById(
+                        "loginBox"
+                    )
+                    .style.display =
+                    "none";
+
+
+                document
+                    .getElementById(
+                        "editForm"
+                    )
+                    .style.display =
+                    "block";
+
+
+                status.textContent =
+                    "";
+
+            } catch(error) {
+
+                status.textContent =
+                    error.message;
+
+                status.style.color =
+                    "red";
+
+            }
+
+        }
+    );
+
+
+// ==================================================
+// PREVIEW FOTO PRIA
+// ==================================================
+
+document
+    .getElementById(
+        "fotoPria"
+    )
+    .addEventListener(
+        "change",
+        function() {
+
+            const file =
+                this.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            showPhotoPreview(
+                "previewFotoPria",
+                "emptyFotoPria",
+                URL.createObjectURL(
+                    file
+                )
+            );
+
+        }
+    );
+
+
+// ==================================================
+// PREVIEW FOTO WANITA
+// ==================================================
+
+document
+    .getElementById(
+        "fotoWanita"
+    )
+    .addEventListener(
+        "change",
+        function() {
+
+            const file =
+                this.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            showPhotoPreview(
+                "previewFotoWanita",
+                "emptyFotoWanita",
+                URL.createObjectURL(
+                    file
+                )
+            );
+
+        }
+    );
+
+
+// ==================================================
+// PREVIEW FOTO COVER
+// ==================================================
+
+document
+    .getElementById(
+        "fotoCover"
+    )
+    .addEventListener(
+        "change",
+        function() {
+
+            const file =
+                this.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            showPhotoPreview(
+                "previewFotoCover",
+                "emptyFotoCover",
+                URL.createObjectURL(
+                    file
+                )
+            );
+
+        }
+    );
+
+
+// ==================================================
+// PREVIEW FOTO GALERI 1-6
+// ==================================================
+
+for (let i = 1; i <= 6; i++) {
+
+    document
+        .getElementById("fotoGallery" + i)
+        .addEventListener(
+            "change",
+            function() {
+
+                const file = this.files[0];
+
+                if (!file) {
+                    return;
+                }
+
+                showPhotoPreview(
+                    "previewFotoGallery" + i,
+                    "emptyFotoGallery" + i,
+                    URL.createObjectURL(file)
+                );
+
+            }
+        );
+
+}
+
+
+// ==================================================
+// KOMPRES FOTO
+// ==================================================
+
+async function compressImage(
+    file
+) {
+
+    const image =
+        new Image();
+
+
+    const objectURL =
+        URL.createObjectURL(
+            file
+        );
+
+
+    image.src =
+        objectURL;
+
+
+    await new Promise(
+        function(
+            resolve,
+            reject
+        ) {
+
+            image.onload =
+                resolve;
+
+            image.onerror =
+                reject;
+
+        }
+    );
+
+
+    const maxWidth =
+        1600;
+
+    const maxHeight =
+        1600;
+
+
+    let width =
+        image.width;
+
+    let height =
+        image.height;
+
+
+    if (
+        width >
+        maxWidth
+    ) {
+
+        height =
+            height *
+            (
+                maxWidth /
+                width
+            );
+
+        width =
+            maxWidth;
+
+    }
+
+
+    if (
+        height >
+        maxHeight
+    ) {
+
+        width =
+            width *
+            (
+                maxHeight /
+                height
+            );
+
+        height =
+            maxHeight;
+
+    }
+
+
+    const canvas =
+        document.createElement(
+            "canvas"
+        );
+
+
+    canvas.width =
+        Math.round(
+            width
+        );
+
+    canvas.height =
+        Math.round(
+            height
+        );
+
+
+    const context =
+        canvas.getContext(
+            "2d"
+        );
+
+
+    context.drawImage(
+        image,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    URL.revokeObjectURL(
+        objectURL
+    );
+
+
+    return new Promise(
+        function(
+            resolve,
+            reject
+        ) {
+
+            canvas.toBlob(
+                function(blob) {
+
+                    if (!blob) {
+
+                        reject(
+                            new Error(
+                                "Foto gagal dikompres."
+                            )
+                        );
+
+                        return;
+
+                    }
+
+
+                    resolve(
+                        new File(
+                            [blob],
+                            "compressed.jpg",
+                            {
+                                type:
+                                    "image/jpeg"
+                            }
+                        )
+                    );
+
+                },
+                "image/jpeg",
+                0.82
+            );
+
+        }
+    );
+
+}
+
+
+// ==================================================
+// UPLOAD FOTO
+// ==================================================
+
+async function uploadPhoto(
+    file,
+    photoType,
+    id,
+    code,
+    oldURL
+) {
+
+    if (!file) {
+
+        return "";
+
+    }
+
+
+    if (
+        file.size >
+        5 *
+        1024 *
+        1024
+    ) {
+
+        throw new Error(
+            "Ukuran foto maksimal 5 MB."
+        );
+
+    }
+
+
+    const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+    ];
+
+
+    if (
+        !allowedTypes.includes(
+            file.type
+        )
+    ) {
+
+        throw new Error(
+            "Format foto harus JPG, PNG, atau WEBP."
+        );
+
+    }
+
+
+    const compressedFile =
+        await compressImage(
+            file
+        );
+
+
+    return new Promise(
+        function(
+            resolve,
+            reject
+        ) {
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                async function() {
+
+                    const iframe =
+                        document.createElement(
+                            "iframe"
+                        );
+
+
+                    const iframeName =
+                        "uploadFrame_" +
+                        Date.now();
+
+
+                    iframe.name =
+                        iframeName;
+
+
+                    iframe.style.display =
+                        "none";
+
+
+                    document.body.appendChild(
+                        iframe
+                    );
+
+
+                    const form =
+                        document.createElement(
+                            "form"
+                        );
+
+
+                    form.method =
+                        "POST";
+
+
+                    form.action =
+                        API_URL;
+
+
+                    form.target =
+                        iframeName;
+
+
+                    form.style.display =
+                        "none";
+
+
+                    const fields = {
+
+                        id:
+                            id,
+
+                        code:
+                            code,
+
+                        photoType:
+                            photoType,
+
+                        fileName:
+                            photoType +
+                            "_" +
+                            Date.now() +
+                            ".jpg",
+
+                        mimeType:
+                            "image/jpeg",
+
+                        fileData:
+                            reader.result
+
+                    };
+
+
+                    Object.keys(
+                        fields
+                    ).forEach(
+                        function(key) {
+
+                            const input =
+                                document.createElement(
+                                    "input"
+                                );
+
+
+                            input.type =
+                                "hidden";
+
+
+                            input.name =
+                                key;
+
+
+                            input.value =
+                                fields[key];
+
+
+                            form.appendChild(
+                                input
+                            );
+
+                        }
+                    );
+
+
+                    document.body.appendChild(
+                        form
+                    );
+
+
+                    try {
+
+                        form.submit();
+
+                    } catch(error) {
+
+                        iframe.remove();
+
+                        form.remove();
+
+                        reject(
+                            new Error(
+                                "Gagal mengirim foto."
+                            )
+                        );
+
+                        return;
+
+                    }
+
+
+                    /*
+                     * Tunggu sampai Apps Script
+                     * selesai menulis URL ke Sheet.
+                     */
+
+                    try {
+
+                        const newURL =
+                            await waitForPhotoURL(
+                                id,
+                                photoType,
+                                oldURL || ""
+                            );
+
+
+                        iframe.remove();
+
+                        form.remove();
+
+
+                        if (!newURL) {
+
+                            reject(
+                                new Error(
+                                    "Foto berhasil dikirim, tetapi URL belum masuk ke Google Sheet."
+                                )
+                            );
+
+                            return;
+
+                        }
+
+
+                        resolve(
+                            newURL
+                        );
+
+                    } catch(error) {
+
+                        iframe.remove();
+
+                        form.remove();
+
+                        reject(
+                            error
+                        );
+
+                    }
+
+                };
+
+
+            reader.onerror =
+                function() {
+
+                    reject(
+                        new Error(
+                            "Gagal membaca foto."
+                        )
+                    );
+
+                };
+
+
+            reader.readAsDataURL(
+                compressedFile
+            );
+
+        }
+    );
+
+}
+
+
+// ==================================================
+// TUNGGU URL FOTO MASUK KE SHEET
+// ==================================================
+
+async function waitForPhotoURL(
+    id,
+    photoType,
+    oldURL
+) {
+
+    let header = "";
+
+
+    if (
+        photoType === "pria"
+    ) {
+
+        header =
+            "Foto Pria";
+
+    }
+
+
+    if (
+        photoType === "wanita"
+    ) {
+
+        header =
+            "Foto Wanita";
+
+    }
+
+
+    if (
+        photoType === "cover"
+    ) {
+
+        header =
+            "Foto Cover";
+
+    }
+
+
+    if (photoType.indexOf("gallery") === 0) {
+        const number = photoType.replace("gallery", "");
+        header = "Gallery " + number;
+    }
+
+
+    if (!header) {
+
+        throw new Error(
+            "Jenis foto tidak dikenali."
+        );
+
+    }
+
+
+    const maxAttempts =
+        20;
+
+
+    for (
+        let attempt = 0;
+        attempt < maxAttempts;
+        attempt++
+    ) {
+
+        try {
+
+            const response =
+                await loadJsonp(
+                    API_URL +
+                    "?id=" +
+                    encodeURIComponent(
+                        id
+                    ) +
+                    "&t=" +
+                    Date.now()
+                );
+
+
+            if (
+                response &&
+                response.success &&
+                response.data
+            ) {
+
+                const newURL =
+                    response.data[
+                        header
+                    ] || "";
+
+
+                if (
+                    newURL &&
+                    newURL !== oldURL
+                ) {
+
+                    return newURL;
+
+                }
+
+            }
+
+        } catch(error) {
+
+            /*
+             * Abaikan sementara.
+             * Kita coba lagi.
+             */
+
+        }
+
+
+        await new Promise(
+            function(resolve) {
+
+                setTimeout(
+                    resolve,
+                    1500
+                );
+
+            }
+        );
+
+    }
+
+
+    throw new Error(
+        "URL " +
+        header +
+        " belum masuk ke Google Sheet. Periksa Apps Script."
+    );
+
+}
+
+
+// ==================================================
+// SIMPAN PERUBAHAN
+// ==================================================
+
+document
+    .getElementById(
+        "saveButton"
+    )
+    .addEventListener(
+        "click",
+        async function() {
+
+            const saveButton =
+                document.getElementById(
+                    "saveButton"
+                );
+
+
+            const status =
+                document.getElementById(
+                    "saveStatus"
+                );
+
+
+            const id =
+                document
+                    .getElementById(
+                        "invitationId"
+                    )
+                    .value
+                    .trim();
+
+
+            const code =
+                document
+                    .getElementById(
+                        "editCode"
+                    )
+                    .value
+                    .trim();
+
+
+            const fotoPria =
+                document
+                    .getElementById(
+                        "fotoPria"
+                    )
+                    .files[0];
+
+
+            const fotoWanita =
+                document
+                    .getElementById(
+                        "fotoWanita"
+                    )
+                    .files[0];
+
+
+            const fotoCover =
+                document
+                    .getElementById(
+                        "fotoCover"
+                    )
+                    .files[0];
+
+
+            if (
+                !id ||
+                !code
+            ) {
+
+                status.textContent =
+                    "ID dan Kode Edit tidak ditemukan.";
+
+                status.style.color =
+                    "red";
+
+                return;
+
+            }
+
+
+            try {
+
+                saveButton.disabled =
+                    true;
+
+
+                // ==================================
+                // FOTO PRIA
+                // ==================================
+
+                if (fotoPria) {
+
+                    status.textContent =
+                        "Mengupload foto pria...";
+
+                    const newPriaURL =
+                        await uploadPhoto(
+                            fotoPria,
+                            "pria",
+                            id,
+                            code,
+                            currentPhotoURL.pria
+                        );
+
+
+                    currentPhotoURL.pria =
+                        newPriaURL;
+
+
+                    showPhotoPreview(
+                        "previewFotoPria",
+                        "emptyFotoPria",
+                        newPriaURL
+                    );
+
+                }
+
+
+                // ==================================
+                // FOTO WANITA
+                // ==================================
+
+                if (fotoWanita) {
+
+                    status.textContent =
+                        "Mengupload foto wanita...";
+
+                    const newWanitaURL =
+                        await uploadPhoto(
+                            fotoWanita,
+                            "wanita",
+                            id,
+                            code,
+                            currentPhotoURL.wanita
+                        );
+
+
+                    currentPhotoURL.wanita =
+                        newWanitaURL;
+
+
+                    showPhotoPreview(
+                        "previewFotoWanita",
+                        "emptyFotoWanita",
+                        newWanitaURL
+                    );
+
+                }
+
+
+                // ==================================
+                // FOTO COVER
+                // ==================================
+
+                if (fotoCover) {
+
+                    status.textContent =
+                        "Mengupload foto cover...";
+
+                    const newCoverURL =
+                        await uploadPhoto(
+                            fotoCover,
+                            "cover",
+                            id,
+                            code,
+                            currentPhotoURL.cover
+                        );
+
+
+                    currentPhotoURL.cover =
+                        newCoverURL;
+
+
+                    showPhotoPreview(
+                        "previewFotoCover",
+                        "emptyFotoCover",
+                        newCoverURL
+                    );
+
+                }
+
+
+                // ==================================
+                // FOTO GALERI 1-6
+                // ==================================
+
+                for (let i = 1; i <= 6; i++) {
+
+                    const file =
+                        document
+                            .getElementById("fotoGallery" + i)
+                            .files[0];
+
+                    if (!file) {
+                        continue;
+                    }
+
+                    status.textContent =
+                        "Mengupload foto galeri " + i + "...";
+
+                    const key = "gallery" + i;
+
+                    const newGalleryURL =
+                        await uploadPhoto(
+                            file,
+                            key,
+                            id,
+                            code,
+                            currentPhotoURL[key]
+                        );
+
+                    currentPhotoURL[key] =
+                        newGalleryURL;
+
+                    showPhotoPreview(
+                        "previewFotoGallery" + i,
+                        "emptyFotoGallery" + i,
+                        newGalleryURL
+                    );
+
+                }
+
+
+                // ==================================
+                // GOOGLE MAPS
+                // ==================================
+
+                const googleMaps =
+                    document
+                        .getElementById(
+                            "googleMaps"
+                        )
+                        .value
+                        .trim();
+
+
+                const mapsBerubah =
+                    googleMaps !==
+                    originalGoogleMaps;
+
+
+                const isGoogleMaps =
+                    googleMaps.includes(
+                        "google.com/maps"
+                    ) ||
+                    googleMaps.includes(
+                        "maps.app.goo.gl"
+                    );
+
+
+                /*
+                 * Link lama tidak divalidasi.
+                 *
+                 * Jadi kalau database lama
+                 * masih menggunakan Bing,
+                 * customer tetap bisa upload foto.
+                 *
+                 * Validasi hanya terjadi ketika
+                 * customer mengubah link Maps.
+                 */
+
+                if (
+                    mapsBerubah &&
+                    googleMaps &&
+                    !isGoogleMaps
+                ) {
+
+                    status.textContent =
+                        "Link lokasi harus menggunakan Google Maps.";
+
+                    status.style.color =
+                        "red";
+
+                    return;
+
+                }
+
+
+                // ==================================
+                // SIMPAN DATA TEKS
+                // ==================================
+
+                status.textContent =
+                    "Menyimpan data...";
+
+
+                const params =
+                    new URLSearchParams({
+
+                        mode:
+                            "save",
+
+                        id:
+                            id,
+
+                        code:
+                            code,
+
+                        namaPria:
+                            document
+                                .getElementById(
+                                    "namaPria"
+                                )
+                                .value
+                                .trim(),
+
+                        namaWanita:
+                            document
+                                .getElementById(
+                                    "namaWanita"
+                                )
+                                .value
+                                .trim(),
+
+                        orangTuaPria:
+                            document
+                                .getElementById(
+                                    "orangTuaPria"
+                                )
+                                .value
+                                .trim(),
+
+                        orangTuaWanita:
+                            document
+                                .getElementById(
+                                    "orangTuaWanita"
+                                )
+                                .value
+                                .trim(),
+
+                        tanggalPernikahan:
+                            document
+                                .getElementById(
+                                    "tanggalPernikahan"
+                                )
+                                .value
+                                .trim(),
+
+                        jamAkad:
+                            document
+                                .getElementById(
+                                    "jamAkad"
+                                )
+                                .value
+                                .trim(),
+
+                        jamResepsi:
+                            document
+                                .getElementById(
+                                    "jamResepsi"
+                                )
+                                .value
+                                .trim(),
+
+                        namaGedung:
+                            document
+                                .getElementById(
+                                    "namaGedung"
+                                )
+                                .value
+                                .trim(),
+
+                        alamat:
+                            document
+                                .getElementById(
+                                    "alamat"
+                                )
+                                .value
+                                .trim(),
+
+                        googleMaps:
+                            googleMaps,
+
+                        nomorRekening:
+                            document
+                                .getElementById(
+                                    "nomorRekening"
+                                )
+                                .value
+                                .trim(),
+
+                        namaPemilikRekening:
+                            document
+                                .getElementById(
+                                    "namaPemilikRekening"
+                                )
+                                .value
+                                .trim(),
+
+                        nomorDana:
+                            document
+                                .getElementById(
+                                    "nomorDana"
+                                )
+                                .value
+                                .trim(),
+
+                        namaPemilikDana:
+                            document
+                                .getElementById(
+                                    "namaPemilikDana"
+                                )
+                                .value
+                                .trim()
+
+                    });
+
+
+                const saveResponse =
+                    await loadJsonp(
+                        API_URL +
+                        "?" +
+                        params.toString() +
+                        "&t=" +
+                        Date.now()
+                    );
+
+
+                if (
+                    !saveResponse ||
+                    !saveResponse.success
+                ) {
+
+                    throw new Error(
+                        saveResponse &&
+                        saveResponse.message
+                            ? saveResponse.message
+                            : "Gagal menyimpan data."
+                    );
+
+                }
+
+
+                // ==================================
+                // BERHASIL
+                // ==================================
+
+                status.textContent =
+                    "✓ Data dan foto berhasil disimpan.";
+
+                status.style.color =
+                    "green";
+
+
+                document
+                    .getElementById(
+                        "fotoPria"
+                    )
+                    .value =
+                    "";
+
+
+                document
+                    .getElementById(
+                        "fotoWanita"
+                    )
+                    .value =
+                    "";
+
+
+                document
+                    .getElementById(
+                        "fotoCover"
+                    )
+                    .value =
+                    "";
+
+
+                for (let i = 1; i <= 6; i++) {
+                    document
+                        .getElementById("fotoGallery" + i)
+                        .value = "";
+                }
+
+
+            } catch(error) {
+
+                status.textContent =
+                    error.message ||
+                    "Gagal menyimpan.";
+
+                status.style.color =
+                    "red";
+
+            } finally {
+
+                saveButton.disabled =
+                    false;
+
+            }
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>
+

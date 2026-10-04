@@ -1,0 +1,14 @@
+Theme 08 — Sunda Pusaka
+
+Visual direction:
+- Cream / ivory base
+- Forest green accents
+- Cacao / carved-wood brown
+- Antique gold
+- Subtle geometric batik-inspired ornament
+- Falling jasmine + green leaves
+
+All layout and behavior from the current template are retained.
+
+
+FINAL UPDATE: cover-bg.png dan mobile-cover-bg.png sudah diganti dengan background Sundanese heritage baru: pendopo kayu ukir, rangkaian melati, payung adat, sawah pegunungan, dan suasana Jawa Barat. location-bg.png dan section-bg.png juga diselaraskan.

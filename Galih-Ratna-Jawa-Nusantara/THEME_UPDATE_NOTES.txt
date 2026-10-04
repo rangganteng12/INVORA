@@ -1,0 +1,6 @@
+JAWA NUSANTARA — UPDATE DEW
+
+- Section backgrounds now use a new layered ornamental geometry instead of the previous Jawa pattern image.
+- Falling decoration changed from leaves/jasmine to translucent dew droplets.
+- Desktop and mobile layouts preserved.
+- Existing gallery/lightbox/music/functions preserved.

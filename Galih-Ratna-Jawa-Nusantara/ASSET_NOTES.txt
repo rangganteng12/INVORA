@@ -1,0 +1,1 @@
+cover-bg.png = background cover desktop; mobile-cover-bg.png = background cover mobile; location-bg.png = background location; section-bg.png = background section; jawa-pattern.svg = motif kawung-inspired; music.mp3 = musik undangan.

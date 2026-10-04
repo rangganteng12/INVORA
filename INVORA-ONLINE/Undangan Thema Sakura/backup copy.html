@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Edit Undangan</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f7e8ed;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            color: #9d405d;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 30px;
+            color: #9d405d;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        input[type="file"] {
+            padding: 9px;
+            background: #fff;
+        }
+
+        small {
+            display: block;
+            margin-top: 5px;
+            color: #777;
+            line-height: 1.4;
+        }
+
+        button {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            padding: 13px;
+            margin-top: 20px;
+            background: #c96b88;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #b75876;
+        }
+
+        #editForm {
+            display: none;
+        }
+
+        #status {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+
+        .photo-preview {
+            margin-top: 20px;
+        }
+
+        .photo-preview-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .photo-preview-list {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .photo-item {
+            width: 100px;
+            text-align: center;
+        }
+
+        .photo-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            background: #f5f5f5;
+        }
+
+        .photo-item span {
+            display: block;
+            margin-top: 5px;
+            font-size: 12px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            text-align: center;
+            margin-top: 15px;
+            color: #9d405d;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+    <h1>Edit Undangan</h1>
+
+
+    <!-- ============================= -->
+    <!-- LOGIN -->
+    <!-- ============================= -->
+
+    <div id="loginForm">
+
+        <label for="invitationId">
+            ID Undangan
+        </label>
+
+        <input
+            type="text"
+            id="invitationId"
+            placeholder="Contoh: TEST002"
+        >
+
+
+        <label for="editCode">
+            Kode Edit
+        </label>
+
+        <input
+            type="text"
+            id="editCode"
+            placeholder="Masukkan kode edit"
+        >
+
+
+        <button
+            type="button"
+            id="loginButton"
+        >
+            Masuk
+        </button>
+
+
+        <div id="loginStatus"></div>
+
+    </div>
+
+
+
+    <!-- ============================= -->
+    <!-- FORM EDIT -->
+    <!-- ============================= -->
+
+    <div id="editForm">
+
+
+        <h2>
+            Data Mempelai
+        </h2>
+
+
+        <label for="namaPria">
+            Nama Pria
+        </label>
+
+        <input
+            type="text"
+            id="namaPria"
+        >
+
+
+        <label for="namaWanita">
+            Nama Wanita
+        </label>
+
+        <input
+            type="text"
+            id="namaWanita"
+        >
+
+
+        <label for="orangTuaPria">
+            Orang Tua Pria
+        </label>
+
+        <input
+            type="text"
+            id="orangTuaPria"
+        >
+
+
+        <label for="orangTuaWanita">
+            Orang Tua Wanita
+        </label>
+
+        <input
+            type="text"
+            id="orangTuaWanita"
+        >
+
+
+
+        <h2>
+            Acara Pernikahan
+        </h2>
+
+
+        <label for="tanggalPernikahan">
+            Tanggal Pernikahan
+        </label>
+
+        <input
+            type="date"
+            id="tanggalPernikahan"
+        >
+
+
+        <label for="jamAkad">
+            Jam Akad
+        </label>
+
+        <input
+            type="text"
+            id="jamAkad"
+            placeholder="Contoh: 08.00 WIB"
+        >
+
+
+        <label for="jamResepsi">
+            Jam Resepsi
+        </label>
+
+        <input
+            type="text"
+            id="jamResepsi"
+            placeholder="Contoh: 10.00 WIB"
+        >
+
+
+        <label for="namaGedung">
+            Nama Gedung
+        </label>
+
+        <input
+            type="text"
+            id="namaGedung"
+        >
+
+
+        <label for="alamat">
+            Alamat
+        </label>
+
+        <input
+            type="text"
+            id="alamat"
+        >
+
+
+        <label for="googleMaps">
+            Google Maps
+        </label>
+
+        <input
+            type="url"
+            id="googleMaps"
+            placeholder="https://maps.app.goo.gl/..."
+        >
+
+        <small>
+            Buka Google Maps → pilih lokasi → Bagikan → Salin link.
+        </small>
+
+
+
+        <h2>
+            Wedding Gift
+        </h2>
+
+
+        <label for="nomorRekening">
+            Nomor Rekening
+        </label>
+
+        <input
+            type="text"
+            id="nomorRekening"
+        >
+
+
+        <label for="namaPemilikRekening">
+            Nama Pemilik Rekening
+        </label>
+
+        <input
+            type="text"
+            id="namaPemilikRekening"
+        >
+
+
+        <label for="nomorDana">
+            Nomor DANA
+        </label>
+
+        <input
+            type="text"
+            id="nomorDana"
+        >
+
+
+        <label for="namaPemilikDana">
+            Nama Pemilik DANA
+        </label>
+
+        <input
+            type="text"
+            id="namaPemilikDana"
+        >
+
+
+
+        <h2>
+            Foto Undangan
+        </h2>
+
+
+        <!-- ============================= -->
+        <!-- FOTO PRIA -->
+        <!-- ============================= -->
+
+        <label for="fotoPria">
+            Foto Mempelai Pria
+        </label>
+
+        <input
+            type="file"
+            id="fotoPria"
+            accept="image/jpeg,image/png,image/webp"
+        >
+
+        <small>
+            JPG, PNG, atau WEBP. Maksimal 5 MB.
+        </small>
+
+
+
+        <!-- ============================= -->
+        <!-- FOTO WANITA -->
+        <!-- ============================= -->
+
+        <label for="fotoWanita">
+            Foto Mempelai Wanita
+        </label>
+
+        <input
+            type="file"
+            id="fotoWanita"
+            accept="image/jpeg,image/png,image/webp"
+        >
+
+        <small>
+            JPG, PNG, atau WEBP. Maksimal 5 MB.
+        </small>
+
+
+
+        <!-- ============================= -->
+        <!-- FOTO COVER -->
+        <!-- ============================= -->
+
+        <label for="fotoCover">
+            Foto Cover Undangan
+        </label>
+
+        <input
+            type="file"
+            id="fotoCover"
+            accept="image/jpeg,image/png,image/webp"
+        >
+
+        <small>
+            JPG, PNG, atau WEBP. Maksimal 5 MB.
+        </small>
+
+
+
+        <!-- ============================= -->
+        <!-- FOTO SAAT INI -->
+        <!-- ============================= -->
+
+        <div
+            class="photo-preview"
+            id="photoPreview"
+        >
+
+            <div class="photo-preview-title">
+                Foto Saat Ini
+            </div>
+
+            <div
+                class="photo-preview-list"
+                id="photoPreviewList"
+            ></div>
+
+        </div>
+
+
+
+        <button
+            type="button"
+            id="saveButton"
+        >
+            Simpan Perubahan
+        </button>
+
+
+        <div id="status"></div>
+
+        <div
+            class="loading"
+            id="loading"
+        ></div>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+// ==================================================
+// URL GOOGLE APPS SCRIPT
+// ==================================================
+
+const WEB_APP_URL =
+    "https://script.google.com/macros/s/AKfycbxKcjFZEKfJ4hyjeaj818jDtY2rCt1gH5kCYPlCugvLzMgkGNtv4QSucuaTYxL7FQezWA/exec";
+
+
+
+// ==================================================
+// VARIABEL
+// ==================================================
+
+let currentId = "";
+let currentCode = "";
+let currentData = {};
+
+
+
+// ==================================================
+// ELEMENT
+// ==================================================
+
+const loginForm =
+    document.getElementById("loginForm");
+
+const editForm =
+    document.getElementById("editForm");
+
+const loginButton =
+    document.getElementById("loginButton");
+
+const loginStatus =
+    document.getElementById("loginStatus");
+
+const saveButton =
+    document.getElementById("saveButton");
+
+const status =
+    document.getElementById("status");
+
+const loading =
+    document.getElementById("loading");
+
+
+
+// ==================================================
+// DRIVE IMAGE
+// ==================================================
+
+function driveImageURL(url) {
+
+    if (!url) {
+        return "";
+    }
+
+    const match =
+        String(url).match(/[?&]id=([^&]+)/);
+
+    if (match && match[1]) {
+
+        return (
+            "https://drive.google.com/thumbnail?id=" +
+            match[1] +
+            "&sz=w1000"
+        );
+
+    }
+
+    return url;
+}
+
+
+
+// ==================================================
+// LOAD DATA
+// ==================================================
+
+async function loadData(id, code) {
+
+    loginStatus.textContent =
+        "Memeriksa data...";
+
+    loginStatus.style.color =
+        "#9d405d";
+
+
+    try {
+
+        const url =
+            WEB_APP_URL +
+            "?mode=check" +
+            "&id=" +
+            encodeURIComponent(id) +
+            "&code=" +
+            encodeURIComponent(code);
+
+
+        const response =
+            await fetch(url);
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "DATA DARI APPS SCRIPT:",
+            data
+        );
+
+
+        if (!data.success) {
+
+            throw new Error(
+                data.error ||
+                "ID atau kode edit salah."
+            );
+
+        }
+
+
+        currentId = id;
+        currentCode = code;
+        currentData = data.data || data;
+
+
+        isiForm(currentData);
+
+
+        loginForm.style.display =
+            "none";
+
+        editForm.style.display =
+            "block";
+
+
+        loginStatus.textContent =
+            "";
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        loginStatus.textContent =
+            error.message;
+
+        loginStatus.style.color =
+            "red";
+
+    }
+
+}
+
+
+
+// ==================================================
+// ISI FORM
+// ==================================================
+
+function isiForm(data) {
+
+
+    document.getElementById("namaPria").value =
+        data["Nama Pria"] || "";
+
+
+    document.getElementById("namaWanita").value =
+        data["Nama Wanita"] || "";
+
+
+    document.getElementById("orangTuaPria").value =
+        data["Orang Tua Pria"] || "";
+
+
+    document.getElementById("orangTuaWanita").value =
+        data["Orang Tua Wanita"] || "";
+
+
+    document.getElementById("tanggalPernikahan").value =
+        formatDateForInput(
+            data["Tanggal Pernikahan"] || ""
+        );
+
+
+    document.getElementById("jamAkad").value =
+        data["Jam Akad"] || "";
+
+
+    document.getElementById("jamResepsi").value =
+        data["Jam Resepsi"] || "";
+
+
+    document.getElementById("namaGedung").value =
+        data["Nama Gedung"] || "";
+
+
+    document.getElementById("alamat").value =
+        data["Alamat"] || "";
+
+
+    document.getElementById("googleMaps").value =
+        data["Google Maps"] || "";
+
+
+    document.getElementById("nomorRekening").value =
+        data["Nomor Rekening"] || "";
+
+
+    document.getElementById("namaPemilikRekening").value =
+        data["Nama Pemilik Rekening"] || "";
+
+
+    document.getElementById("nomorDana").value =
+        data["Nomor DANA"] || "";
+
+
+    document.getElementById("namaPemilikDana").value =
+        data["Nama Pemilik DANA"] || "";
+
+
+    tampilkanFoto(
+        data["Foto Pria"],
+        "Mempelai Pria"
+    );
+
+
+    tampilkanFoto(
+        data["Foto Wanita"],
+        "Mempelai Wanita"
+    );
+
+
+    tampilkanFoto(
+        data["Foto Cover"],
+        "Foto Cover"
+    );
+
+}
+
+
+
+// ==================================================
+// FORMAT TANGGAL
+// ==================================================
+
+function formatDateForInput(value) {
+
+    if (!value) {
+        return "";
+    }
+
+
+    const text =
+        String(value).trim();
+
+
+    if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
+        return text;
+    }
+
+
+    const parts =
+        text.split("/");
+
+
+    if (parts.length === 3) {
+
+        return (
+            parts[2] +
+            "-" +
+            parts[1].padStart(2, "0") +
+            "-" +
+            parts[0].padStart(2, "0")
+        );
+
+    }
+
+
+    return "";
+
+}
+
+
+
+// ==================================================
+// TAMPILKAN FOTO
+// ==================================================
+
+function tampilkanFoto(url, nama) {
+
+    if (!url) {
+        return;
+    }
+
+
+    const list =
+        document.getElementById(
+            "photoPreviewList"
+        );
+
+
+    const item =
+        document.createElement("div");
+
+    item.className =
+        "photo-item";
+
+
+    const img =
+        document.createElement("img");
+
+
+    img.src =
+        driveImageURL(url);
+
+
+    img.alt =
+        nama;
+
+
+    img.onerror =
+        function () {
+
+            this.style.display =
+                "none";
+
+        };
+
+
+    const span =
+        document.createElement("span");
+
+
+    span.textContent =
+        nama;
+
+
+    item.appendChild(img);
+
+    item.appendChild(span);
+
+    list.appendChild(item);
+
+}
+
+
+
+// ==================================================
+// KOMPRES FOTO
+// ==================================================
+
+function compressImage(file) {
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function (event) {
+
+                    const img =
+                        new Image();
+
+
+                    img.onload =
+                        function () {
+
+                            const MAX_SIZE =
+                                1600;
+
+
+                            let width =
+                                img.width;
+
+                            let height =
+                                img.height;
+
+
+                            if (
+                                width >
+                                MAX_SIZE ||
+                                height >
+                                MAX_SIZE
+                            ) {
+
+                                if (
+                                    width >
+                                    height
+                                ) {
+
+                                    height =
+                                        Math.round(
+                                            height *
+                                            MAX_SIZE /
+                                            width
+                                        );
+
+                                    width =
+                                        MAX_SIZE;
+
+                                } else {
+
+                                    width =
+                                        Math.round(
+                                            width *
+                                            MAX_SIZE /
+                                            height
+                                        );
+
+                                    height =
+                                        MAX_SIZE;
+
+                                }
+
+                            }
+
+
+                            const canvas =
+                                document.createElement(
+                                    "canvas"
+                                );
+
+
+                            canvas.width =
+                                width;
+
+                            canvas.height =
+                                height;
+
+
+                            const ctx =
+                                canvas.getContext(
+                                    "2d"
+                                );
+
+
+                            ctx.drawImage(
+                                img,
+                                0,
+                                0,
+                                width,
+                                height
+                            );
+
+
+                            canvas.toBlob(
+                                function (blob) {
+
+                                    if (!blob) {
+
+                                        reject(
+                                            new Error(
+                                                "Gagal mengompres foto."
+                                            )
+                                        );
+
+                                        return;
+
+                                    }
+
+
+                                    const newFile =
+                                        new File(
+                                            [blob],
+                                            file.name.replace(
+                                                /\.[^/.]+$/,
+                                                ".jpg"
+                                            ),
+                                            {
+                                                type:
+                                                    "image/jpeg"
+                                            }
+                                        );
+
+
+                                    resolve(
+                                        newFile
+                                    );
+
+                                },
+                                "image/jpeg",
+                                0.82
+                            );
+
+                        };
+
+
+                    img.onerror =
+                        function () {
+
+                            reject(
+                                new Error(
+                                    "File foto tidak dapat dibaca."
+                                )
+                            );
+
+                        };
+
+
+                    img.src =
+                        event.target.result;
+
+                };
+
+
+            reader.onerror =
+                function () {
+
+                    reject(
+                        new Error(
+                            "Gagal membaca foto."
+                        )
+                    );
+
+                };
+
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+}
+
+
+
+// ==================================================
+// UPLOAD FOTO
+// ==================================================
+
+async function uploadPhoto(file, photoType, id, code) {
+
+    if (!file) {
+        return;
+    }
+
+    console.log("UPLOAD FOTO:", photoType, file.name);
+
+    const reader = new FileReader();
+
+    const base64 = await new Promise((resolve, reject) => {
+
+        reader.onload = () => {
+            resolve(reader.result);
+        };
+
+        reader.onerror = () => {
+            reject(
+                new Error("Gagal membaca file foto.")
+            );
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+
+    const params = new URLSearchParams();
+
+    params.append("id", id);
+    params.append("code", code);
+    params.append("photoType", photoType);
+    params.append("fileName", file.name);
+    params.append(
+        "mimeType",
+        file.type || "image/jpeg"
+    );
+    params.append("fileData", base64);
+
+
+    console.log("MENGIRIM FOTO:", {
+        id: id,
+        code: code,
+        photoType: photoType,
+        fileName: file.name,
+        mimeType: file.type
+    });
+
+
+    const response = await fetch(
+        WEB_APP_URL,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type":
+                    "application/x-www-form-urlencoded;charset=UTF-8"
+            },
+            body: params.toString()
+        }
+    );
+
+
+    const text = await response.text();
+
+    console.log(
+        "RESPONSE UPLOAD:",
+        text
+    );
+
+
+    let result;
+
+    try {
+
+        result = JSON.parse(text);
+
+    } catch (error) {
+
+        throw new Error(
+            "Response Apps Script bukan JSON: " +
+            text
+        );
+
+    }
+
+
+    if (!result.success) {
+
+        throw new Error(
+            result.message ||
+            "Upload foto gagal."
+        );
+
+    }
+
+
+    console.log(
+        "UPLOAD BERHASIL:",
+        result
+    );
+
+
+    return result;
+}
+
+
+// ==================================================
+// SIMPAN DATA
+// ==================================================
+
+async function simpanData() {
+
+    status.textContent = "";
+
+    loading.textContent =
+        "Menyimpan data...";
+
+    saveButton.disabled =
+        true;
+
+
+    try {
+
+
+        const googleMaps =
+            document
+                .getElementById(
+                    "googleMaps"
+                )
+                .value
+                .trim();
+
+
+        if (
+            googleMaps &&
+            !googleMaps.includes(
+                "google.com/maps"
+            ) &&
+            !googleMaps.includes(
+                "maps.app.goo.gl"
+            )
+        ) {
+
+            throw new Error(
+                "Link lokasi harus menggunakan Google Maps."
+            );
+
+        }
+
+
+
+        // ==========================================
+        // DATA
+        // ==========================================
+
+        const data = {
+
+            id:
+                currentId,
+
+            code:
+                currentCode,
+
+            "Nama Pria":
+                document
+                    .getElementById(
+                        "namaPria"
+                    )
+                    .value
+                    .trim(),
+
+            "Nama Wanita":
+                document
+                    .getElementById(
+                        "namaWanita"
+                    )
+                    .value
+                    .trim(),
+
+            "Orang Tua Pria":
+                document
+                    .getElementById(
+                        "orangTuaPria"
+                    )
+                    .value
+                    .trim(),
+
+            "Orang Tua Wanita":
+                document
+                    .getElementById(
+                        "orangTuaWanita"
+                    )
+                    .value
+                    .trim(),
+
+            "Tanggal Pernikahan":
+                document
+                    .getElementById(
+                        "tanggalPernikahan"
+                    )
+                    .value,
+
+            "Jam Akad":
+                document
+                    .getElementById(
+                        "jamAkad"
+                    )
+                    .value
+                    .trim(),
+
+            "Jam Resepsi":
+                document
+                    .getElementById(
+                        "jamResepsi"
+                    )
+                    .value
+                    .trim(),
+
+            "Nama Gedung":
+                document
+                    .getElementById(
+                        "namaGedung"
+                    )
+                    .value
+                    .trim(),
+
+            "Alamat":
+                document
+                    .getElementById(
+                        "alamat"
+                    )
+                    .value
+                    .trim(),
+
+            "Google Maps":
+                googleMaps,
+
+            "Nomor Rekening":
+                document
+                    .getElementById(
+                        "nomorRekening"
+                    )
+                    .value
+                    .trim(),
+
+            "Nama Pemilik Rekening":
+                document
+                    .getElementById(
+                        "namaPemilikRekening"
+                    )
+                    .value
+                    .trim(),
+
+            "Nomor DANA":
+                document
+                    .getElementById(
+                        "nomorDana"
+                    )
+                    .value
+                    .trim(),
+
+            "Nama Pemilik DANA":
+                document
+                    .getElementById(
+                        "namaPemilikDana"
+                    )
+                    .value
+                    .trim()
+
+        };
+
+
+
+        // ==========================================
+        // SIMPAN DATA KE GOOGLE SHEET
+        // ==========================================
+
+        const params =
+            new URLSearchParams();
+
+
+        params.append(
+            "mode",
+            "save"
+        );
+
+
+        params.append(
+            "id",
+            currentId
+        );
+
+
+        params.append(
+            "code",
+            currentCode
+        );
+
+
+        params.append(
+            "data",
+            JSON.stringify(data)
+        );
+
+
+        const saveResponse =
+            await fetch(
+                WEB_APP_URL +
+                "?" +
+                params.toString()
+            );
+
+
+        const saveText =
+            await saveResponse.text();
+
+
+        console.log(
+            "RESPON SAVE:",
+            saveText
+        );
+
+
+        let saveResult;
+
+
+        try {
+
+            saveResult =
+                JSON.parse(
+                    saveText
+                );
+
+        } catch (error) {
+
+            throw new Error(
+                "Google Apps Script memberikan response yang tidak valid."
+            );
+
+        }
+
+
+        if (!saveResult.success) {
+
+            throw new Error(
+                saveResult.error ||
+                "Data gagal disimpan."
+            );
+
+        }
+
+
+
+        // ==========================================
+        // FOTO PRIA
+        // ==========================================
+
+        const fotoPria =
+            document
+                .getElementById(
+                    "fotoPria"
+                )
+                .files[0];
+
+
+        if (fotoPria) {
+
+            loading.textContent =
+                "Mengupload foto mempelai pria...";
+
+
+            await uploadPhoto(
+                fotoPria,
+                "pria",
+                currentId,
+                currentCode
+            );
+
+        }
+
+
+
+        // ==========================================
+        // FOTO WANITA
+        // ==========================================
+
+        const fotoWanita =
+            document
+                .getElementById(
+                    "fotoWanita"
+                )
+                .files[0];
+
+
+        if (fotoWanita) {
+
+            loading.textContent =
+                "Mengupload foto mempelai wanita...";
+
+
+            await uploadPhoto(
+                fotoWanita,
+                "wanita",
+                currentId,
+                currentCode
+            );
+
+        }
+
+
+
+        // ==========================================
+        // FOTO COVER
+        // ==========================================
+
+        const fotoCover =
+            document
+                .getElementById(
+                    "fotoCover"
+                )
+                .files[0];
+
+
+        if (fotoCover) {
+
+            loading.textContent =
+                "Mengupload foto cover...";
+
+
+            await uploadPhoto(
+                fotoCover,
+                "cover",
+                currentId,
+                currentCode
+            );
+
+        }
+
+
+
+        // ==========================================
+        // SELESAI
+        // ==========================================
+
+        loading.textContent =
+            "";
+
+
+        status.textContent =
+            "✓ Data dan foto berhasil disimpan.";
+
+
+        status.style.color =
+            "green";
+
+
+        saveButton.disabled =
+            false;
+
+
+        // reload data setelah berhasil
+        setTimeout(
+            function () {
+
+                loadData(
+                    currentId,
+                    currentCode
+                );
+
+            },
+            1500
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        loading.textContent =
+            "";
+
+
+        status.textContent =
+            "Gagal: " +
+            error.message;
+
+
+        status.style.color =
+            "red";
+
+
+        saveButton.disabled =
+            false;
+
+    }
+
+}
+
+
+
+// ==================================================
+// BUTTON LOGIN
+// ==================================================
+
+loginButton.addEventListener(
+    "click",
+    function () {
+
+        const id =
+            document
+                .getElementById(
+                    "invitationId"
+                )
+                .value
+                .trim();
+
+
+        const code =
+            document
+                .getElementById(
+                    "editCode"
+                )
+                .value
+                .trim();
+
+
+        if (!id || !code) {
+
+            loginStatus.textContent =
+                "ID Undangan dan Kode Edit wajib diisi.";
+
+            loginStatus.style.color =
+                "red";
+
+            return;
+
+        }
+
+
+        loadData(
+            id,
+            code
+        );
+
+    }
+);
+
+
+
+// ==================================================
+// BUTTON SIMPAN
+// ==================================================
+
+saveButton.addEventListener(
+    "click",
+    simpanData
+);
+
+
+
+// ==================================================
+// SUPPORT URL
+// contoh:
+// edit.html?id=TEST002&code=RANGGA2026
+// ==================================================
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const urlId =
+    urlParams.get("id");
+
+
+const urlCode =
+    urlParams.get("code");
+
+
+if (urlId && urlCode) {
+
+    document
+        .getElementById(
+            "invitationId"
+        )
+        .value =
+        urlId;
+
+
+    document
+        .getElementById(
+            "editCode"
+        )
+        .value =
+        urlCode;
+
+
+    loadData(
+        urlId,
+        urlCode
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
+

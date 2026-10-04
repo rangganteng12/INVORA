@@ -1,0 +1,10 @@
+TERRACOTTA ROMANCE — LOCAL ASSETS
+
+cover-bg.png             Clean desktop cover background
+mobile-cover-bg.png     Clean portrait/mobile cover background
+location-bg.png          Clean location background
+section-bg.png           Darkened generic section background
+gallery/*                Local demo gallery images
+music.mp3                Included wedding music asset
+
+Replace gallery images and text with customer content before publishing.

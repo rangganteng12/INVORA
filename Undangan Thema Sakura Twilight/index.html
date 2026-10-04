@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#160910">
+<title>Galih & Ratna — Sakura Twilight Wedding Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="fallingDecor" aria-hidden="true"></div>
+
+<button id="musicBtn" class="music-btn" type="button" aria-label="Putar musik">♪</button>
+<audio id="music" loop preload="auto">
+  <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+
+<section id="cover" class="cover" aria-label="Sampul undangan">
+  <div class="cover-bg"></div>
+  <div class="cover-overlay"></div>
+  <div class="cover-frame"></div>
+
+  <div class="cover-content">
+    <p class="eyebrow">THE WEDDING OF</p>
+    <h1>
+      <span>Galih</span>
+      <em>&amp;</em>
+      <span>Ratna</span>
+    </h1>
+    <div class="ornament"><i></i><b>✦</b><i></i></div>
+    <p class="cover-date">24 SEPTEMBER 2026</p>
+    <p class="cover-dear">DEAR</p>
+    <p class="cover-guest" id="guestName">Tamu Undangan</p>
+    <button id="openBtn" class="open-btn" type="button">BUKA UNDANGAN <span>→</span></button>
+    <p class="cover-note">A NEW CHAPTER BEGINS</p>
+  </div>
+</section>
+
+<main id="invitation" class="invitation">
+
+  <section class="hero section-photo">
+    <div class="photo-bg"></div>
+    <div class="photo-overlay"></div>
+    <div class="hero-content">
+      <p class="eyebrow">OUR SPECIAL DAY</p>
+      <h2>Galih <em>&amp;</em> Ratna</h2>
+      <p class="hero-date">Kamis, 24 September 2026</p>
+      <p class="hero-place">Gedung Hanami Ballroom · Serang, Banten</p>
+      <div class="ornament"><i></i><b>❦</b><i></i></div>
+      <p class="hero-intro">Dengan penuh sukacita, kami mengundang Anda untuk menjadi bagian dari hari istimewa kami.</p>
+      <div class="countdown" aria-label="Countdown">
+        <div><strong id="days">000</strong><span>HARI</span></div>
+        <div><strong id="hours">00</strong><span>JAM</span></div>
+        <div><strong id="minutes">00</strong><span>MENIT</span></div>
+        <div><strong id="seconds">00</strong><span>DETIK</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section quote-section">
+    <p class="section-kicker">A BLESSING</p>
+    <h2 class="section-title">Two souls, one heart,<br>one beautiful beginning.</h2>
+    <div class="thin-divider"><span></span><b>✦</b><span></span></div>
+    <p class="arabic" dir="rtl">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
+    <p class="translation">“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup agar kamu merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang.”</p>
+    <p class="source">AR-RUM: 21</p>
+  </section>
+
+  <section class="section couple-section">
+    <p class="section-kicker">THE COUPLE</p>
+    <h2 class="section-title">Meet The Couple</h2>
+    <div class="couple-grid">
+      <article class="person-card">
+        <div class="portrait-wrap" data-fallback="UPLOAD FOTO"></div>
+        <p class="person-role">THE GROOM</p>
+        <h3>Galih</h3>
+        <p>Putra dari Bapak Nama Ayah<br>&amp; Ibu Nama Ibu</p>
+      </article>
+      <div class="and-mark">&amp;</div>
+      <article class="person-card">
+        <div class="portrait-wrap" data-fallback="UPLOAD FOTO"></div>
+        <p class="person-role">THE BRIDE</p>
+        <h3>Ratna</h3>
+        <p>Putri dari Bapak Nama Ayah<br>&amp; Ibu Nama Ibu</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section gallery-section">
+    <p class="section-kicker">OUR MOMENTS</p>
+    <h2 class="section-title">Wedding Gallery</h2>
+    <p class="gallery-intro">Demo foto dapat diganti dengan foto pasangan setelah template dibeli.</p>
+    <div class="gallery-slider">
+      <button class="gallery-arrow prev" id="galleryPrev" type="button" aria-label="Sebelumnya">‹</button>
+      <div class="gallery-window">
+        <div class="gallery-track" id="galleryTrack">
+          <div class="gallery-slide">
+            <img loading="lazy" src="assets/gallery/gallery-01-lanterns.png" alt="Wedding couple amidst flowers">
+            <div><span>THE MOMENT</span><strong>Beautiful Together</strong></div>
+          </div>
+          <div class="gallery-slide">
+            <img loading="lazy" src="assets/gallery/gallery-02-sunset.png" alt="Elegant wedding cake and floral decoration">
+            <div><span>THE DETAIL</span><strong>Little Things</strong></div>
+          </div>
+          <div class="gallery-slide">
+            <img loading="lazy" src="assets/gallery/gallery-03-pagoda.png" alt="Decorated wedding reception venue">
+            <div><span>THE RECEPTION</span><strong>A Night To Remember</strong></div>
+          </div>
+          <div class="gallery-slide">
+            <img loading="lazy" src="assets/gallery/gallery-04-bridge.png" alt="Elegant wedding table with flowers">
+            <div><span>THE DECOR</span><strong>Elegant Details</strong></div>
+          </div>
+          <div class="gallery-slide">
+            <img loading="lazy" src="assets/gallery/gallery-05-water.png" alt="Wedding reception table setting">
+            <div><span>THE CELEBRATION</span><strong>Made With Love</strong></div>
+          </div>
+          <div class="gallery-slide">
+            <img loading="lazy" src="assets/gallery/gallery-06-blossoms.png" alt="Wedding couple during outdoor ceremony">
+            <div><span>THE VOWS</span><strong>Forever Begins</strong></div>
+          </div>
+        </div>
+      </div>
+      <button class="gallery-arrow next" id="galleryNext" type="button" aria-label="Berikutnya">›</button>
+    </div>
+    <div class="gallery-dots" id="galleryDots"></div>
+  </section>
+
+  <section class="section story-section">
+    <p class="section-kicker">OUR JOURNEY</p>
+    <h2 class="section-title">Kisah Cinta</h2>
+    <div class="story-grid">
+      <article><span>2022</span><h3>Pertemuan Pertama</h3><p>Kisah kami berawal dari sebuah pertemuan sederhana yang perlahan menjadi sesuatu yang istimewa.</p></article>
+      <article><span>2024</span><h3>Lamaran</h3><p>Perjalanan kami semakin erat hingga akhirnya membawa kami pada satu langkah yang lebih serius.</p></article>
+      <article><span>2026</span><h3>Forever Begins</h3><p>Hari ini kami memilih untuk melangkah bersama menuju perjalanan baru yang akan kami jalani selamanya.</p></article>
+    </div>
+  </section>
+
+  <section class="section events-section">
+    <p class="section-kicker">SAVE THE DATE</p>
+    <h2 class="section-title">Wedding Events</h2>
+    <div class="event-grid">
+      <article><span class="event-icon">01</span><p class="event-label">AKAD NIKAH</p><h3>09:00 WIB</h3><p>Kamis, 24 September 2026</p><span>Gedung Hanami Ballroom<br>Serang, Banten</span></article>
+      <article><span class="event-icon">02</span><p class="event-label">RESEPSI</p><h3>11:00 WIB</h3><p>Kamis, 24 September 2026</p><span>Gedung Hanami Ballroom<br>Serang, Banten</span></article>
+    </div>
+  </section>
+
+  <section class="section location-section">
+    <div class="location-bg"></div>
+    <div class="location-overlay"></div>
+    <div class="location-content">
+      <p class="section-kicker">OUR LOCATION</p>
+      <h2 class="section-title">Gedung Hanami Ballroom</h2>
+      <p>Serang, Banten</p>
+      <a class="outline-button" href="https://www.google.com/maps/search/?api=1&query=Gedung+Hanami+Ballroom+Serang+Banten" target="_blank" rel="noopener">BUKA GOOGLE MAPS</a>
+    </div>
+  </section>
+
+  <section class="section gift-section">
+    <p class="section-kicker">WEDDING GIFT</p>
+    <h2 class="section-title">Your Presence Is Enough</h2>
+    <p class="gift-intro">Bagi keluarga dan sahabat yang ingin memberikan tanda kasih, dapat melalui rekening berikut.</p>
+    <div class="bank-card">
+      <span>BANK BCA</span>
+      <strong id="bankNumber">1234567890</strong>
+      <small>a.n. Galih</small>
+      <button id="copyBank" type="button">SALIN NOMOR</button>
+    </div>
+  </section>
+
+  <section class="section rsvp-section">
+    <p class="section-kicker">KONFIRMASI KEHADIRAN</p>
+    <h2 class="section-title">RSVP</h2>
+    <div class="form-grid">
+      <input id="rsvpName" type="text" placeholder="Nama Anda">
+      <select id="rsvpAttendance">
+        <option value="">Pilih Kehadiran</option>
+        <option value="Akan hadir">✓ Akan hadir</option>
+        <option value="Tidak dapat hadir">✕ Tidak dapat hadir</option>
+      </select>
+      <input id="rsvpGuests" type="number" min="1" max="10" placeholder="Jumlah tamu">
+      <textarea id="rsvpMessage" rows="4" placeholder="Tulis pesan dan doa untuk kami..."></textarea>
+      <button id="rsvpButton" class="solid-button" type="button">KIRIM KONFIRMASI</button>
+    </div>
+  </section>
+
+  <section class="section message-section">
+    <p class="section-kicker">PESAN &amp; UCAPAN</p>
+    <h2 class="section-title">Kirim Ucapan</h2>
+    <div class="form-grid">
+      <input id="messageName" type="text" placeholder="Nama Anda">
+      <textarea id="messageText" rows="4" placeholder="Tulis pesan atau ucapan untuk kami..."></textarea>
+      <button id="messageButton" class="solid-button" type="button">KIRIM UCAPAN</button>
+    </div>
+    <div id="messageList" class="message-list"></div>
+  </section>
+
+  <footer class="footer">
+    <p class="section-kicker">THANK YOU</p>
+    <h2>Galih <em>&amp;</em> Ratna</h2>
+    <p>Dengan cinta, kami menantikan kehadiran Anda.</p>
+  </footer>
+
+</main>
+
+<script src="script.js"></script>
+
+<!-- GALLERY LIGHTBOX -->
+<div class="gallery-lightbox" id="galleryLightbox">
+
+    <button
+        type="button"
+        class="gallery-lightbox-close"
+        aria-label="Tutup">
+        ×
+    </button>
+
+    <img
+        class="gallery-lightbox-image"
+        id="galleryLightboxImage"
+        src=""
+        alt="Wedding Gallery">
+
+</div>
+
+</body>s
+</html>
