@@ -1,0 +1,27 @@
+ASSETS — GALIH & RATNA PADANG
+
+Cover desktop:
+- assets/padang-cover-clean.jpg
+
+Cover mobile:
+- assets/padang-mobile-clean.jpg
+
+Location:
+- assets/padang-location-clean.jpg
+
+Supporting section assets:
+- assets/padang-section-clean.jpg
+- assets/padang-pattern.svg
+
+Gallery:
+- assets/gallery/gallery-01-padang.jpg
+- assets/gallery/gallery-02-padang.jpg
+- assets/gallery/gallery-03-padang.jpg
+- assets/gallery/gallery-04-padang.jpg
+- assets/gallery/gallery-05-padang.jpg
+- assets/gallery/gallery-06-padang.jpg
+
+Music:
+- assets/music.mp3
+
+Untuk menjual template, foto gallery dan data pasangan dapat diganti di index.html setelah pembelian.

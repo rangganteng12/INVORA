@@ -1,4 +1,4 @@
-window.INVORA_THEMES = [
+window.BLOOMY_VOW_THEMES = [
   {
     slug:'sakura', name:'Sakura Élance', collection:'Japanese Romance', category:'Romantic', price:'Rp79K', image:'assets/sakura.png',
     tagline:'Romansa Jepang dalam balutan bunga sakura.', features:['Responsive','Music','Countdown','Gallery'], demoUrl:'../Undangan Thema Sakura/index.html',

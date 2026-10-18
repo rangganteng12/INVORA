@@ -21,7 +21,7 @@ footer{background:var(--ink);color:#fff;padding:40px max(48px,calc((100% - 1280p
 @media(max-width:380px){.hero{min-height:940px}.hero-inner{padding-left:18px;padding-right:18px}.hero-devices{height:310px}.hero-devices img{width:94vw}.brand-copy b{font-size:14px}.brand-copy small{font-size:5px}.brand-mark{width:39px;height:39px}.hero-inner{padding-left:18px;padding-right:18px}.hero h1{font-size:48px}.feature-item strong{font-size:7px}.feature-item small{font-size:5.5px}.theme-cover{height:430px}}
 
 /* =========================================================
-   INVORA COLLECTION — V12 POLISH
+   BLOOMY VOW COLLECTION — V12 POLISH
    ========================================================= */
 .collection{
   position:relative;
@@ -230,3 +230,555 @@ footer{background:var(--ink);color:#fff;padding:40px max(48px,calc((100% - 1280p
   .theme-body>p{min-height:0}
   .theme-footer{margin-top:16px}
 }
+
+/* =========================================================
+   HERO PHONE — BLEND ONLY
+   Jangan mengubah layout hero lainnya
+   ========================================================= */
+
+.hero-devices {
+  position: relative;
+  overflow: hidden;
+}
+
+/* gambar utama */
+.hero-devices img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  /* sedikit menyatu dengan tone background */
+  opacity: .94;
+
+  filter:
+    saturate(.92)
+    contrast(.97)
+    brightness(1.015);
+
+  /* fade di semua tepi gambar */
+  -webkit-mask-image:
+    radial-gradient(
+      ellipse 72% 82% at 50% 50%,
+      #000 48%,
+      rgba(0,0,0,.98) 62%,
+      rgba(0,0,0,.72) 74%,
+      rgba(0,0,0,.28) 88%,
+      transparent 100%
+    );
+
+  mask-image:
+    radial-gradient(
+      ellipse 72% 82% at 50% 50%,
+      #000 48%,
+      rgba(0,0,0,.98) 62%,
+      rgba(0,0,0,.72) 74%,
+      rgba(0,0,0,.28) 88%,
+      transparent 100%
+    );
+}
+
+
+/* =========================================================
+   DESKTOP — fade lebih lebar
+   ========================================================= */
+
+@media (min-width: 761px) {
+
+  .hero-devices img {
+    width: 108%;
+
+    margin-left: -4%;
+
+    -webkit-mask-image:
+      radial-gradient(
+        ellipse 70% 84% at 50% 50%,
+        #000 46%,
+        rgba(0,0,0,.98) 60%,
+        rgba(0,0,0,.65) 73%,
+        rgba(0,0,0,.22) 88%,
+        transparent 100%
+      );
+
+    mask-image:
+      radial-gradient(
+        ellipse 70% 84% at 50% 50%,
+        #000 46%,
+        rgba(0,0,0,.98) 60%,
+        rgba(0,0,0,.65) 73%,
+        rgba(0,0,0,.22) 88%,
+        transparent 100%
+      );
+  }
+}
+
+
+/* =========================================================
+   MOBILE — fade lebih kuat supaya tidak seperti kotak
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .hero-devices {
+    overflow: hidden;
+  }
+
+  .hero-devices img {
+    width: 108%;
+
+    margin-left: -4%;
+
+    opacity: .91;
+
+    filter:
+      saturate(.90)
+      contrast(.95)
+      brightness(1.02);
+
+    -webkit-mask-image:
+      radial-gradient(
+        ellipse 76% 84% at 50% 48%,
+        #000 42%,
+        rgba(0,0,0,.96) 56%,
+        rgba(0,0,0,.62) 72%,
+        rgba(0,0,0,.20) 88%,
+        transparent 100%
+      );
+
+    mask-image:
+      radial-gradient(
+        ellipse 76% 84% at 50% 48%,
+        #000 42%,
+        rgba(0,0,0,.96) 56%,
+        rgba(0,0,0,.62) 72%,
+        rgba(0,0,0,.20) 88%,
+        transparent 100%
+      );
+  }
+}
+/* =========================================================
+   MOBILE ONLY — EXPERIENCE + HOW IT WORKS
+   Tidak mengubah bagian lain
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  /* =======================================================
+     02 / THE EXPERIENCE
+     ======================================================= */
+
+  .experience {
+    padding-top: 48px !important;
+    padding-bottom: 38px !important;
+
+    display: block !important;
+  }
+
+  .experience .section-copy {
+    margin-bottom: 0 !important;
+  }
+
+  .experience h2 {
+    margin-top: 9px !important;
+    margin-bottom: 0 !important;
+
+    font-size: 42px !important;
+    line-height: .94 !important;
+  }
+
+  .experience .section-copy > p {
+    margin-top: 15px !important;
+    margin-bottom: 0 !important;
+
+    font-size: 10.5px !important;
+    line-height: 1.6 !important;
+  }
+
+  .experience .feature-grid {
+    margin-top: 22px !important;
+
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .experience .feature-grid article {
+    min-height: 0 !important;
+
+    padding: 15px 0 !important;
+
+    border-top: 1px solid #d9d1c4 !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+  }
+
+  .experience .feature-grid article:first-child {
+    border-top: 0 !important;
+  }
+
+  .experience .feature-grid article:last-child {
+    border-bottom: 1px solid #d9d1c4 !important;
+  }
+
+  .experience .feature-grid span {
+    display: block;
+
+    margin-bottom: 5px !important;
+
+    font-size: 7px !important;
+    line-height: 1 !important;
+  }
+
+  .experience .feature-grid h3 {
+    margin: 0 0 4px !important;
+
+    font-size: 20px !important;
+    line-height: 1.05 !important;
+  }
+
+  .experience .feature-grid p {
+    margin: 0 !important;
+
+    font-size: 9px !important;
+    line-height: 1.5 !important;
+  }
+
+
+  /* =======================================================
+     03 / HOW IT WORKS
+     ======================================================= */
+
+  .process {
+    padding-top: 44px !important;
+    padding-bottom: 34px !important;
+  }
+
+  .process .section-heading {
+    margin-bottom: 0 !important;
+  }
+
+  .process h2 {
+    margin-top: 9px !important;
+    margin-bottom: 0 !important;
+
+    font-size: 42px !important;
+    line-height: .94 !important;
+  }
+
+  .process .process-grid {
+    margin-top: 22px !important;
+
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .process .process-grid article {
+    min-height: 0 !important;
+
+    padding: 15px 0 !important;
+
+    border-right: 0 !important;
+    border-top: 1px solid #d9d1c4 !important;
+    border-bottom: 0 !important;
+  }
+
+  .process .process-grid article:first-child {
+    border-top: 0 !important;
+  }
+
+  .process .process-grid article:last-child {
+    border-bottom: 1px solid #d9d1c4 !important;
+  }
+
+  .process .process-grid b {
+    display: block;
+
+    margin-bottom: 5px !important;
+
+    font-size: 7px !important;
+    line-height: 1 !important;
+  }
+
+  .process .process-grid h3 {
+    margin: 0 0 4px !important;
+
+    font-size: 20px !important;
+    line-height: 1.05 !important;
+  }
+
+  .process .process-grid p {
+    margin: 0 !important;
+
+    font-size: 9px !important;
+    line-height: 1.5 !important;
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+  .experience {
+    padding-top: 42px !important;
+    padding-bottom: 32px !important;
+  }
+
+  .experience h2,
+  .process h2 {
+    font-size: 39px !important;
+  }
+
+  .experience .feature-grid,
+  .process .process-grid {
+    margin-top: 18px !important;
+  }
+
+  .experience .feature-grid article,
+  .process .process-grid article {
+    padding: 13px 0 !important;
+  }
+
+  .experience .feature-grid h3,
+  .process .process-grid h3 {
+    font-size: 18px !important;
+  }
+
+  .experience .feature-grid p,
+  .process .process-grid p {
+    font-size: 8.5px !important;
+  }
+}
+
+/* =========================================================
+   MOBILE HERO — NAIKKAN CONTENT
+   Hanya mengubah posisi vertikal hero
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .hero {
+    align-items: flex-start !important;
+  }
+
+  .hero-content {
+    padding-top: 4px !important;
+  }
+
+}
+
+/* =========================================================
+   HERO MOBILE — ONLY MOVE CONTENT UP
+   Bagian lain tidak disentuh
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .hero {
+    align-items: flex-start !important;
+  }
+
+  .hero-inner {
+    width: 100% !important;
+    min-height: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 20px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  /* HANYA bagian teks hero yang dinaikkan */
+  .hero-copy {
+    width: 100% !important;
+    max-width: none !important;
+
+    margin: 0 !important;
+    padding: 40px 0 0 !important;
+
+    transform: translateY(-20px) !important;
+  }
+
+  .hero-copy .eyebrow {
+    margin-bottom: 30px !important;
+  }
+
+  .hero-copy h1 {
+    margin-top: 15 !important;
+  }
+
+  .hero-copy > p {
+    margin-top: 30px !important;
+  }
+
+  .hero-buttons {
+    margin-top: 35px !important;
+  }
+
+  .hero-stats {
+    margin-top: 25px !important;
+  }
+}
+
+/* BLOOMY VOW — BRANDING */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand-emblem {
+  display: block;
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  object-fit: contain;
+}
+
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.brand-copy b {
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+
+.brand-copy small {
+  font-size: 8px;
+  letter-spacing: 0.16em;
+}
+
+footer .brand-emblem {
+  width: 52px;
+  height: 52px;
+  flex-basis: 52px;
+}
+
+@media (max-width: 700px) {
+  .brand {
+    gap: 7px;
+  }
+
+  .brand-emblem {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+  }
+
+  .brand-copy b {
+    font-size: 13px;
+  }
+
+  .brand-copy small {
+    font-size: 7px;
+    letter-spacing: 0.1em;
+  }
+}
+
+/* BLOOMY VOW — FIX THEME COLLECTION */
+
+#grid.theme-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 200px !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#grid .theme-card {
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 400px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  overflow: hidden !important;
+  background: #fffdf8 !important;
+  border: 1px solid #e3d8c6 !important;
+  border-radius: 12px !important;
+  color: #111b30 !important;
+}
+
+#grid .theme-cover {
+  display: block !important;
+  position: relative !important;
+  width: 100% !important;
+  height: 300px !important;
+  overflow: hidden !important;
+  background: #e9dfd0 !important;
+  flex-shrink: 0 !important;
+}
+
+#grid .theme-cover img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#grid .theme-body {
+  display: flex !important;
+  flex: 1 1 auto !important;
+  flex-direction: column !important;
+  padding: 20px !important;
+  color: #111b30 !important;
+}
+
+#grid .theme-body h3,
+#grid .theme-body p,
+#grid .theme-collection {
+  color: #111b30 !important;
+}
+
+#grid .theme-footer {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-top: auto !important;
+  padding-top: 18px !important;
+}
+
+@media (max-width: 1000px) {
+  #grid.theme-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 650px) {
+  #grid.theme-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 18px !important;
+  }
+
+  #grid .theme-cover {
+    height: 280px !important;
+  }
+
+  #grid .theme-body {
+    padding: 17px !important;
+  }
+}
+

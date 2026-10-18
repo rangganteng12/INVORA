@@ -1,4 +1,4 @@
-INVORA V11 — Hero Phone Showcase
+BLOOMY VOW V11 — Hero Phone Showcase
 
 Perubahan:
 - Menambahkan showcase dua smartphone Galih & Ratna ke hero homepage.

@@ -1,5 +1,0 @@
-REFRESH NOTES
-- New Minangkabau background treatment
-- New local gallery demo images featuring Minangkabau wedding attire
-- Gallery click/fullscreen controls hardened
-- Falling decoration changed to songket jewel ornaments

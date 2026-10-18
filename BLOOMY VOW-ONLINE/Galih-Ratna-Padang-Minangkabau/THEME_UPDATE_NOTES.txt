@@ -1,0 +1,15 @@
+THEME REBUILD — PADANG / MINANGKABAU
+
+Rebuild bersih untuk menghilangkan konflik CSS/JS dari versi sebelumnya.
+
+Perbaikan utama:
+- CSS ditulis ulang menjadi satu stylesheet tanpa override bertumpuk.
+- JS ditulis ulang menjadi satu script tanpa duplikasi sistem gallery.
+- Cover dan Hero dibuat fullscreen desktop/mobile.
+- Posisi awal halaman setelah membuka undangan dikunci ke paling atas.
+- Meet The Couple desktop dibuat 3 kolom: Galih | & | Ratna.
+- Meet The Couple mobile dibuat satu kolom.
+- Background section menggunakan motif geometris Minangkabau yang lembut.
+- Gallery diperbaiki: slide, dots, autoplay, click-to-lightbox, tombol kanan/kiri, keyboard, swipe.
+- Ornamen jatuh dibuat berupa aksen emas/songket kecil agar sesuai tema Padang.
+- Warna teks dibuat kontras terhadap background.

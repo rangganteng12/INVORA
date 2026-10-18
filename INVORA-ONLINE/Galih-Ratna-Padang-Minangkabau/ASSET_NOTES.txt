@@ -1,8 +1,0 @@
-PADANG / MINANGKABAU REFRESH
-- Background cover baru: assets/padang-scenic-cover-new.jpg
-- Background section baru: assets/padang-songket-section-new.jpg
-- Background location baru: assets/padang-location-new.jpg
-- Gallery lokal baru menampilkan demo pasangan/pengantin bernuansa busana adat Minangkabau.
-- Falling decor: ornamen songket merah-emas berbentuk diamond/star, bukan embun, daun, atau melati.
-- Gallery lightbox: klik foto, fullscreen, tombol kiri/kanan, keyboard ArrowLeft/ArrowRight, swipe.
-- Semua asset tetap lokal termasuk music.mp3.
