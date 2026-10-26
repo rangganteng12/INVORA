@@ -468,6 +468,7 @@
     script.remove();
     try { delete window[callbackName]; } catch (_) {}
     console.error("BLOOMY VOW: database request timed out.");
+    if (window.__bloomyVowFinishLoading) window.__bloomyVowFinishLoading(false, "Koneksi database terlalu lama.\nSilakan muat ulang undangan.");
   }, 20000);
 
   window[callbackName] = function (response) {
@@ -478,9 +479,16 @@
     try { delete window[callbackName]; } catch (_) {}
     if (!response || response.success !== true || !response.data) {
       console.error("BLOOMY VOW: invitation data was not found.", response && response.message);
+      if (window.__bloomyVowFinishLoading) window.__bloomyVowFinishLoading(false, "Data undangan tidak ditemukan.\nPeriksa tautan undangan.");
       return;
     }
-    applyData(response.data);
+    try {
+      applyData(response.data);
+      if (window.__bloomyVowFinishLoading) window.__bloomyVowFinishLoading(true);
+    } catch (error) {
+      console.error("BLOOMY VOW: failed to apply invitation data.", error);
+      if (window.__bloomyVowFinishLoading) window.__bloomyVowFinishLoading(false, "Undangan mengalami kendala saat dimuat.\nSilakan muat ulang.");
+    }
   };
 
   script.onerror = function () {
@@ -490,6 +498,7 @@
     try { delete window[callbackName]; } catch (_) {}
     script.remove();
     console.error("BLOOMY VOW: failed to reach the invitation database.");
+    if (window.__bloomyVowFinishLoading) window.__bloomyVowFinishLoading(false, "Database tidak dapat dihubungi.\nPeriksa koneksi internet.");
   };
 
   script.src = API_URL + "?id=" + encodeURIComponent(invitationId) +
