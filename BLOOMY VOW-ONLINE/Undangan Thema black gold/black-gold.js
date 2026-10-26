@@ -50,10 +50,31 @@ openBtn.addEventListener("click", function () {
        COUNTDOWN
     ===================================================== */
 
-    const weddingDate =
-        new Date(
-            "September 30, 2026 09:00:00"
-        ).getTime();
+    function parseBlackGoldDate(dateString, timeString) {
+        const dateMatch = String(dateString || "").trim().match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{4})$/);
+        if (!dateMatch) return null;
+
+        const day = Number(dateMatch[1]);
+        const month = Number(dateMatch[2]);
+        const year = Number(dateMatch[3]);
+        const timeParts = String(timeString || "09:00").trim().split(":");
+        const hour = Number(timeParts[0] || 0);
+        const minute = Number(timeParts[1] || 0);
+
+        const parsed = new Date(year, month - 1, day, hour, minute, 0, 0);
+        if (
+            parsed.getFullYear() !== year ||
+            parsed.getMonth() !== month - 1 ||
+            parsed.getDate() !== day
+        ) return null;
+
+        return parsed.getTime();
+    }
+
+    const initialEvent = window.__blackGoldEventDate || {};
+    let weddingDate =
+        parseBlackGoldDate(initialEvent.date, initialEvent.time) ||
+        new Date("September 30, 2026 09:00:00").getTime();
 
 
     function updateCountdown() {
@@ -149,6 +170,22 @@ openBtn.addEventListener("click", function () {
 
     }
 
+
+    window.updateBlackGoldWeddingDate = function (dateString, timeString) {
+        const parsedDate = parseBlackGoldDate(dateString, timeString);
+        if (parsedDate !== null) {
+            weddingDate = parsedDate;
+            updateCountdown();
+        }
+    };
+
+    // If API data arrived before DOMContentLoaded, apply it now.
+    if (window.__blackGoldEventDate) {
+        window.updateBlackGoldWeddingDate(
+            window.__blackGoldEventDate.date,
+            window.__blackGoldEventDate.time
+        );
+    }
 
     updateCountdown();
 
