@@ -1126,8 +1126,3 @@ footer .brand-emblem {
     transform: none !important;
   }
 }
-
-/* Hilangkan gambar preview 3D Motion Kompas yang rusak */
-img[alt*="3D Motion Kompas"] {
-    display: none !important;
-}
