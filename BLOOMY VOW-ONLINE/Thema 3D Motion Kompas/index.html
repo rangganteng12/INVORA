@@ -2,6 +2,17 @@
 <html lang="id">
 <head>
 
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Wedding · Undangan Pernikahan</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&family=Special+Elite&family=Playfair+Display:wght@500;700&family=Cormorant+SC:wght@600;700&family=Cormorant+Garamond:ital,wght@1,500&family=Mrs+Saint+Delafield&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="lock">
 <script id="bloomy-vow-loading-bootstrap">
 (function () {
     var root = document.documentElement;
@@ -13,13 +24,20 @@
     function finish(success, message) {
         if (!invitationId) return;
         root.classList.remove("bloomy-data-pending");
+        if (document.body) {
+            document.body.classList.remove("bloomy-data-pending");
+            document.body.classList.remove("bloomy-data-failed");
+        }
         if (timer) window.clearTimeout(timer);
+
         if (success) {
             root.classList.remove("bloomy-data-failed");
             if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
             return;
         }
+
         root.classList.add("bloomy-data-failed");
+        if (document.body) document.body.classList.add("bloomy-data-failed");
         if (overlay) {
             overlay.classList.add("is-error");
             var copy = overlay.querySelector(".bloomy-vow-loader-copy");
@@ -34,75 +52,48 @@
 
     var style = document.createElement("style");
     style.id = "bloomy-vow-loading-style";
-    style.textContent = `
-        html.bloomy-data-pending body,
-        html.bloomy-data-failed body { visibility: hidden !important; }
-        #bloomy-vow-loading-overlay {
-            position: fixed !important; inset: 0 !important;
-            z-index: 2147483647 !important;
-            display: flex !important; flex-direction: column !important;
-            align-items: center !important; justify-content: center !important;
-            gap: 18px !important; padding: 28px !important; box-sizing: border-box !important;
-            background: radial-gradient(circle at 50% 40%, #30232a 0%, #171115 48%, #090809 100%) !important;
-            color: #f0d5a0 !important; font: 600 12px/1.8 system-ui, sans-serif !important;
-            letter-spacing: .14em !important; text-align: center !important;
-            text-transform: uppercase !important; white-space: normal !important;
-            opacity: 1 !important; visibility: visible !important; pointer-events: auto !important;
-        }
-        #bloomy-vow-loading-overlay .bloomy-vow-loader-brand {
-            font-size: 13px !important; letter-spacing: .24em !important;
-        }
-        #bloomy-vow-loading-overlay .bloomy-vow-loader-copy {
-            max-width: 300px !important; font-size: 11px !important; font-weight: 500 !important;
-            letter-spacing: .12em !important;
-        }
-        #bloomy-vow-loading-overlay .bloomy-vow-loader-spinner {
-            width: 23px !important; height: 23px !important; display: block;
-            border: 2px solid rgba(240, 213, 160, .24) !important;
-            border-top-color: #f0d5a0 !important; border-radius: 50% !important;
-            animation: bloomy-vow-loader-spin .75s linear infinite !important;
-        }
-        #bloomy-vow-loading-overlay.is-error .bloomy-vow-loader-copy {
-            max-width: 340px !important; line-height: 2 !important;
-        }
-        @keyframes bloomy-vow-loader-spin { to { transform: rotate(360deg); } }
-    `;
+    style.textContent = [
+        "body.bloomy-data-pending > *:not(#bloomy-vow-loading-overlay),",
+        "body.bloomy-data-failed > *:not(#bloomy-vow-loading-overlay) { visibility: hidden !important; }",
+        "#bloomy-vow-loading-overlay { position: fixed !important; inset: 0 !important; z-index: 2147483647 !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; gap: 18px !important; padding: 28px !important; box-sizing: border-box !important; background: radial-gradient(circle at 50% 40%, #30232a 0%, #171115 48%, #090809 100%) !important; color: #f0d5a0 !important; font: 600 12px/1.8 system-ui, sans-serif !important; letter-spacing: .14em !important; text-align: center !important; text-transform: uppercase !important; white-space: normal !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }",
+        "#bloomy-vow-loading-overlay .bloomy-vow-loader-brand { font-size: 13px !important; letter-spacing: .24em !important; }",
+        "#bloomy-vow-loading-overlay .bloomy-vow-loader-copy { max-width: 300px !important; font-size: 11px !important; font-weight: 500 !important; letter-spacing: .12em !important; }",
+        "#bloomy-vow-loading-overlay .bloomy-vow-loader-spinner { width: 23px !important; height: 23px !important; display: block; border: 2px solid rgba(240, 213, 160, .24) !important; border-top-color: #f0d5a0 !important; border-radius: 50% !important; animation: bloomy-vow-loader-spin .75s linear infinite !important; }",
+        "#bloomy-vow-loading-overlay.is-error .bloomy-vow-loader-copy { max-width: 340px !important; line-height: 2 !important; }",
+        "@keyframes bloomy-vow-loader-spin { to { transform: rotate(360deg); } }"
+    ].join("\n");
     (document.head || root).appendChild(style);
 
     overlay = document.createElement("div");
     overlay.id = "bloomy-vow-loading-overlay";
     overlay.setAttribute("role", "status");
     overlay.setAttribute("aria-live", "polite");
+
     var brand = document.createElement("div");
     brand.className = "bloomy-vow-loader-brand";
     brand.textContent = "BLOOMY VOW";
+
     var copy = document.createElement("div");
     copy.className = "bloomy-vow-loader-copy";
     copy.textContent = "Menyiapkan undangan...";
+
     var spinner = document.createElement("span");
     spinner.className = "bloomy-vow-loader-spinner";
     spinner.setAttribute("aria-hidden", "true");
+
     overlay.appendChild(brand);
     overlay.appendChild(copy);
     overlay.appendChild(spinner);
 
-    root.classList.add("bloomy-data-pending");
-    root.appendChild(overlay);
+    document.body.classList.add("bloomy-data-pending");
+    document.body.insertBefore(overlay, document.body.firstChild);
+
     timer = window.setTimeout(function () {
         finish(false, "Koneksi terlalu lama. Silakan muat ulang undangan.");
-    }, 15000);
+    }, 20000);
 })();
 </script>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Wedding · Undangan Pernikahan</title>
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&family=Special+Elite&family=Playfair+Display:wght@500;700&family=Cormorant+SC:wght@600;700&family=Cormorant+Garamond:ital,wght@1,500&family=Mrs+Saint+Delafield&display=swap">
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body class="lock">
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
