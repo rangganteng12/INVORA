@@ -445,8 +445,9 @@
     if (!data || typeof data !== "object") return;
     if (guestName) setGuest();
 
-    if (window.location.pathname.toLowerCase().indexOf("3d%20motion%20kompas") !== -1 ||
-        window.location.pathname.toLowerCase().indexOf("3d motion kompas") !== -1) {
+    var routePath = window.location.pathname || "";
+    try { routePath = decodeURIComponent(routePath); } catch (_) {}
+    if (/3d\s+motion\s+kompas/i.test(routePath)) {
       update3DMotion(data);
     } else {
       updateCommonTemplate(data);
@@ -459,7 +460,7 @@
   setGuest();
   if (!invitationId) return;
 
-  var cacheKey = "bloomy-vow:invitation:" + invitationId;
+  var cacheKey = "bloomy-vow:invitation:v2:" + invitationId;
   var usedCache = false;
   try {
     var cached = JSON.parse(localStorage.getItem(cacheKey) || "null");
