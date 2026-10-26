@@ -15,120 +15,54 @@
 <body class="lock">
 <script id="bloomy-vow-loading-bootstrap">
 (function () {
-  "use strict";
-  var params = new URLSearchParams(window.location.search);
-  var invitationId = String(params.get("id") || "").trim();
-  if (!invitationId) return;
+  const id = new URLSearchParams(location.search).get("id");
+  if (!id) return;
 
-  var root = document.documentElement;
-  var overlay = document.createElement("div");
+  const style = document.createElement("style");
+  style.textContent =
+    "body.bloomy-kompas-loading > *:not(#bloomy-vow-loading-overlay) {visibility:hidden !important;}" +
+    "#bloomy-vow-loading-overlay {position:fixed !important;inset:0 !important;width:100vw !important;height:100vh !important;z-index:2147483647 !important;display:flex !important;flex-direction:column !important;align-items:center !important;justify-content:center !important;gap:18px !important;box-sizing:border-box !important;background:radial-gradient(circle,#30232a,#090809) !important;color:#f0d5a0 !important;font:600 12px Arial,sans-serif !important;letter-spacing:.14em !important;text-align:center !important;}" +
+    "#bloomy-vow-loading-overlay .spinner {width:24px;height:24px;border:2px solid #604d3b;border-top-color:#f0d5a0;border-radius:50%;animation:bloomy-kompas-spin .75s linear infinite;}" +
+    "@keyframes bloomy-kompas-spin {to{transform:rotate(360deg);}}";
+  document.head.appendChild(style);
+
+  const overlay = document.createElement("div");
   overlay.id = "bloomy-vow-loading-overlay";
-  overlay.setAttribute("role", "status");
-  overlay.setAttribute("aria-live", "polite");
-
-  var brand = document.createElement("div");
+  const brand = document.createElement("div");
   brand.textContent = "BLOOMY VOW";
-  var copy = document.createElement("div");
-  copy.textContent = "Menyiapkan undangan...";
-  var spinner = document.createElement("span");
-  spinner.setAttribute("aria-hidden", "true");
+  const message = document.createElement("div");
+  message.textContent = "MENYIAPKAN UNDANGAN...";
+  const spinner = document.createElement("span");
+  spinner.className = "spinner";
+  overlay.append(brand, message, spinner);
 
-  Object.assign(overlay.style, {
-    position: "fixed",
-    top: "0",
-    right: "0",
-    bottom: "0",
-    left: "0",
-    width: "100%",
-    height: "100%",
-    zIndex: "2147483647",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "18px",
-    boxSizing: "border-box",
-    padding: "28px",
-    margin: "0",
-    background: "radial-gradient(circle at 50% 40%, #30232a 0%, #171115 48%, #090809 100%)",
-    color: "#f0d5a0",
-    fontFamily: "Arial, sans-serif",
-    fontSize: "12px",
-    fontWeight: "600",
-    lineHeight: "1.8",
-    letterSpacing: ".14em",
-    textAlign: "center",
-    textTransform: "uppercase",
-    visibility: "visible",
-    opacity: "1",
-    pointerEvents: "auto"
-  });
-  Object.assign(brand.style, {
-    display: "block",
-    fontSize: "13px",
-    letterSpacing: ".24em",
-    color: "#f0d5a0"
-  });
-  Object.assign(copy.style, {
-    display: "block",
-    maxWidth: "320px",
-    fontSize: "11px",
-    fontWeight: "500",
-    letterSpacing: ".12em",
-    color: "#f0d5a0"
-  });
-  Object.assign(spinner.style, {
-    display: "block",
-    width: "24px",
-    height: "24px",
-    boxSizing: "border-box",
-    borderRadius: "50%",
-    border: "2px solid rgba(240,213,160,.25)",
-    borderTopColor: "#f0d5a0",
-    animation: "bloomy-vow-kompas-spin .75s linear infinite"
-  });
+  document.body.classList.add("bloomy-kompas-loading");
+  document.body.prepend(overlay);
 
-  var style = document.createElement("style");
-  style.id = "bloomy-vow-loading-style";
-  style.textContent = [
-    "html.bloomy-kompas-loading body { visibility: hidden !important; }",
-    "html.bloomy-kompas-loading #bloomy-vow-loading-overlay { visibility: visible !important; opacity: 1 !important; display: flex !important; }",
-    "@keyframes bloomy-vow-kompas-spin { to { transform: rotate(360deg); } }"
-  ].join("\n");
-  (document.head || root).appendChild(style);
-
-  overlay.appendChild(brand);
-  overlay.appendChild(copy);
-  overlay.appendChild(spinner);
-
-  root.classList.add("bloomy-kompas-loading");
-  // Append as a sibling of <body> so theme CSS cannot hide the overlay with body rules.
-  root.appendChild(overlay);
-
-  var ended = false;
-  var timer = window.setTimeout(function () {
-    if (ended) return;
-    copy.textContent = "Data belum berhasil dimuat. Periksa koneksi lalu muat ulang undangan.";
+  let finished = false;
+  const timer = setTimeout(function () {
+    if (finished) return;
+    message.textContent = "DATA BELUM DIMUAT. PERIKSA KONEKSI DAN COBA MUAT ULANG.";
     spinner.style.display = "none";
-    overlay.setAttribute("role", "alert");
   }, 15000);
 
-  window.__bloomyVowFinishLoading = function (success, message) {
-    if (ended) return;
+  window.__bloomyVowFinishLoading = function (success, errorMessage) {
+    if (finished) return;
     if (!success) {
-      copy.textContent = message || "Data belum berhasil dimuat. Periksa koneksi lalu muat ulang undangan.";
+      message.textContent = errorMessage || "DATA GAGAL DIMUAT. SILAKAN COBA LAGI.";
       spinner.style.display = "none";
-      overlay.setAttribute("role", "alert");
       return;
     }
-    ended = true;
-    window.clearTimeout(timer);
-    root.classList.remove("bloomy-kompas-loading");
-    if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-    if (style.parentNode) style.parentNode.removeChild(style);
+    finished = true;
+    clearTimeout(timer);
+    document.body.classList.remove("bloomy-kompas-loading");
+    overlay.remove();
+    style.remove();
   };
 })();
 </script>
+
+
 
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
