@@ -1,6 +1,66 @@
 <!doctype html>
 <html lang="id">
 <head>
+
+<script id="bloomy-vow-loading-bootstrap">
+(function () {
+    var root = document.documentElement;
+    var params = new URLSearchParams(window.location.search);
+    var invitationId = String(params.get("id") || "").trim();
+
+    function finish(success, message) {
+        if (!invitationId) return;
+        root.classList.remove("bloomy-data-pending");
+        if (success) {
+            root.classList.remove("bloomy-data-failed");
+            root.removeAttribute("data-bloomy-message");
+        } else {
+            root.classList.add("bloomy-data-failed");
+            root.setAttribute("data-bloomy-message",
+                "BLOOMY VOW\n" + (message || "Undangan tidak dapat dimuat.\nPeriksa tautan atau koneksi."));
+        }
+        if (window.__bloomyVowLoaderTimer) window.clearTimeout(window.__bloomyVowLoaderTimer);
+    }
+
+    window.__bloomyVowFinishLoading = finish;
+
+    var style = document.createElement("style");
+    style.textContent = `
+        html.bloomy-data-pending body,
+        html.bloomy-data-failed body { visibility: hidden !important; }
+        html.bloomy-data-pending::before,
+        html.bloomy-data-failed::before {
+            content: attr(data-bloomy-message);
+            position: fixed; inset: 0; z-index: 2147483647;
+            display: flex; align-items: center; justify-content: center;
+            box-sizing: border-box; padding: 28px;
+            background: radial-gradient(circle at 50% 40%, #30232a 0%, #171115 48%, #090809 100%);
+            color: #f0d5a0; font: 600 13px/1.9 system-ui, sans-serif;
+            letter-spacing: .12em; text-align: center; text-transform: uppercase;
+            white-space: pre-line; visibility: visible !important;
+        }
+        html.bloomy-data-pending::after {
+            content: ""; position: fixed; z-index: 2147483647;
+            top: calc(50% + 43px); left: calc(50% - 11px);
+            width: 22px; height: 22px;
+            border: 2px solid rgba(240, 213, 160, .25);
+            border-top-color: #f0d5a0; border-radius: 50%;
+            animation: bloomy-vow-spin .8s linear infinite;
+            visibility: visible !important;
+        }
+        @keyframes bloomy-vow-spin { to { transform: rotate(360deg); } }
+    `;
+    (document.head || root).appendChild(style);
+
+    if (!invitationId) return;
+    root.classList.add("bloomy-data-pending");
+    root.setAttribute("data-bloomy-message", "BLOOMY VOW\nMenyiapkan undangan...");
+    window.__bloomyVowLoaderTimer = window.setTimeout(function () {
+        finish(false, "Koneksi terlalu lama.\nSilakan muat ulang undangan.");
+    }, 25000);
+})();
+</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#3a120e">
