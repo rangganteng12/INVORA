@@ -1570,7 +1570,7 @@ if (mapsButton) {
 // ==================================================
 
 const DATABASE_API =
-    "https://script.google.com/macros/s/AKfycbyYtfGoDs2WdpfmWzQSARB_6jzOIRfgwVADE7YlAaPPMYlR4KyLtr-rPj8F7FGyFCuoog/exec";
+    "https://script.google.com/macros/s/AKfycbxKcjFZEKfJ4hyjeaj818jDtY2rCt1gH5kCYPlCugvLzMgkGNtv4QSucuaTYxL7FQezWA/exec";
 
 
 function loadDatabaseInvitation() {
