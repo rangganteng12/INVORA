@@ -506,6 +506,18 @@ function loadJSONP(
     url
 ) {
 
+    let cacheKey = "";
+    try {
+        const invitationId = new URL(url, window.location.href).searchParams.get("id");
+        if (invitationId) {
+            cacheKey = "bloomy-vow:invitation:" + invitationId;
+            const cached = JSON.parse(localStorage.getItem(cacheKey) || "null");
+            if (cached && cached.data && cached.savedAt && Date.now() - cached.savedAt < 30000) {
+                return Promise.resolve({ success: true, data: cached.data });
+            }
+        }
+    } catch (_) {}
+
     return new Promise(
         function(
             resolve,
@@ -578,6 +590,15 @@ function loadJSONP(
                     delete window[
                         callbackName
                     ];
+
+                    if (cacheKey && response && response.success === true && response.data) {
+                        try {
+                            localStorage.setItem(cacheKey, JSON.stringify({
+                                savedAt: Date.now(),
+                                data: response.data
+                            }));
+                        } catch (_) {}
+                    }
 
                     resolve(
                         response
