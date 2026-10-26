@@ -2,7 +2,7 @@
 // ⚙️ DATA UNDANGAN
 // =========================================
 
-const API_URL = "https://script.google.com/macros/s/AKfycbwvZfIxsyIKmH5UC_uwPTQZmLSwAQ0Xxf07UZJRobWR4I1tBM9arDc1Cqu7aSm0UQmQjA/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbxKcjFZEKfJ4hyjeaj818jDtY2rCt1gH5kCYPlCugvLzMgkGNtv4QSucuaTYxL7FQezWA/exec";
 
 // =========================================
 // 🔗 AMBIL DATA UNDANGAN DARI GOOGLE SHEETS
