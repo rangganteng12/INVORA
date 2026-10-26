@@ -15,82 +15,75 @@
 <body class="lock">
 <script id="bloomy-vow-loading-bootstrap">
 (function () {
-    var root = document.documentElement;
-    var params = new URLSearchParams(window.location.search);
-    var invitationId = String(params.get("id") || "").trim();
-    var overlay = null;
-    var timer = null;
+  "use strict";
+  var params = new URLSearchParams(window.location.search);
+  var invitationId = String(params.get("id") || "").trim();
+  if (!invitationId) return;
 
-    function finish(success, message) {
-        if (!invitationId) return;
-        root.classList.remove("bloomy-data-pending");
-        if (document.body) {
-            document.body.classList.remove("bloomy-data-pending");
-            document.body.classList.remove("bloomy-data-failed");
-        }
-        if (timer) window.clearTimeout(timer);
+  var overlay = document.createElement("div");
+  overlay.id = "bloomy-vow-loading-overlay";
+  overlay.setAttribute("role", "status");
+  overlay.setAttribute("aria-live", "polite");
 
-        if (success) {
-            root.classList.remove("bloomy-data-failed");
-            if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
-            return;
-        }
+  var brand = document.createElement("div");
+  brand.textContent = "BLOOMY VOW";
+  var copy = document.createElement("div");
+  copy.textContent = "Menyiapkan undangan...";
+  var spinner = document.createElement("span");
+  spinner.setAttribute("aria-hidden", "true");
 
-        root.classList.add("bloomy-data-failed");
-        if (document.body) document.body.classList.add("bloomy-data-failed");
-        if (overlay) {
-            overlay.classList.add("is-error");
-            var copy = overlay.querySelector(".bloomy-vow-loader-copy");
-            var spinner = overlay.querySelector(".bloomy-vow-loader-spinner");
-            if (copy) copy.textContent = message || "Data undangan belum dapat dimuat. Periksa koneksi lalu muat ulang.";
-            if (spinner) spinner.style.display = "none";
-        }
+  // Inline styles ensure that the loading screen stays above any theme CSS.
+  Object.assign(overlay.style, {
+    position: "fixed", inset: "0", width: "100vw", height: "100vh",
+    zIndex: "2147483647", display: "flex", flexDirection: "column",
+    alignItems: "center", justifyContent: "center", gap: "18px",
+    boxSizing: "border-box", padding: "28px",
+    background: "radial-gradient(circle at 50% 40%, #30232a 0%, #171115 48%, #090809 100%)",
+    color: "#f0d5a0", fontFamily: "system-ui, sans-serif",
+    fontSize: "12px", fontWeight: "600", lineHeight: "1.8",
+    letterSpacing: ".14em", textAlign: "center", textTransform: "uppercase",
+    visibility: "visible", opacity: "1", pointerEvents: "auto"
+  });
+  Object.assign(brand.style, {fontSize:"13px", letterSpacing:".24em"});
+  Object.assign(copy.style, {maxWidth:"320px", fontSize:"11px", fontWeight:"500", letterSpacing:".12em"});
+  Object.assign(spinner.style, {
+    display:"block", width:"24px", height:"24px", borderRadius:"50%",
+    border:"2px solid rgba(240,213,160,.25)", borderTopColor:"#f0d5a0",
+    animation:"bloomy-vow-kompas-spin .75s linear infinite"
+  });
+  var style = document.createElement("style");
+  style.textContent = "@keyframes bloomy-vow-kompas-spin { to { transform: rotate(360deg); } } body.bloomy-kompas-loading > *:not(#bloomy-vow-loading-overlay) { visibility: hidden !important; }";
+  document.head.appendChild(style);
+  overlay.appendChild(brand);
+  overlay.appendChild(copy);
+  overlay.appendChild(spinner);
+
+  var body = document.body;
+  body.classList.add("bloomy-kompas-loading");
+  body.appendChild(overlay);
+
+  var ended = false;
+  var timer = window.setTimeout(function () {
+    if (ended) return;
+    copy.textContent = "Data belum berhasil dimuat. Periksa koneksi lalu muat ulang undangan.";
+    spinner.style.display = "none";
+    overlay.setAttribute("role", "alert");
+  }, 15000);
+
+  window.__bloomyVowFinishLoading = function (success, message) {
+    if (ended) return;
+    if (!success) {
+      copy.textContent = message || "Data belum berhasil dimuat. Periksa koneksi lalu muat ulang undangan.";
+      spinner.style.display = "none";
+      overlay.setAttribute("role", "alert");
+      return;
     }
-
-    window.__bloomyVowFinishLoading = finish;
-    if (!invitationId) return;
-
-    var style = document.createElement("style");
-    style.id = "bloomy-vow-loading-style";
-    style.textContent = [
-        "body.bloomy-data-pending > *:not(#bloomy-vow-loading-overlay),",
-        "body.bloomy-data-failed > *:not(#bloomy-vow-loading-overlay) { visibility: hidden !important; }",
-        "#bloomy-vow-loading-overlay { position: fixed !important; inset: 0 !important; z-index: 2147483647 !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; gap: 18px !important; padding: 28px !important; box-sizing: border-box !important; background: radial-gradient(circle at 50% 40%, #30232a 0%, #171115 48%, #090809 100%) !important; color: #f0d5a0 !important; font: 600 12px/1.8 system-ui, sans-serif !important; letter-spacing: .14em !important; text-align: center !important; text-transform: uppercase !important; white-space: normal !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }",
-        "#bloomy-vow-loading-overlay .bloomy-vow-loader-brand { font-size: 13px !important; letter-spacing: .24em !important; }",
-        "#bloomy-vow-loading-overlay .bloomy-vow-loader-copy { max-width: 300px !important; font-size: 11px !important; font-weight: 500 !important; letter-spacing: .12em !important; }",
-        "#bloomy-vow-loading-overlay .bloomy-vow-loader-spinner { width: 23px !important; height: 23px !important; display: block; border: 2px solid rgba(240, 213, 160, .24) !important; border-top-color: #f0d5a0 !important; border-radius: 50% !important; animation: bloomy-vow-loader-spin .75s linear infinite !important; }",
-        "#bloomy-vow-loading-overlay.is-error .bloomy-vow-loader-copy { max-width: 340px !important; line-height: 2 !important; }",
-        "@keyframes bloomy-vow-loader-spin { to { transform: rotate(360deg); } }"
-    ].join("\n");
-    (document.head || root).appendChild(style);
-
-    overlay = document.createElement("div");
-    overlay.id = "bloomy-vow-loading-overlay";
-    overlay.setAttribute("role", "status");
-    overlay.setAttribute("aria-live", "polite");
-
-    var brand = document.createElement("div");
-    brand.className = "bloomy-vow-loader-brand";
-    brand.textContent = "BLOOMY VOW";
-
-    var copy = document.createElement("div");
-    copy.className = "bloomy-vow-loader-copy";
-    copy.textContent = "Menyiapkan undangan...";
-
-    var spinner = document.createElement("span");
-    spinner.className = "bloomy-vow-loader-spinner";
-    spinner.setAttribute("aria-hidden", "true");
-
-    overlay.appendChild(brand);
-    overlay.appendChild(copy);
-    overlay.appendChild(spinner);
-
-    document.body.classList.add("bloomy-data-pending");
-    document.body.insertBefore(overlay, document.body.firstChild);
-
-    timer = window.setTimeout(function () {
-        finish(false, "Koneksi terlalu lama. Silakan muat ulang undangan.");
-    }, 20000);
+    ended = true;
+    window.clearTimeout(timer);
+    body.classList.remove("bloomy-kompas-loading");
+    if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    if (style.parentNode) style.parentNode.removeChild(style);
+  };
 })();
 </script>
 
