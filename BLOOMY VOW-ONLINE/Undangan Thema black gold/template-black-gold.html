@@ -1917,6 +1917,250 @@ html, body {
 </script>
 
 
+
+<!-- BLOOMY VOW DATABASE INTEGRATION: Black & Gold template -->
+<script>
+(function () {
+    "use strict";
+
+    var API_URL = "https://script.google.com/macros/s/AKfycbxKcjFZEKfJ4hyjeaj818jDtY2rCt1gH5kCYPlCugvLzMgkGNtv4QSucuaTYxL7FQezWA/exec";
+    var params = new URLSearchParams(window.location.search);
+    var invitationId = String(params.get("id") || "").trim();
+    var guestName = String(params.get("to") || "").trim();
+
+    function setText(element, value) {
+        if (element && value !== "") element.textContent = value;
+    }
+
+    function setCoupleHeading(element, groom, bride) {
+        if (!element || (!groom && !bride)) return;
+        while (element.firstChild) element.removeChild(element.firstChild);
+        element.appendChild(document.createTextNode(groom || ""));
+        element.appendChild(document.createTextNode(" "));
+        var amp = document.createElement("span");
+        amp.textContent = "&";
+        element.appendChild(amp);
+        element.appendChild(document.createTextNode(" " + (bride || "")));
+    }
+
+    function formatDate(value, uppercase) {
+        var match = String(value || "").trim().match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{4})$/);
+        if (!match) return value || "";
+        var date = new Date(Number(match[3]), Number(match[2]) - 1, Number(match[1]), 12);
+        var formatted = new Intl.DateTimeFormat("id-ID", {
+            weekday: "long", day: "numeric", month: "long", year: "numeric"
+        }).format(date);
+        formatted = formatted.charAt(0).toUpperCase() + formatted.slice(1);
+        return uppercase ? formatted.toLocaleUpperCase("id-ID") : formatted;
+    }
+
+    function formatTime(value) {
+        var match = String(value || "").trim().match(/^(\d{1,2}):(\d{2})/);
+        if (!match) return value || "";
+        return String(Number(match[1])).padStart(2, "0") + ":" + match[2] + " WIB";
+    }
+
+    function driveImageUrl(value) {
+        var raw = String(value || "").trim();
+        if (!/^https?:\/\//i.test(raw)) return "";
+        var idMatch = raw.match(/[?&]id=([^&]+)/) || raw.match(/\/d\/([^/]+)/);
+        if (idMatch && idMatch[1]) {
+            return "https://drive.google.com/thumbnail?id=" +
+                encodeURIComponent(decodeURIComponent(idMatch[1])) + "&sz=w1200";
+        }
+        return raw;
+    }
+
+    function setBackgroundImage(element, url) {
+        if (!element || !url) return;
+        element.style.backgroundImage = "url(\"" + url.replace(/"/g, "%22") + "\")";
+        element.style.backgroundSize = "cover";
+        element.style.backgroundPosition = "center";
+    }
+
+    function loadFromDatabase(data) {
+        var groom = String(data["Nama Pria"] || "").trim();
+        var bride = String(data["Nama Wanita"] || "").trim();
+        var parentsGroom = String(data["Orang Tua Pria"] || "").trim();
+        var parentsBride = String(data["Orang Tua Wanita"] || "").trim();
+        var weddingDate = String(data["Tanggal Pernikahan"] || "").trim();
+        var timeAkad = String(data["Jam Akad"] || "").trim();
+        var timeResepsi = String(data["Jam Resepsi"] || "").trim();
+        var venue = String(data["Nama Gedung"] || "").trim();
+        var address = String(data["Alamat"] || "").trim();
+        var maps = String(data["Google Maps"] || "").trim();
+
+        setCoupleHeading(document.querySelector(".cover-content h1"), groom, bride);
+        setCoupleHeading(document.querySelector(".opening-content h2"), groom, bride);
+        setCoupleHeading(document.querySelector(".closing h2"), groom, bride);
+        if (groom || bride) document.title = (groom || "Mempelai") + " & " + (bride || "Mempelai") + " | Wedding Invitation";
+
+        document.querySelectorAll(".cover-content .date, .opening-date").forEach(function (el) {
+            if (weddingDate) el.textContent = formatDate(weddingDate, el.classList.contains("date"));
+        });
+
+        var persons = document.querySelectorAll(".couple-grid .person");
+        if (persons[0]) {
+            setText(persons[0].querySelector("h3"), groom);
+            var p = persons[0].querySelectorAll("p");
+            if (p[1] && parentsGroom) p[1].textContent = "Putra dari " + parentsGroom;
+            setBackgroundImage(persons[0].querySelector(".person-photo"), driveImageUrl(data["Foto Pria"]));
+        }
+        if (persons[1]) {
+            setText(persons[1].querySelector("h3"), bride);
+            var p2 = persons[1].querySelectorAll("p");
+            if (p2[1] && parentsBride) p2[1].textContent = "Putri dari " + parentsBride;
+            setBackgroundImage(persons[1].querySelector(".person-photo"), driveImageUrl(data["Foto Wanita"]));
+        }
+
+        var coverImage = driveImageUrl(data["Foto Cover"]);
+        var coupleImage = driveImageUrl(data["Foto Pasangan"]);
+        if (coverImage) {
+            var coverEl = document.querySelector(".cover");
+            if (coverEl) {
+                coverEl.style.backgroundImage = "linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.45)), url(\"" + coverImage + "\")";
+                coverEl.style.backgroundSize = "cover";
+                coverEl.style.backgroundPosition = "center";
+            }
+        }
+        setBackgroundImage(document.querySelector(".opening-photo"), coupleImage || coverImage);
+
+        var eventCards = document.querySelectorAll(".event-grid .event-card");
+        [timeAkad, timeResepsi].forEach(function (time, index) {
+            var card = eventCards[index];
+            if (!card) return;
+            setText(card.querySelector("h3"), formatTime(time));
+            var paragraphs = card.querySelectorAll("p");
+            if (paragraphs[1] && weddingDate) paragraphs[1].textContent = formatDate(weddingDate, false);
+            setText(card.querySelector("strong"), venue);
+            if (paragraphs[2]) setText(paragraphs[2], address);
+        });
+
+        setText(document.querySelector(".location-card h3"), venue);
+        setText(document.querySelector(".location-card .location-address"), address);
+        var mapButton = document.querySelector(".location-card a.location-button");
+        if (mapButton && /^https?:\/\//i.test(maps)) mapButton.href = maps;
+
+        var galleryImages = document.querySelectorAll(".gallery .gallery-item img");
+        for (var i = 0; i < 6; i++) {
+            var photoUrl = driveImageUrl(data["Gallery " + (i + 1)]);
+            if (galleryImages[i] && photoUrl) galleryImages[i].src = photoUrl;
+        }
+
+        var accountNumber = String(data["Nomor Rekening"] || "").trim();
+        var accountName = String(data["Nama Pemilik Rekening"] || "").trim();
+        var bank = document.querySelector(".gift .bank");
+        if (bank) {
+            setText(bank.querySelector("small"), accountNumber ? "INFORMASI REKENING" : "");
+            setText(bank.querySelector("strong"), accountNumber);
+            setText(bank.querySelector("p"), accountName ? "a.n. " + accountName : "");
+            var copyButton = bank.querySelector("button");
+            if (copyButton && accountNumber) {
+                copyButton.onclick = function () {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(accountNumber).then(function () {
+                            copyButton.textContent = "TERSALIN";
+                        }).catch(function () {
+                            window.prompt("Salin nomor rekening:", accountNumber);
+                        });
+                    } else {
+                        window.prompt("Salin nomor rekening:", accountNumber);
+                    }
+                };
+            }
+        }
+
+        var danaNumber = String(data["Nomor DANA"] || "").trim();
+        var danaName = String(data["Nama Pemilik DANA"] || "").trim();
+        var giftSection = document.querySelector(".gift");
+        if (giftSection && danaNumber && !giftSection.querySelector("[data-dana-card]")) {
+            var danaCard = document.createElement("div");
+            danaCard.className = "bank";
+            danaCard.setAttribute("data-dana-card", "true");
+            var small = document.createElement("small");
+            small.textContent = "DANA";
+            var number = document.createElement("strong");
+            number.textContent = danaNumber;
+            var owner = document.createElement("p");
+            owner.textContent = danaName ? "a.n. " + danaName : "";
+            var copy = document.createElement("button");
+            copy.type = "button";
+            copy.textContent = "SALIN NOMOR DANA";
+            copy.addEventListener("click", function () {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(danaNumber).then(function () {
+                        copy.textContent = "TERSALIN";
+                    }).catch(function () {
+                        window.prompt("Salin nomor DANA:", danaNumber);
+                    });
+                } else {
+                    window.prompt("Salin nomor DANA:", danaNumber);
+                }
+            });
+            danaCard.appendChild(small);
+            danaCard.appendChild(number);
+            danaCard.appendChild(owner);
+            danaCard.appendChild(copy);
+            var firstBank = giftSection.querySelector(".bank");
+            if (firstBank) firstBank.insertAdjacentElement("afterend", danaCard);
+            else giftSection.appendChild(danaCard);
+        }
+
+        if (window.updateBlackGoldWeddingDate) {
+            window.updateBlackGoldWeddingDate(weddingDate, timeAkad);
+        } else {
+            window.__blackGoldEventDate = { date: weddingDate, time: timeAkad };
+        }
+
+        document.documentElement.setAttribute("data-invitation-loaded", "true");
+        console.info("BLOOMY VOW: data undangan berhasil dimuat untuk ID", invitationId);
+    }
+
+    var guestElement = document.querySelector(".guest strong");
+    if (guestElement && guestName) guestElement.textContent = guestName;
+
+    if (!invitationId) return;
+
+    var callbackName = "__bloomyBlackGoldData_" + Date.now() + "_" +
+        Math.random().toString(36).slice(2);
+    var apiScript = document.createElement("script");
+    var finished = false;
+
+    function cleanUp() {
+        if (finished) return;
+        finished = true;
+        window.clearTimeout(timeoutId);
+        apiScript.remove();
+        try { delete window[callbackName]; } catch (_) { window[callbackName] = undefined; }
+    }
+
+    var timeoutId = window.setTimeout(function () {
+        cleanUp();
+        console.error("BLOOMY VOW: waktu tunggu database habis.");
+    }, 20000);
+
+    window[callbackName] = function (response) {
+        if (finished) return;
+        cleanUp();
+        if (!response || !response.success || !response.data) {
+            console.error("BLOOMY VOW: data undangan tidak ditemukan.", response && response.message);
+            return;
+        }
+        loadFromDatabase(response.data);
+    };
+
+    apiScript.onerror = function () {
+        if (finished) return;
+        cleanUp();
+        console.error("BLOOMY VOW: gagal menghubungi Apps Script.");
+    };
+
+    apiScript.src = API_URL + "?id=" + encodeURIComponent(invitationId) +
+        "&callback=" + encodeURIComponent(callbackName) + "&t=" + Date.now();
+    document.head.appendChild(apiScript);
+})();
+</script>
+
 </body>
 </html>
 
