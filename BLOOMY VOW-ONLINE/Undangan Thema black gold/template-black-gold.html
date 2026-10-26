@@ -2215,6 +2215,17 @@ html, body {
 
     if (!invitationId) return;
 
+    var cacheKey = "bloomy-vow:invitation:" + invitationId;
+    var usedCache = false;
+    try {
+        var cached = JSON.parse(localStorage.getItem(cacheKey) || "null");
+        if (cached && cached.data && cached.savedAt && Date.now() - cached.savedAt < 30000) {
+            loadFromDatabase(cached.data);
+            usedCache = true;
+            if (window.__bloomyVowFinishLoading) window.__bloomyVowFinishLoading(true);
+        }
+    } catch (_) {}
+
     var callbackName = "__bloomyBlackGoldData_" + Date.now() + "_" +
         Math.random().toString(36).slice(2);
     var apiScript = document.createElement("script");
@@ -2231,7 +2242,7 @@ html, body {
     var timeoutId = window.setTimeout(function () {
         cleanUp();
         console.error("BLOOMY VOW: waktu tunggu database habis.");
-        if (window.__bloomyVowFinishLoading) window.__bloomyVowFinishLoading(false, "Koneksi database terlalu lama.\\nSilakan muat ulang undangan.");
+        if (!usedCache && window.__bloomyVowFinishLoading) window.__bloomyVowFinishLoading(false, "Koneksi database terlalu lama.\\nSilakan muat ulang undangan.");
     }, 20000);
 
     window[callbackName] = function (response) {
@@ -2239,14 +2250,16 @@ html, body {
         cleanUp();
         if (!response || !response.success || !response.data) {
             console.error("BLOOMY VOW: data undangan tidak ditemukan.", response && response.message);
-            if (window.__bloomyVowFinishLoading) window.__bloomyVowFinishLoading(false, "Data undangan tidak ditemukan.\\nPeriksa tautan undangan.");
+            if (!usedCache && window.__bloomyVowFinishLoading) window.__bloomyVowFinishLoading(false, "Data undangan tidak ditemukan.\\nPeriksa tautan undangan.");
             return;
         }
         try {
+            try { localStorage.setItem(cacheKey, JSON.stringify({ savedAt: Date.now(), data: response.data })); } catch (_) {}
             loadFromDatabase(response.data);
+            usedCache = true;
         } catch (error) {
             console.error("BLOOMY VOW: gagal menerapkan data undangan.", error);
-            if (window.__bloomyVowFinishLoading) window.__bloomyVowFinishLoading(false, "Undangan mengalami kendala saat dimuat.\\nSilakan muat ulang.");
+            if (!usedCache && window.__bloomyVowFinishLoading) window.__bloomyVowFinishLoading(false, "Undangan mengalami kendala saat dimuat.\\nSilakan muat ulang.");
         }
     };
 
@@ -2254,7 +2267,7 @@ html, body {
         if (finished) return;
         cleanUp();
         console.error("BLOOMY VOW: gagal menghubungi Apps Script.");
-        if (window.__bloomyVowFinishLoading) window.__bloomyVowFinishLoading(false, "Database tidak dapat dihubungi.\\nPeriksa koneksi internet.");
+        if (!usedCache && window.__bloomyVowFinishLoading) window.__bloomyVowFinishLoading(false, "Database tidak dapat dihubungi.\\nPeriksa koneksi internet.");
     };
 
     apiScript.src = API_URL + "?id=" + encodeURIComponent(invitationId) +
