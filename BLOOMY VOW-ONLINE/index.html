@@ -3,101 +3,345 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f8f4ec">
-  <meta name="description" content="Bloomy Vow — undangan digital yang elegan, personal, dan interaktif.">
-  <title>Bloomy Vow — Digital Wedding Invitations</title>
+  <title>Bloomy Vow — Wedding Invitation</title>
+  <meta name="description" content="Bloomy Vow — premium digital wedding invitations.">
   <link rel="icon" href="assets/favicon.ico">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" sizes="32x32"
+      href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+      href="assets/favicon-16.png">
+<link rel="apple-touch-icon"
+      href="assets/apple-touch-icon.png">
+
+<meta name="theme-color" content="#f8f7ef">
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-  <header class="site-header" id="siteHeader">
-    <div class="header-inner">
-      <a class="brand" href="#top" aria-label="Bloomy Vow, beranda">
-        <img class="brand-emblem" src="assets/bloomy-vow-emblem.png" alt="" onerror="this.hidden=true">
-        <span class="brand-copy"><b>BLOOMY VOW</b><small>WEDDING INVITATIONS</small></span>
-      </a>
-      <nav class="main-nav" aria-label="Navigasi utama">
-        <a href="#top">Beranda</a>
-        <a href="#themes">Koleksi Tema</a>
-        <a href="#3d-motion">3D Motion</a>
-        <a href="#experience">Fitur</a>
-        <a href="#process">Cara Pesan</a>
-        <a href="#pricing">Harga</a>
-        <a href="#faq">FAQ</a>
-      </nav>
-      <div class="header-actions">
-        <label class="search-box header-search"><span aria-hidden="true">⌕</span><input id="navSearch" type="search" placeholder="Cari tema..." autocomplete="off" aria-label="Cari tema di navigasi"></label>
-        <a class="button button-gold header-order" href="https://wa.me/6285111249861?text=Halo%20Bloomy%20Vow%2C%20saya%20ingin%20memesan%20undangan%20digital." target="_blank" rel="noopener noreferrer">Pesan Sekarang <span aria-hidden="true">↗</span></a>
-        <button class="menu-button" id="menuButton" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="mobileMenu"><i></i><i></i><i></i></button>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="brand" href="#top" aria-label="Bloomy Vow home">
+  <img
+    class="brand-emblem"
+    src="assets/bloomy-vow-emblem.png"
+    alt=""
+  >
+  <span class="brand-copy">
+    <b>BLOOMY VOW</b>
+    <small>WEDDING INVITATIONS</small>
+  </span>
+</a>
+
+  <nav class="main-nav" aria-label="Navigasi utama">
+  <a class="active" href="#top">Beranda</a>
+  <a href="#themes">Koleksi Tema</a>
+  <a href="#3d-motion">3D Motion</a>
+  <a href="#experience">Fitur</a>
+  <a href="#process">Cara Pesan</a>
+  <a href="#pricing">Harga</a>
+  <a href="#faq">FAQ</a>
+</nav>
+
+    <div class="header-actions">
+      <label class="search-box">
+        <span>⌕</span>
+        <input id="navSearch" type="search" placeholder="Cari tema..." autocomplete="off">
+      </label>
+     <a
+  class="button button-gold header-order"
+  href="https://wa.me/6285111249861?text=Halo%20BLOOMY%20VOW%2C%20saya%20ingin%20memesan%20undangan%20digital."
+  target="_blank"
+  rel="noopener"
+>
+  Pesan Sekarang <span>↗</span>
+</a>
+      <button class="menu-button" id="menuButton" type="button" aria-label="Buka menu" aria-controls="mobileMenu" aria-expanded="false">
+        <i></i><i></i><i></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#3d-motion">3D Motion</a>
+    <a href="#top">Beranda</a>
+    <a href="#themes">Koleksi Tema</a>
+    <a href="#experience">Fitur</a>
+    <a href="#process">Cara Pesan</a>
+    <a href="#pricing">Harga</a>
+    <a href="#faq">FAQ</a>
+    <a class="mobile-order" href="https://wa.me/6285111249861?text=Halo%20BLOOMY%20VOW%2C%20saya%20ingin%20memesan%20undangan%20digital." target="_blank" rel="noopener">Pesan Sekarang ↗</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="eyebrow"><span></span>PREMIUM DIGITAL INVITATION STUDIO<span></span></div>
+        <h1>Your Story,<br><em>Beautifully</em><br>Invited.</h1>
+        <p>Undangan digital premium yang dirancang seperti sebuah pengalaman — elegan, personal, dan indah untuk dibagikan.</p>
+        <div class="hero-buttons">
+          <a class="button button-gold" href="#themes">Jelajahi Koleksi <span>→</span></a>
+          <a class="button button-light" href="#process">Cara Pesan <span>↓</span></a>
+        </div>
+        <div class="hero-stats">
+          <div><b>13</b><span>curated themes</span></div>
+          <div><b>Mobile</b><span>first</span></div>
+          <div><b>Live</b><span>preview</span></div>
+        </div>
+      </div>
+
+      <div class="hero-devices" aria-label="Preview undangan Galih dan Ratna">
+        <img src="assets/galih-ratna-phone-showcase.png" alt="Preview dua smartphone undangan digital Galih dan Ratna">
       </div>
     </div>
-    <nav class="mobile-menu" id="mobileMenu" aria-label="Navigasi seluler" hidden>
-      <a href="#top">Beranda</a><a href="#themes">Koleksi Tema</a><a href="#3d-motion">3D Motion</a><a href="#experience">Fitur</a><a href="#process">Cara Pesan</a><a href="#pricing">Harga</a><a href="#faq">FAQ</a>
-      <a class="mobile-order" href="https://wa.me/6285111249861?text=Halo%20Bloomy%20Vow%2C%20saya%20ingin%20memesan%20undangan%20digital." target="_blank" rel="noopener noreferrer">Pesan Sekarang ↗</a>
-    </nav>
-  </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="hero-decoration hero-decoration-one" aria-hidden="true"></div><div class="hero-decoration hero-decoration-two" aria-hidden="true"></div>
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <div class="eyebrow"><span></span> PREMIUM DIGITAL INVITATION STUDIO <span></span></div>
-          <h1>Your Story,<br><em>Beautifully</em><br>Invited.</h1>
-          <p>Undangan digital premium yang dirancang seperti sebuah pengalaman — elegan, personal, dan indah untuk dibagikan.</p>
-          <div class="hero-buttons"><a class="button button-gold" href="#themes">Jelajahi Koleksi <span aria-hidden="true">→</span></a><a class="button button-light" href="#process">Cara Pesan <span aria-hidden="true">↓</span></a></div>
-          <div class="hero-stats"><div><b id="heroThemeCount">13</b><span>curated themes</span></div><div><b>Mobile</b><span>first design</span></div><div><b>Live</b><span>preview</span></div></div>
-        </div>
-        <div class="hero-visual">
-          <div class="hero-image-frame"><img src="assets/galih-ratna-phone-showcase.png" alt="Contoh tampilan undangan digital Bloomy Vow" onerror="this.hidden=true"><div class="hero-image-fallback"><span class="fallback-ornament">✿</span><span>Every love story<br>deserves a beautiful invitation.</span><b>BLOOMY VOW</b></div></div>
-          <div class="floating-note note-top"><span>✦</span> Designed with love</div><div class="floating-note note-bottom"><span>♡</span> Made for your story</div>
-        </div>
+    <div class="feature-strip" aria-label="Fitur undangan">
+      <div class="feature-item"><span class="feature-icon">◇</span><strong>Desain</strong><small>Eksklusif</small></div>
+      <div class="feature-item"><span class="feature-icon">▣</span><strong>Responsive</strong><small>Mobile &amp; Desktop</small></div>
+      <div class="feature-item"><span class="feature-icon">♫</span><strong>Musik</strong><small>Autoplay</small></div>
+      <div class="feature-item"><span class="feature-icon">▧</span><strong>Galeri Foto</strong><small>dan Video</small></div>
+      <div class="feature-item"><span class="feature-icon">▦</span><strong>Countdown</strong><small>Acara</small></div>
+    </div>
+  </section>
+
+  <section class="intro" aria-labelledby="collection-intro">
+    <div>
+      <span class="section-number">01 / THE COLLECTION</span>
+      <h2 id="collection-intro">Choose a theme<br><i>that feels like you.</i></h2>
+    </div>
+    <p>Dari sakura yang romantis sampai heritage Nusantara. Setiap tema dibuat dengan visual yang kuat, pengalaman mobile yang nyaman, dan preview yang mudah dijelajahi.</p>
+  </section>
+
+  <section class="collection" id="themes">
+    <div class="collection-head">
+      <div>
+        <span class="mini-label">BLOOMY VOW COLLECTION</span>
+        <h2>Curated invitations</h2>
       </div>
-      <div class="feature-strip"><div class="feature-item"><span>◇</span><strong>Desain Eksklusif</strong></div><div class="feature-item"><span>▣</span><strong>Mobile Responsive</strong></div><div class="feature-item"><span>♫</span><strong>Musik Latar</strong></div><div class="feature-item"><span>▧</span><strong>Galeri Foto</strong></div><div class="feature-item"><span>♡</span><strong>RSVP &amp; Countdown</strong></div></div>
-    </section>
-
-    <section class="intro section-wrap" aria-labelledby="collection-intro">
-      <div><span class="section-number">01 / THE COLLECTION</span><h2 id="collection-intro">Choose a theme<br><i>that feels like you.</i></h2></div>
-      <p>Dari sakura yang romantis sampai heritage Nusantara. Pilih desain yang paling mewakili cerita kalian, lalu lihat demo sebelum memesan.</p>
-    </section>
-
-    <section class="collection section-wrap" id="themes">
-      <div class="collection-head"><div><span class="mini-label">BLOOMY VOW COLLECTION</span><h2>Curated invitations<span class="title-dot">.</span></h2><p class="section-subtitle">Temukan desain yang cocok untuk hari istimewa Anda.</p></div>
-        <div class="collection-tools"><div class="filter-scroll" id="filters" aria-label="Filter kategori tema"></div><label class="search-box collection-search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Cari nama atau kategori..." autocomplete="off" aria-label="Cari tema undangan"></label></div>
+      <div class="collection-tools">
+        <div class="filter-scroll" id="filters"></div>
+        <label class="search-box collection-search">
+          <span>⌕</span>
+          <input id="search" type="search" placeholder="Cari tema..." autocomplete="off">
+        </label>
       </div>
-      <div class="collection-meta"><span id="themeCount" aria-live="polite">Memuat tema...</span><span>PREVIEW &amp; DEMO</span></div>
-      <div class="theme-grid" id="grid" aria-live="polite"><p class="loading-message">Memuat koleksi Bloomy Vow...</p></div>
-    </section>
+    </div>
+    <div class="collection-meta"><span id="themeCount">13 THEMES</span><span>PREVIEW &amp; DEMO</span></div>
+    <div class="theme-grid" id="grid"></div>
+  </section>
 
-    <section class="motion-collection" id="3d-motion">
-      <div class="motion-collection-inner section-wrap">
-        <div class="motion-collection-head"><div><span class="motion-eyebrow">BLOOMY VOW · MOTION LAB</span><h2>3D Motion <em>Collection.</em></h2></div><p>Undangan dengan gerakan sinematik, kedalaman visual, animasi interaktif, dan pengalaman yang berbeda dari undangan biasa.</p></div>
-        <article class="motion-showcase" data-motion-card>
-          <a class="motion-cover" href="./Thema%203D%20Motion%20Kompas/index.html" aria-label="Buka demo undangan 3D Motion Kompas">
-            <div class="motion-cover-fallback"><span class="motion-compass-mark">✧</span><span>AN INVITATION BEYOND ORDINARY</span><b>THE JOURNEY OF LOVE</b></div>
-            <span class="motion-cover-wash"></span><span class="motion-cover-label">FEATURED · 3D INTERACTIVE</span>
-            <span class="motion-cover-copy"><small>THE SIGNATURE EXPERIENCE</small><strong>Make your moment<br>feel cinematic.</strong><span class="motion-open">Jelajahi demo ↗</span></span>
-          </a>
-          <div class="motion-details"><span class="section-number">01 / CINEMATIC EXPERIENCE</span><h3>3D Motion Kompas</h3><p>Eksplorasi visual dengan elemen kompas dan transisi sinematik untuk mengundang tamu masuk ke dalam kisah Anda.</p><a class="text-link" href="./Thema%203D%20Motion%20Kompas/index.html">Lihat demo lengkap <span>→</span></a></div>
-        </article>
+    <!-- BLOOMY VOW: 3D MOTION COLLECTION -->
+<section class="motion-collection" id="3d-motion">
+
+  <div class="motion-collection-head">
+    <div>
+      <span class="motion-eyebrow">BLOOMY VOW · MOTION LAB</span>
+      <h2>3D Motion <em>Collection.</em></h2>
+    </div>
+
+    <p>
+      Temukan undangan dengan gerakan sinematik, kedalaman visual,
+      animasi interaktif, dan pengalaman yang berbeda.
+    </p>
+  </div>
+
+  <article class="motion-showcase" data-motion-card>
+
+    <a
+      class="motion-cover"
+      href="./Thema%203D%20Motion%20Kompas/index.html"
+      aria-label="Buka demo undangan 3D Motion Kompas"
+    >
+      <img
+        src="./assets/3d-motion-kompas-card.webp"
+        alt="Preview undangan 3D Motion Kompas"
+        loading="lazy"
+      >
+
+      <span class="motion-cover-wash"></span>
+
+      <span class="motion-cover-label">
+        FEATURED · 3D INTERACTIVE
+      </span>
+
+      <span class="motion-compass" aria-hidden="true">
+        <svg viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="88"
+            stroke="currentColor" stroke-width="1.2"/>
+          <circle cx="100" cy="100" r="72"
+            stroke="currentColor" stroke-dasharray="3 5"/>
+
+          <path
+            d="M100 15 L112 86 L185 100 L112 114 L100 185 L88 114 L15 100 L88 86 Z"
+            fill="currentColor"
+            stroke="#f3d69d"
+            stroke-width="1.5"
+          />
+
+          <circle cx="100" cy="100" r="11"
+            fill="#f1d49a"
+            stroke="#54152d"
+            stroke-width="3"
+          />
+        </svg>
+      </span>
+
+      <span class="motion-cover-cta">OPEN EXPERIENCE ↗</span>
+    </a>
+
+    <div class="motion-showcase-copy">
+
+      <div class="motion-overline">
+        <span>JOURNEY OF LOVE</span>
+        <span>01 / SIGNATURE</span>
       </div>
-    </section>
 
-    <section class="experience section-wrap" id="experience"><div class="section-heading"><span class="section-number">02 / THE EXPERIENCE</span><h2>More than an invitation.<br><i>A memory to keep.</i></h2><p>Semua detail dirancang agar undangan mudah dibuka, nyaman dilihat, dan terasa personal.</p></div><div class="benefit-grid"><article><span>01</span><h3>Personalized</h3><p>Nama pasangan, tanggal, lokasi, foto, dan detail acara disesuaikan dengan kebutuhan Anda.</p></article><article><span>02</span><h3>Easy to share</h3><p>Satu tautan sederhana untuk dibagikan melalui WhatsApp dan media sosial.</p></article><article><span>03</span><h3>Interactive details</h3><p>Tambahkan musik, galeri, countdown, peta lokasi, dan fitur RSVP sesuai tema.</p></article></div></section>
+      <h3>3D Motion Kompas</h3>
 
-    <section class="process" id="process"><div class="section-wrap"><div class="section-heading"><span class="section-number">03 / HOW IT WORKS</span><h2>From theme to <i>your story.</i></h2><p>Proses pemesanan dibuat sesederhana mungkin.</p></div><div class="process-grid"><article><span>01</span><h3>Pilih tema</h3><p>Jelajahi katalog dan buka demo desain favorit Anda.</p></article><article><span>02</span><h3>Kirim detail</h3><p>Hubungi kami untuk mengirim nama, tanggal, lokasi, foto, dan informasi acara.</p></article><article><span>03</span><h3>Review &amp; publish</h3><p>Periksa hasil personalisasi. Setelah disetujui, undangan siap dibagikan.</p></article></div></div></section>
+      <p>
+        Undangan pernikahan bertema passport dengan kompas bergerak,
+        visual sinematik, detail perjalanan, dan pengalaman interaktif
+        untuk menceritakan perjalanan cinta kedua mempelai.
+      </p>
 
-    <section class="pricing section-wrap" id="pricing"><div class="pricing-copy"><span class="section-number">04 / SIMPLE PRICING</span><h2>Beautiful details,<br><i>thoughtful pricing.</i></h2><p>Harga menyesuaikan tema, fitur, dan tingkat personalisasi yang dipilih.</p></div><div class="price-panel"><span>BLOOMY VOW DIGITAL INVITATION</span><strong>Mulai dari <em>Rp69K</em></strong><p>Tanyakan detail harga dan ketersediaan fitur melalui WhatsApp.</p><a class="button button-gold" href="https://wa.me/6285111249861?text=Halo%20Bloomy%20Vow%2C%20saya%20ingin%20bertanya%20tentang%20harga%20undangan%20digital." target="_blank" rel="noopener noreferrer">Tanya Harga <span>↗</span></a></div></section>
+      <div class="motion-pill-list">
+        <span>3D Motion</span>
+        <span>Compass Animation</span>
+        <span>Mobile Ready</span>
+        <span>Interactive</span>
+      </div>
 
-    <section class="faq section-wrap" id="faq"><span class="section-number">05 / FAQ</span><h2>Questions, answered.</h2><div class="faq-list"><details open><summary>Apakah bisa melihat demo sebelum membeli?</summary><p>Bisa. Pilih tombol demo pada kartu tema untuk membuka contoh undangan.</p></details><details><summary>Bisakah nama dan foto diganti?</summary><p>Bisa. Konten seperti nama, foto, tanggal, lokasi, dan informasi acara dapat disesuaikan sesuai paket dan kebutuhan Anda.</p></details><details><summary>Bagaimana jika tombol demo tidak bisa dibuka?</summary><p>Hubungi Bloomy Vow melalui WhatsApp. Kami akan membantu memeriksa tautan demo tema yang dipilih.</p></details><details><summary>Apakah undangan bisa dibuka di ponsel?</summary><p>Desain dibuat responsif agar nyaman dibuka melalui ponsel maupun komputer.</p></details></div></section>
-  </main>
+      <a
+        class="motion-open-link"
+        href="./Thema%203D%20Motion%20Kompas/index.html"
+      >
+        Jelajahi demo <span>↗</span>
+      </a>
 
-  <footer class="site-footer"><a class="brand" href="#top"><img class="brand-emblem" src="assets/bloomy-vow-emblem.png" alt="" onerror="this.hidden=true"><span class="brand-copy"><b>BLOOMY VOW</b><small>WEDDING INVITATIONS</small></span></a><p>Your Story, Beautifully Invited.</p><span>© <span id="currentYear">2026</span> BLOOMY VOW</span></footer>
-  <script src="themes.js"></script>
-  <script src="app.js"></script>
+    </div>
+  </article>
+
+  <div class="motion-collection-foot">
+    <span>DESIGNED TO MOVE</span>
+    <span>ROYAL BURGUNDY · CHAMPAGNE GOLD</span>
+  </div>
+
+</section>
+
+  <section class="section experience" id="experience">
+
+<!-- END 3D MOTION COLLECTION -->
+    <div class="section-copy">
+      <span class="section-number">02 / THE EXPERIENCE</span>
+      <h2>Beautiful on screen.<br><i>Effortless to share.</i></h2>
+      <p>Setiap undangan dibuat dengan perhatian pada tipografi, komposisi, motion, dan pengalaman mobile.</p>
+    </div>
+    <div class="feature-grid">
+      <article><span>01</span><h3>Premium Visual</h3><p>Artwork dan layout yang terasa seperti invitation suite.</p></article>
+      <article><span>02</span><h3>Mobile First</h3><p>Nyaman dibaca di layar kecil tanpa kehilangan estetika.</p></article>
+      <article><span>03</span><h3>Live Preview</h3><p>Lihat detail tema sebelum menentukan pilihan.</p></article>
+      <article><span>04</span><h3>Personal</h3><p>Nama, foto, tanggal, lokasi, musik dan detail acara dapat disesuaikan.</p></article>
+    </div>
+  </section>
+
+  <section class="section process" id="process">
+    <div class="section-heading"><span class="section-number">03 / HOW IT WORKS</span><h2>From theme to <i>your story.</i></h2></div>
+    <div class="process-grid">
+      <article><b>01</b><h3>Pilih tema</h3><p>Jelajahi koleksi dan lihat preview tema yang kamu suka.</p></article>
+      <article><b>02</b><h3>Pesan</h3><p>Kirim tema pilihan dan detail pasangan melalui WhatsApp.</p></article>
+      <article><b>03</b><h3>Kami kerjakan</h3><p>Data, foto, musik dan detail acara kami masukkan ke undangan.</p></article>
+      <article><b>04</b><h3>Siap dibagikan</h3><p>Kamu mendapatkan link undangan yang siap dikirim ke tamu.</p></article>
+    </div>
+  </section>
+
+  <section class="section pricing" id="pricing">
+    <div class="section-copy"><span class="section-number">04 / SIMPLE PRICING</span><h2>Start with a beautiful<br><i>invitation.</i></h2></div>
+    <div class="price-panel"><span>BLOOMY VOW DIGITAL INVITATION</span><strong>Mulai dari <em>Rp69K</em></strong><p>Harga mengikuti tema dan kebutuhan personalisasi.</p><a class="button button-gold" href="#themes">Pilih Tema <span>→</span></a></div>
+  </section>
+
+  <section class="section faq" id="faq">
+    <span class="section-number">05 / FAQ</span>
+    <h2>Questions, answered.</h2>
+    <div class="faq-list">
+      <details open><summary>Apakah bisa lihat demo sebelum membeli?</summary><p>Bisa. Tema dengan demo aktif akan memiliki tombol demo. Tema lain tetap dapat dilihat melalui preview dan halaman detail.</p></details>
+      <details><summary>Apakah Bloomy Vow menyediakan undangan selain pernikahan?</summary><p>Ya, Invora dapat digunakan untuk berbagai jenis acara seperti ulang tahun, reuni, acara perusahaan, dan lainnya dengan menyesuaikan konten undangan sesuai kebutuhan Anda.</p></details>
+      <details><summary>Apakah tema bisa dikustomisasi?</summary><p>Ya. Nama, foto, tanggal, lokasi, musik dan konten undangan dapat disesuaikan.</p></details>
+<details>
+  <summary>Apakah bisa request perubahan desain?</summary>
+  <p>Bisa. Sampaikan kebutuhan perubahan yang kamu inginkan dan kami akan menyesuaikannya dengan tema yang dipilih.</p>
+</details>    
+    </div>
+  </section>
+</main>
+
+<footer>
+  <a class="brand" href="#top" aria-label="Bloomy Vow home">
+  <img
+    class="brand-emblem"
+    src="assets/bloomy-vow-emblem.png"
+    alt=""
+  >
+  <span class="brand-copy">
+    <b>BLOOMY VOW</b>
+    <small>WEDDING INVITATIONS</small>
+  </span>
+</a>
+
+  <span>© 2026 BLOOMY VOW</span>
+</footer>
+<script>
+(function () {
+  var reduceMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+
+  var desktopPointer = window.matchMedia(
+    '(hover: hover) and (pointer: fine)'
+  ).matches;
+
+  var cards = document.querySelectorAll('[data-motion-card]');
+
+  if (reduceMotion || !desktopPointer) return;
+
+  cards.forEach(function (card) {
+    card.addEventListener('pointermove', function (event) {
+      var rect = card.getBoundingClientRect();
+
+      if (!rect.width || !rect.height) return;
+
+      var x = (event.clientX - rect.left) / rect.width;
+      var y = (event.clientY - rect.top) / rect.height;
+
+      card.style.setProperty(
+        '--mx',
+        ((0.5 - y) * 5).toFixed(2) + 'deg'
+      );
+
+      card.style.setProperty(
+        '--my',
+        ((x - 0.5) * 7).toFixed(2) + 'deg'
+      );
+
+      card.style.setProperty('--lift', '-4px');
+    });
+
+    card.addEventListener('pointerleave', function () {
+      card.style.setProperty('--mx', '0deg');
+      card.style.setProperty('--my', '0deg');
+      card.style.setProperty('--lift', '0px');
+    });
+  });
+})();
+</script>
+
+<script src="themes.js"></script>
+<script src="app.js"></script>
+
 </body>
 </html>
