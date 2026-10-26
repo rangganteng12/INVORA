@@ -161,7 +161,7 @@ window.BLOOMY_VOW_THEMES = [
     collection: 'Cinematic 3D Collection',
     category: '3D',
     price: 'Hubungi kami',
-    image: 'assets/3d-motion-kompas-card.webp',
+    image: '/bloomy%20vow-online/assets/3d-motion-kompas-card.webp',
     tagline: 'Undangan bertema perjalanan dengan animasi kompas 3D dan visual sinematik yang interaktif.',
     features: ['3D Motion', 'Compass Animation', 'Mobile Ready', 'Interactive'],
     demoUrl: './Thema%203D%20Motion%20Kompas/index.html',
