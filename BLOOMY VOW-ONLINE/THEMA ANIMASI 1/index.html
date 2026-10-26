@@ -5,57 +5,90 @@
     var root = document.documentElement;
     var params = new URLSearchParams(window.location.search);
     var invitationId = String(params.get("id") || "").trim();
+    var overlay = null;
+    var timer = null;
 
     function finish(success, message) {
         if (!invitationId) return;
         root.classList.remove("bloomy-data-pending");
+        if (timer) window.clearTimeout(timer);
         if (success) {
             root.classList.remove("bloomy-data-failed");
-            root.removeAttribute("data-bloomy-message");
-        } else {
-            root.classList.add("bloomy-data-failed");
-            root.setAttribute("data-bloomy-message",
-                "BLOOMY VOW\n" + (message || "Undangan tidak dapat dimuat.\nPeriksa tautan atau koneksi."));
+            if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+            return;
         }
-        if (window.__bloomyVowLoaderTimer) window.clearTimeout(window.__bloomyVowLoaderTimer);
+        root.classList.add("bloomy-data-failed");
+        if (overlay) {
+            overlay.classList.add("is-error");
+            var copy = overlay.querySelector(".bloomy-vow-loader-copy");
+            var spinner = overlay.querySelector(".bloomy-vow-loader-spinner");
+            if (copy) copy.textContent = message || "Data undangan belum dapat dimuat. Periksa koneksi lalu muat ulang.";
+            if (spinner) spinner.style.display = "none";
+        }
     }
 
     window.__bloomyVowFinishLoading = finish;
+    if (!invitationId) return;
 
     var style = document.createElement("style");
+    style.id = "bloomy-vow-loading-style";
     style.textContent = `
         html.bloomy-data-pending body,
         html.bloomy-data-failed body { visibility: hidden !important; }
-        html.bloomy-data-pending::before,
-        html.bloomy-data-failed::before {
-            content: attr(data-bloomy-message);
-            position: fixed; inset: 0; z-index: 2147483647;
-            display: flex; align-items: center; justify-content: center;
-            box-sizing: border-box; padding: 28px;
-            background: radial-gradient(circle at 50% 40%, #30232a 0%, #171115 48%, #090809 100%);
-            color: #f0d5a0; font: 600 13px/1.9 system-ui, sans-serif;
-            letter-spacing: .12em; text-align: center; text-transform: uppercase;
-            white-space: pre-line; visibility: visible !important;
+        #bloomy-vow-loading-overlay {
+            position: fixed !important; inset: 0 !important;
+            z-index: 2147483647 !important;
+            display: flex !important; flex-direction: column !important;
+            align-items: center !important; justify-content: center !important;
+            gap: 18px !important; padding: 28px !important; box-sizing: border-box !important;
+            background: radial-gradient(circle at 50% 40%, #30232a 0%, #171115 48%, #090809 100%) !important;
+            color: #f0d5a0 !important; font: 600 12px/1.8 system-ui, sans-serif !important;
+            letter-spacing: .14em !important; text-align: center !important;
+            text-transform: uppercase !important; white-space: normal !important;
+            opacity: 1 !important; visibility: visible !important; pointer-events: auto !important;
         }
-        html.bloomy-data-pending::after {
-            content: ""; position: fixed; z-index: 2147483647;
-            top: calc(50% + 43px); left: calc(50% - 11px);
-            width: 22px; height: 22px;
-            border: 2px solid rgba(240, 213, 160, .25);
-            border-top-color: #f0d5a0; border-radius: 50%;
-            animation: bloomy-vow-spin .8s linear infinite;
-            visibility: visible !important;
+        #bloomy-vow-loading-overlay .bloomy-vow-loader-brand {
+            font-size: 13px !important; letter-spacing: .24em !important;
         }
-        @keyframes bloomy-vow-spin { to { transform: rotate(360deg); } }
+        #bloomy-vow-loading-overlay .bloomy-vow-loader-copy {
+            max-width: 300px !important; font-size: 11px !important; font-weight: 500 !important;
+            letter-spacing: .12em !important;
+        }
+        #bloomy-vow-loading-overlay .bloomy-vow-loader-spinner {
+            width: 23px !important; height: 23px !important; display: block;
+            border: 2px solid rgba(240, 213, 160, .24) !important;
+            border-top-color: #f0d5a0 !important; border-radius: 50% !important;
+            animation: bloomy-vow-loader-spin .75s linear infinite !important;
+        }
+        #bloomy-vow-loading-overlay.is-error .bloomy-vow-loader-copy {
+            max-width: 340px !important; line-height: 2 !important;
+        }
+        @keyframes bloomy-vow-loader-spin { to { transform: rotate(360deg); } }
     `;
     (document.head || root).appendChild(style);
 
-    if (!invitationId) return;
+    overlay = document.createElement("div");
+    overlay.id = "bloomy-vow-loading-overlay";
+    overlay.setAttribute("role", "status");
+    overlay.setAttribute("aria-live", "polite");
+    var brand = document.createElement("div");
+    brand.className = "bloomy-vow-loader-brand";
+    brand.textContent = "BLOOMY VOW";
+    var copy = document.createElement("div");
+    copy.className = "bloomy-vow-loader-copy";
+    copy.textContent = "Menyiapkan undangan...";
+    var spinner = document.createElement("span");
+    spinner.className = "bloomy-vow-loader-spinner";
+    spinner.setAttribute("aria-hidden", "true");
+    overlay.appendChild(brand);
+    overlay.appendChild(copy);
+    overlay.appendChild(spinner);
+
     root.classList.add("bloomy-data-pending");
-    root.setAttribute("data-bloomy-message", "BLOOMY VOW\nMenyiapkan undangan...");
-    window.__bloomyVowLoaderTimer = window.setTimeout(function () {
-        finish(false, "Koneksi terlalu lama.\nSilakan muat ulang undangan.");
-    }, 25000);
+    root.appendChild(overlay);
+    timer = window.setTimeout(function () {
+        finish(false, "Koneksi terlalu lama. Silakan muat ulang undangan.");
+    }, 15000);
 })();
 </script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#171329"><title>Galih & Ratna</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body>
