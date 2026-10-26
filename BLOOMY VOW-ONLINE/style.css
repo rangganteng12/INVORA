@@ -782,3 +782,352 @@ footer .brand-emblem {
   }
 }
 
+/* =========================================
+   BLOOMY VOW — 3D MOTION COLLECTION
+========================================= */
+
+.motion-collection {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(52px, 7vw, 92px) clamp(18px, 5.5vw, 80px);
+  color: #fff3dc;
+  background:
+    radial-gradient(ellipse at 75% 20%, rgba(139, 39, 75, .4), transparent 42%),
+    radial-gradient(ellipse at 10% 90%, rgba(190, 143, 65, .12), transparent 40%),
+    linear-gradient(125deg, #160f1b, #321020 52%, #160d19);
+}
+
+.motion-collection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .25;
+  background-image: radial-gradient(
+    circle,
+    rgba(230, 195, 128, .4) 1px,
+    transparent 1.5px
+  );
+  background-size: 22px 22px;
+}
+
+.motion-collection-head {
+  display: grid;
+  grid-template-columns: 1fr minmax(240px, .65fr);
+  align-items: end;
+  gap: 35px;
+  max-width: 1320px;
+  margin: 0 auto 34px;
+}
+
+.motion-eyebrow {
+  color: #e4bf78;
+  text-transform: uppercase;
+  letter-spacing: .24em;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.motion-collection-head h2 {
+  margin: 15px 0 0;
+  color: #fff2d7;
+  font-family: Georgia, serif;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: .98;
+  font-weight: 400;
+  letter-spacing: -.045em;
+}
+
+.motion-collection-head h2 em {
+  display: block;
+  color: #dcb36a;
+  font-weight: 400;
+}
+
+.motion-collection-head > p {
+  max-width: 520px;
+  margin: 0 0 5px;
+  color: #d1c5b6;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.motion-showcase {
+  --mx: 0deg;
+  --my: 0deg;
+  --lift: 0px;
+
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  max-width: 1320px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(224, 190, 125, .65);
+  border-radius: 22px;
+  background: linear-gradient(130deg, #431126, #641b36 56%, #2e1224);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, .25);
+  transform: perspective(1500px)
+    rotateX(var(--mx))
+    rotateY(var(--my))
+    translateY(var(--lift));
+  transform-style: preserve-3d;
+  transition: transform .4s ease, box-shadow .35s ease;
+}
+
+.motion-showcase:hover {
+  box-shadow: 0 30px 85px rgba(0, 0, 0, .38);
+}
+
+.motion-cover {
+  position: relative;
+  display: block;
+  min-width: 0;
+  min-height: 390px;
+  overflow: hidden;
+  background: #51142c;
+  text-decoration: none;
+}
+
+.motion-cover > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform .8s ease, opacity .5s ease;
+}
+
+.motion-showcase:hover .motion-cover > img {
+  transform: scale(1.05);
+}
+
+.motion-cover-wash {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, rgba(26, 7, 17, .45), transparent 65%),
+    linear-gradient(110deg, rgba(36, 8, 24, .14), rgba(35, 7, 22, .24));
+}
+
+.motion-cover-label,
+.motion-cover-cta {
+  position: absolute;
+  z-index: 2;
+  top: 16px;
+  padding: 9px 12px;
+  border: 1px solid rgba(242, 214, 153, .68);
+  border-radius: 999px;
+  color: #fff1cd;
+  background: rgba(46, 11, 28, .72);
+  font-size: 8px;
+  letter-spacing: .12em;
+}
+
+.motion-cover-label {
+  left: 16px;
+}
+
+.motion-cover-cta {
+  right: 16px;
+}
+
+.motion-compass {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 52%;
+  width: min(52%, 250px);
+  aspect-ratio: 1;
+  color: #f0d49b;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, .45));
+  pointer-events: none;
+}
+
+.motion-compass svg {
+  width: 100%;
+  height: 100%;
+  animation: motionCompassOrbit 24s linear infinite;
+}
+
+@keyframes motionCompassOrbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.motion-showcase-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(25px, 4vw, 55px);
+}
+
+.motion-overline {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  color: #e1bb78;
+  font-size: 8px;
+  letter-spacing: .13em;
+}
+
+.motion-showcase-copy h3 {
+  margin: 23px 0 14px;
+  color: #fff0cc;
+  font-family: Georgia, serif;
+  font-size: clamp(30px, 3.5vw, 48px);
+  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: -.035em;
+}
+
+.motion-showcase-copy > p {
+  max-width: 510px;
+  margin: 0;
+  color: #ddcfc4;
+  font-size: 12px;
+  line-height: 1.95;
+}
+
+.motion-pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 22px 0 26px;
+}
+
+.motion-pill-list span {
+  padding: 7px 10px;
+  border: 1px solid rgba(225, 190, 125, .35);
+  border-radius: 999px;
+  color: #ead9b7;
+  background: rgba(255, 255, 255, .045);
+  font-size: 9px;
+}
+
+.motion-open-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 12px 18px;
+  border: 1px solid #e0bb76;
+  border-radius: 999px;
+  color: #3b1325;
+  background: linear-gradient(135deg, #f5dfac, #cda35b);
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.motion-open-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .3);
+}
+
+.motion-collection-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  max-width: 1320px;
+  margin: 22px auto 0;
+  color: #aa9478;
+  font-size: 8px;
+  letter-spacing: .16em;
+}
+
+@media (max-width: 900px) {
+  .motion-collection-head {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .motion-showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .motion-cover {
+    min-height: 360px;
+  }
+
+  .motion-showcase-copy {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .motion-collection {
+    padding: 48px 16px 36px;
+  }
+
+  .motion-collection-head h2 {
+    font-size: 44px;
+  }
+
+  .motion-collection-head > p {
+    font-size: 12px;
+  }
+
+  .motion-showcase {
+    border-radius: 16px;
+  }
+
+  .motion-cover {
+    min-height: 300px;
+  }
+
+  .motion-compass {
+    width: min(57%, 210px);
+  }
+
+  .motion-cover-label,
+  .motion-cover-cta {
+    top: 12px;
+    padding: 7px 9px;
+    font-size: 7px;
+  }
+
+  .motion-cover-label {
+    left: 10px;
+  }
+
+  .motion-cover-cta {
+    right: 10px;
+  }
+
+  .motion-showcase-copy {
+    padding: 24px 20px 26px;
+  }
+
+  .motion-showcase-copy h3 {
+    font-size: 34px;
+  }
+
+  .motion-collection-foot {
+    font-size: 7px;
+    letter-spacing: .08em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-compass svg {
+    animation: none !important;
+  }
+
+  .motion-showcase,
+  .motion-cover > img {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Hilangkan gambar preview 3D Motion Kompas yang rusak */
+img[alt*="3D Motion Kompas"] {
+    display: none !important;
+}
