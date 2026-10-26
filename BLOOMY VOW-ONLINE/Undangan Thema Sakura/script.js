@@ -1494,8 +1494,15 @@ galleryItems.forEach((img, index) => {
             data
         );
 
+        if (window.__bloomyVowFinishLoading) {
+            window.__bloomyVowFinishLoading(true);
+        }
 
     } catch(error) {
+
+        if (window.__bloomyVowFinishLoading) {
+            window.__bloomyVowFinishLoading(false, "Database tidak dapat dihubungi.\\nPeriksa koneksi internet.");
+        }
 
         console.error(
             "Database error:",
