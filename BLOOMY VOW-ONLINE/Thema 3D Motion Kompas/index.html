@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Wedding · Undangan Pernikahan</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&family=Special+Elite&family=Playfair+Display:wght@500;700&family=Cormorant+SC:wght@600;700&family=Cormorant+Garamond:ital,wght@1,500&family=Mrs+Saint+Delafield&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="lock">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Nama pasangan: lebih dekat ke lingkaran tengah -->
+<path id="a1"
+      d="M30,150 A120,120 0 0 1 270,150"/>
+
+
+<!-- Tanggal: lebih dekat ke lingkaran tengah -->
+<!-- Lengkungan tanggal di bawah -->
+<path id="a2"
+      d="M18,150 A132,132 0 0 0 282,150"/>
+
+    <symbol id="plane" viewBox="0 0 24 24">
+      <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="ht" viewBox="0 0 24 24">
+      <path d="M12 21s-7-4.6-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.4-7 10-7 10z"/>
+    </symbol>
+
+    <symbol id="glb" viewBox="0 0 64 64">
+      <g fill="none" stroke="currentColor" stroke-width="2.2">
+        <circle cx="32" cy="32" r="22"/>
+        <ellipse cx="32" cy="32" rx="9" ry="22"/>
+        <path d="M10 32h44M14 21h36M14 43h36"/>
+      </g>
+    </symbol>
+
+    <symbol id="doodle" viewBox="0 0 120 46">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M2 36C14 36 22 20 16 12 10 4 2 14 12 22c8 6 18-4 28-8 14-6 30-2 46-8"/>
+        <path d="M18 21c-5-5-2-9 1.500-7 3-3 6 0 3 4z" fill="currentColor"/>
+      </g>
+      <use href="#plane" x="82" y="-4" width="40" height="40" transform="rotate(48 102 16)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- COVER UTAMA -->
+<div id="cover">
+
+  <!-- Browser memilih background sesuai lebar layar -->
+  <picture class="cover-background" aria-hidden="true">
+    <source
+      media="(min-width: 760px)"
+      srcset="./assets/Cover%20desktop.png"
+    >
+    <img
+      src="./assets/cover%20mobile.png"
+      alt=""
+    >
+  </picture>
+
+  <div class="cover-copy">
+    <div class="ttl">Wedding<b></b></div>
+
+    <div class="to">
+      Kepada Yth.<br>
+      Bapak/Ibu/Saudara/i
+      <b id="guest"></b>
+    </div>
+
+    <button class="btn" id="go">
+      Open Invitation →
+    </button>
+  </div>
+
+  <!-- Kompas asli tetap dipertahankan -->
+  <div class="cmp">
+  <svg
+    viewBox="0 0 300 300"
+    fill="none"
+    stroke="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <!-- Kompas premium baru -->
+    <image
+      class="rose"
+      href="./assets/kompas.png"
+      x="35"
+      y="35"
+      width="230"
+      height="230"
+      preserveAspectRatio="xMidYMid meet"
+    />
+
+    <!-- Nama pengantin tetap melengkung -->
+    <text
+      class="arc"
+      fill="currentColor"
+      stroke="none"
+      font-size="19"
+      letter-spacing="6"
+    >
+      <textPath
+        href="#a1"
+        startOffset="50%"
+        text-anchor="middle"
+      >~ <tspan class="n"></tspan> ~</textPath>
+    </text>
+
+    <!-- Tanggal pernikahan tetap melengkung -->
+    <text
+      class="arc"
+      fill="currentColor"
+      stroke="none"
+      font-size="18"
+      letter-spacing="5.5"
+    >
+      <textPath
+        href="#a2"
+        startOffset="50%"
+        text-anchor="middle"
+        class="dt"
+      ></textPath>
+    </text>
+  </svg>
+</div>
+</div>
+
+<!-- ISI UNDANGAN -->
+<div class="col">
+  <main id="app">
+
+    <section id="home" data-k="home" data-dock="l">
+      <div class="ttl">Wedding<b></b></div>
+
+      <div class="hr">
+        <svg viewBox="0 0 300 300" fill="none" stroke="#6b1f3a">
+          <g class="ring">
+            <circle cx="150" cy="150" r="102" stroke-width="2"/>
+
+            <text class="arc" fill="#6b1f3a" stroke="none" font-size="19" letter-spacing="6">
+              <textPath href="#a1" startOffset="50%" text-anchor="middle">
+                ~ <tspan class="n"></tspan> ~
+              </textPath>
+            </text>
+
+            <text class="arc" fill="#6b1f3a" stroke="none" font-size="18" letter-spacing="5.5">
+              <textPath href="#a2" startOffset="50%" text-anchor="middle" class="dt"></textPath>
+            </text>
+
+            <image href="assets/passport-emblem.webp" x="62" y="55" width="176" height="182" stroke="none"/>
+          </g>
+        </svg>
+      </div>
+
+      <svg class="msc" viewBox="0 0 42 62">
+        <rect x="2" y="2" width="38" height="58" rx="19"/>
+        <path d="M21 22v18M14 33l7 8 7-8"/>
+      </svg>
+
+      <svg class="deco" style="right:-6px;bottom:96px;width:122px" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="64" cy="62" r="44" stroke-dasharray="7 6"/>
+        <use href="#glb" x="26" y="24" width="76" height="76" stroke="none"/>
+        <use href="#plane" x="2" y="2" width="38" height="38" transform="rotate(40 21 21)"/>
+      </svg>
+
+      <svg class="deco" style="left:4px;bottom:92px;width:150px" viewBox="0 0 150 56" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M12 8a7 7 0 0 1 7 7c0 7-7 13-7 13S5 22 5 15a7 7 0 0 1 7-7z"/>
+        <path d="M12 40c30 8 60-14 100-2" stroke-dasharray="5 5"/>
+        <use href="#plane" x="104" y="26" width="30" height="30" transform="rotate(60 119 41)" stroke="none"/>
+      </svg>
+    </section>
+
+    <section id="couple" class="dk" data-k="couple" data-dock="d">
+
+  <div class="couple-kicker">
+    ✦ OUR JOURNEY OF LOVE ✦
+  </div>
+
+  <h2 class="couple-title">
+    Dua Hati,
+    <span>Satu Ikatan</span>
+  </h2>
+
+  <div class="verse-box">
+
+    <div class="verse-label">
+      FIRMAN ALLAH SWT
+    </div>
+
+    <div class="ar">
+      وَمِن كُلِّ شَيْءٍ خَلَقْنَا زَوْجَيْنِ
+      لَعَلَّكُمْ تَذَكَّرُونَ
+    </div>
+
+    <div class="verse-divider">
+      <span>✦</span>
+    </div>
+
+    <p class="q rv">
+      “Dan segala sesuatu Kami ciptakan berpasang-pasangan
+      supaya kamu mengingat kebesaran Allah.”
+    </p>
+
+    <p class="verse-ref">
+      QS. Az-Zariyat: 49
+    </p>
+
+  </div>
+
+  <div class="sal">
+    Assalamu’alaikum Wr. Wb.
+  </div>
+
+  <p class="op">
+    Dengan penuh rasa syukur kepada Allah SWT,
+    kami bermaksud mengundang Bapak/Ibu/Saudara/i
+    untuk menjadi bagian dari hari istimewa kami.
+
+    <span class="op-highlight">
+      Semoga kehadiran dan doa restu Anda mengiringi
+      langkah awal kami dalam membangun rumah tangga
+      yang sakinah, mawaddah, dan rahmah.
+    </span>
+  </p>
+
+  <div class="couple-divider">
+    <span>✧</span>
+    <i></i>
+    <span>✧</span>
+  </div>
+
+  <div id="pps"></div>
+
+</section>
+
+    <section id="date" class="sec" data-k="event">
+      <div class="rv">
+        <p>Kami akan menikah,<br>dan kami ingin Anda menjadi bagian<br>dari hari istimewa kami!</p>
+        <div class="cd" id="cd"></div>
+
+        <a class="b2" id="cal" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24">
+            <rect x="4" y="5" width="16" height="15" rx="2"/>
+            <path d="M4 10h16M8 3v4M16 3v4M9 15l2 2 4-4"/>
+          </svg>
+          Save the date
+        </a>
+      </div>
+    </section>
+
+    <section id="event" class="sec" style="padding-top:20px" data-k="event"></section>
+    <section id="gallery" class="sec" data-k="gallery"></section>
+    <section id="story" class="sec" data-k="story"></section>
+    <section id="wishes" class="sec" data-k="wishes"></section>
+    <section id="gift" class="sec" data-k="gift"></section>
+
+    <section id="end" class="dk" data-dock="d">
+      <div class="cl">
+        <svg viewBox="0 0 300 300" fill="none">
+          <defs>
+            <clipPath id="cc">
+              <circle cx="150" cy="150" r="104"/>
+            </clipPath>
+          </defs>
+
+          <text class="arc" fill="#f2e6a4" font-size="19" letter-spacing="6">
+            <textPath href="#a1" startOffset="50%" text-anchor="middle">~ <tspan class="n"></tspan> ~</textPath>
+          </text>
+
+          <text class="arc" fill="#f2e6a4" font-size="18" letter-spacing="5.5">
+            <textPath href="#a2" startOffset="50%" text-anchor="middle" class="dt"></textPath>
+          </text>
+
+          <circle cx="150" cy="150" r="106" stroke="#c9a37a" stroke-width="1.5"/>
+
+          <g clip-path="url(#cc)">
+            <rect x="40" y="40" width="220" height="220" fill="#d9d0d4"/>
+            <image id="cimg"
+       href=""
+       x="40"
+       y="40"
+       width="220"
+       height="220"
+       preserveAspectRatio="xMidYMin slice"/>
+            <text x="150" y="160" text-anchor="middle" fill="#8a7a84" font-size="12" font-family="Space Mono" id="ctx">FOTO BERDUA</text>
+          </g>
+        </svg>
+      </div>
+
+      <p>Atas kehadiran dan do’a restu dari Bapak/Ibu/Saudara/i sekalian, kami mengucapkan Terima Kasih.</p>
+      <div class="sal">Wassalamu’alaikum Wr. Wb.</div>
+      <p>Kami yang berbahagia</p>
+      <h2 id="fin"></h2>
+    </section>
+
+    
+<div class="mw brand-footer" aria-label="Bloomy Vow Wedding Invitations">
+    <div class="brand-emblem">
+    <img
+        src="./assets/bloomy-vow-logo.png"
+        alt="Bloomy Vow Logo"
+    >
+</div>
+
+    <div class="brand-type">
+        <div class="brand-name">BLOOMY VOW</div>
+        <div class="brand-tagline">WEDDING INVITATIONS</div>
+    </div>
+</div>
+
+  </main>
+</div>
+
+<nav class="dock" id="dock"></nav>
+
+<button id="mus" aria-label="Musik">
+  <svg viewBox="0 0 24 24">
+    <path d="M3 6h11M3 11h8M3 16h6M17 17V6l4 2M17 17a2 2 0 1 1-2-2"/>
+  </svg>
+</button>
+
+<script src="script.js"></script>
+</body>
+</html>
