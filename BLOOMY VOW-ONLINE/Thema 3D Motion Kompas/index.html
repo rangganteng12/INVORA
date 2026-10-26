@@ -20,6 +20,7 @@
   var invitationId = String(params.get("id") || "").trim();
   if (!invitationId) return;
 
+  var root = document.documentElement;
   var overlay = document.createElement("div");
   overlay.id = "bloomy-vow-loading-overlay";
   overlay.setAttribute("role", "status");
@@ -32,35 +33,77 @@
   var spinner = document.createElement("span");
   spinner.setAttribute("aria-hidden", "true");
 
-  // Inline styles ensure that the loading screen stays above any theme CSS.
   Object.assign(overlay.style, {
-    position: "fixed", inset: "0", width: "100vw", height: "100vh",
-    zIndex: "2147483647", display: "flex", flexDirection: "column",
-    alignItems: "center", justifyContent: "center", gap: "18px",
-    boxSizing: "border-box", padding: "28px",
+    position: "fixed",
+    top: "0",
+    right: "0",
+    bottom: "0",
+    left: "0",
+    width: "100%",
+    height: "100%",
+    zIndex: "2147483647",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "18px",
+    boxSizing: "border-box",
+    padding: "28px",
+    margin: "0",
     background: "radial-gradient(circle at 50% 40%, #30232a 0%, #171115 48%, #090809 100%)",
-    color: "#f0d5a0", fontFamily: "system-ui, sans-serif",
-    fontSize: "12px", fontWeight: "600", lineHeight: "1.8",
-    letterSpacing: ".14em", textAlign: "center", textTransform: "uppercase",
-    visibility: "visible", opacity: "1", pointerEvents: "auto"
+    color: "#f0d5a0",
+    fontFamily: "Arial, sans-serif",
+    fontSize: "12px",
+    fontWeight: "600",
+    lineHeight: "1.8",
+    letterSpacing: ".14em",
+    textAlign: "center",
+    textTransform: "uppercase",
+    visibility: "visible",
+    opacity: "1",
+    pointerEvents: "auto"
   });
-  Object.assign(brand.style, {fontSize:"13px", letterSpacing:".24em"});
-  Object.assign(copy.style, {maxWidth:"320px", fontSize:"11px", fontWeight:"500", letterSpacing:".12em"});
+  Object.assign(brand.style, {
+    display: "block",
+    fontSize: "13px",
+    letterSpacing: ".24em",
+    color: "#f0d5a0"
+  });
+  Object.assign(copy.style, {
+    display: "block",
+    maxWidth: "320px",
+    fontSize: "11px",
+    fontWeight: "500",
+    letterSpacing: ".12em",
+    color: "#f0d5a0"
+  });
   Object.assign(spinner.style, {
-    display:"block", width:"24px", height:"24px", borderRadius:"50%",
-    border:"2px solid rgba(240,213,160,.25)", borderTopColor:"#f0d5a0",
-    animation:"bloomy-vow-kompas-spin .75s linear infinite"
+    display: "block",
+    width: "24px",
+    height: "24px",
+    boxSizing: "border-box",
+    borderRadius: "50%",
+    border: "2px solid rgba(240,213,160,.25)",
+    borderTopColor: "#f0d5a0",
+    animation: "bloomy-vow-kompas-spin .75s linear infinite"
   });
+
   var style = document.createElement("style");
-  style.textContent = "@keyframes bloomy-vow-kompas-spin { to { transform: rotate(360deg); } } body.bloomy-kompas-loading > *:not(#bloomy-vow-loading-overlay) { visibility: hidden !important; }";
-  document.head.appendChild(style);
+  style.id = "bloomy-vow-loading-style";
+  style.textContent = [
+    "html.bloomy-kompas-loading body { visibility: hidden !important; }",
+    "html.bloomy-kompas-loading #bloomy-vow-loading-overlay { visibility: visible !important; opacity: 1 !important; display: flex !important; }",
+    "@keyframes bloomy-vow-kompas-spin { to { transform: rotate(360deg); } }"
+  ].join("\n");
+  (document.head || root).appendChild(style);
+
   overlay.appendChild(brand);
   overlay.appendChild(copy);
   overlay.appendChild(spinner);
 
-  var body = document.body;
-  body.classList.add("bloomy-kompas-loading");
-  body.appendChild(overlay);
+  root.classList.add("bloomy-kompas-loading");
+  // Append as a sibling of <body> so theme CSS cannot hide the overlay with body rules.
+  root.appendChild(overlay);
 
   var ended = false;
   var timer = window.setTimeout(function () {
@@ -80,7 +123,7 @@
     }
     ended = true;
     window.clearTimeout(timer);
-    body.classList.remove("bloomy-kompas-loading");
+    root.classList.remove("bloomy-kompas-loading");
     if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
     if (style.parentNode) style.parentNode.removeChild(style);
   };
