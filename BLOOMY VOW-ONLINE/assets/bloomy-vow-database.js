@@ -72,9 +72,9 @@
     return raw;
   }
 
-  function setText(selector, text) {
+  function setText(selector, text, root) {
     if (!text) return;
-    all(selector).forEach(function (element) {
+    all(selector, root).forEach(function (element) {
       element.textContent = text;
     });
   }
@@ -193,7 +193,7 @@
       setText("#heroPlace", [venue, address].filter(Boolean).join(" · "));
       setText(".hero-place", [venue, address].filter(Boolean).join(" · "));
       setText("#locationTitle, .location-content h2, .location-card h3", venue);
-      setText("#locationAddress, .location-address, .location-content p:not(.section-kicker), .location-content p:not(.eyebrow)", address);
+      setText("#locationAddress, .location-address, .location-content p:not(.section-kicker):not(.eyebrow)", address);
     }
     var mapButton = first("#mapsLink, .location-content a.outline-button, .location-card a[target='_blank']");
     if (mapButton && /^https?:\/\//i.test(mapUrl)) {
@@ -284,7 +284,7 @@
         });
       }
       updateCountdownFromDatabase();
-      window.setInterval(updateCountdownFromDatabase, 1000);
+      window.setInterval(updateCountdownFromDatabase, 500);
     }
   }
 
