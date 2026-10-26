@@ -211,35 +211,23 @@
   ===================================================== */
 
   if (menuButton && mobileMenu) {
-    const closeMobileMenu = () => {
-      mobileMenu.classList.remove('open');
-      mobileMenu.hidden = true;
-      menuButton.setAttribute('aria-expanded', 'false');
-      menuButton.setAttribute('aria-label', 'Buka menu');
-    };
-
     menuButton.addEventListener('click', () => {
-      const isOpen = menuButton.getAttribute('aria-expanded') !== 'true';
+      const isOpen = mobileMenu.classList.toggle('open');
 
-      mobileMenu.hidden = !isOpen;
-      mobileMenu.classList.toggle('open', isOpen);
-      menuButton.setAttribute('aria-expanded', String(isOpen));
       menuButton.setAttribute(
-        'aria-label',
-        isOpen ? 'Tutup menu' : 'Buka menu'
+        'aria-expanded',
+        String(isOpen)
       );
     });
 
     mobileMenu.addEventListener('click', event => {
       if (event.target.closest('a')) {
-        closeMobileMenu();
-      }
-    });
+        mobileMenu.classList.remove('open');
 
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && !mobileMenu.hidden) {
-        closeMobileMenu();
-        menuButton.focus();
+        menuButton.setAttribute(
+          'aria-expanded',
+          'false'
+        );
       }
     });
   }
